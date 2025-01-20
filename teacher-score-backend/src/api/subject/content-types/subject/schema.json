@@ -1,0 +1,14 @@
+
+{
+  "kind": "collectionType",
+  "collectionName": "subjects",
+  "info": {
+    "singularName": "subject",
+    "pluralName": "subjects",
+    "displayName": "Subject"
+  },
+  "options": {
+    "comment": ""
+  },
+  "attributes": {}
+}
