@@ -1,0 +1,39 @@
+# name: Techsphere-containers
+
+services:
+
+  app_mysql:
+
+    container_name:  g11-database
+
+    image: mysql
+
+    environment:
+
+      - MYSQL_DATABASE=admin
+
+      - MYSQL_ROOT_PASSWORD=123456
+
+      - MYSQL_ROOT_HOST=%
+
+    ports:
+
+      - 3306:3306
+
+    volumes:
+
+      - g11-data:/var/lib/mysql
+
+    networks:
+
+      - my_app
+
+      
+
+volumes:
+
+  g11-data:
+
+networks:
+
+  my_app:
