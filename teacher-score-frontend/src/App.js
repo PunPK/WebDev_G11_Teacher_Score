@@ -19,10 +19,11 @@ function App() {
   if (!state.isLoggedIn) return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<LoginForm />} />
         <Route path="/login" element={<LoginForm />} />
-        <Route path="/" element={<HomePage />} />
       </Routes>
-    </BrowserRouter>);
+    </BrowserRouter>
+  );
   else
     return (
       <BrowserRouter>
