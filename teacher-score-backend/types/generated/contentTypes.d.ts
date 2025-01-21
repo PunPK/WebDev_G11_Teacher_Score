@@ -381,30 +381,28 @@ export interface ApiLecturerLecturer extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    background: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    background: Schema.Attribute.BigInteger;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    first_name: Schema.Attribute.String & Schema.Attribute.Required;
-    last_name: Schema.Attribute.String & Schema.Attribute.Required;
+    email: Schema.Attribute.String & Schema.Attribute.Unique;
+    first_name: Schema.Attribute.String;
+    last_name: Schema.Attribute.String;
     lecturer_id: Schema.Attribute.Relation<'oneToMany', 'api::subject.subject'>;
-    lecturer_rating: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    lecturer_rating: Schema.Attribute.BigInteger;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::lecturer.lecturer'
     > &
       Schema.Attribute.Private;
-    password: Schema.Attribute.String & Schema.Attribute.Required;
+    password: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    topic_score: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    topic_score: Schema.Attribute.BigInteger;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    username: Schema.Attribute.String & Schema.Attribute.Required;
+    username: Schema.Attribute.String;
   };
 }
 
@@ -427,9 +425,9 @@ export interface ApiScoreScore extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::score.score'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    score: Schema.Attribute.String & Schema.Attribute.Required;
+    score: Schema.Attribute.String;
     student_score_id: Schema.Attribute.Relation<
-      'oneToOne',
+      'manyToOne',
       'api::student.student'
     >;
     topic_score_id: Schema.Attribute.Relation<'manyToOne', 'api::topic.topic'>;
@@ -454,23 +452,23 @@ export interface ApiStudentStudent extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.String & Schema.Attribute.Required;
-    first_name: Schema.Attribute.String & Schema.Attribute.Required;
-    last_name: Schema.Attribute.String & Schema.Attribute.Required;
+    email: Schema.Attribute.String;
+    first_name: Schema.Attribute.String;
+    last_name: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::student.student'
     > &
       Schema.Attribute.Private;
-    password: Schema.Attribute.String & Schema.Attribute.Required;
+    password: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    student_id: Schema.Attribute.Relation<'oneToOne', 'api::score.score'>;
-    Subject: Schema.Attribute.Relation<'oneToMany', 'api::subject.subject'>;
+    student_ids: Schema.Attribute.Relation<'oneToMany', 'api::score.score'>;
+    subjects: Schema.Attribute.Relation<'manyToMany', 'api::subject.subject'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    username: Schema.Attribute.String & Schema.Attribute.Required;
+    username: Schema.Attribute.String;
   };
 }
 
@@ -487,10 +485,10 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
-    create_date: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    create_date: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.Text & Schema.Attribute.Required;
+    Description: Schema.Attribute.Text;
     lecturer_owned: Schema.Attribute.Relation<
       'manyToOne',
       'api::lecturer.lecturer'
@@ -501,12 +499,15 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
       'api::subject.subject'
     > &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String & Schema.Attribute.Required;
+    Name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    Subject_id: Schema.Attribute.Relation<'manyToOne', 'api::student.student'>;
-    Time_Usage: Schema.Attribute.Integer & Schema.Attribute.Required;
+    subject_ids: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::student.student'
+    >;
+    Time_Usage: Schema.Attribute.Integer;
     topic: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'>;
-    topic_count: Schema.Attribute.Integer & Schema.Attribute.Required;
+    topic_count: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -526,7 +527,7 @@ export interface ApiTopicTopic extends Struct.CollectionTypeSchema {
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
-    create_date: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    create_date: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -535,11 +536,11 @@ export interface ApiTopicTopic extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     score_id: Schema.Attribute.Relation<'oneToMany', 'api::score.score'>;
     topic_id: Schema.Attribute.Relation<'manyToOne', 'api::subject.subject'>;
-    topic_title: Schema.Attribute.String & Schema.Attribute.Required;
+    topic_title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    upload_time: Schema.Attribute.Time & Schema.Attribute.Required;
+    upload_time: Schema.Attribute.Time;
   };
 }
 

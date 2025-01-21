@@ -14,29 +14,29 @@
   "attributes": {
     "Name": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "Description": {
       "type": "text",
-      "required": true
+      "required": false
     },
     "Time_Usage": {
       "type": "integer",
-      "required": true
+      "required": false
     },
     "create_date": {
       "type": "datetime",
-      "required": true
+      "required": false
     },
     "topic_count": {
       "type": "integer",
-      "required": true
+      "required": false
     },
-    "Subject_id": {
+    "subject_ids": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::student.student",
-      "inversedBy": "Subject"
+      "inversedBy": "subjects"
     },
     "lecturer_owned": {
       "type": "relation",

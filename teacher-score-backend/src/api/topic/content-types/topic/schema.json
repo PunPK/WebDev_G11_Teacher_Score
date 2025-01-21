@@ -14,15 +14,15 @@
   "attributes": {
     "topic_title": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "upload_time": {
       "type": "time",
-      "required": true
+      "required": false
     },
     "create_date": {
       "type": "datetime",
-      "required": true
+      "required": false
     },
     "topic_id": {
       "type": "relation",

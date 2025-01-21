@@ -14,35 +14,35 @@
   "attributes": {
     "first_name": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "last_name": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "email": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "username": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "password": {
       "type": "string",
-      "required": true
+      "required": false
     },
-    "student_id": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::score.score",
-      "inversedBy": "student_score_id"
-    },
-    "Subject": {
+    "student_ids": {
       "type": "relation",
       "relation": "oneToMany",
+      "target": "api::score.score",
+      "mappedBy": "student_score_id"
+    },
+    "subjects": {
+      "type": "relation",
+      "relation": "manyToMany",
       "target": "api::subject.subject",
-      "mappedBy": "Subject_id"
+      "mappedBy": "subject_ids"
     }
   }
 }

@@ -14,36 +14,36 @@
   "attributes": {
     "first_name": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "last_name": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "email": {
       "type": "string",
-      "required": true,
+      "required": false,
       "unique": true
     },
     "username": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "password": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "lecturer_rating": {
       "type": "biginteger",
-      "required": true
+      "required": false
     },
     "background": {
       "type": "biginteger",
-      "required": true
+      "required": false
     },
     "topic_score": {
       "type": "biginteger",
-      "required": true
+      "required": false
     },
     "lecturer_id": {
       "type": "relation",
