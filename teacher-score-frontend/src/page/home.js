@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../context/Auth.context.js";
 import ax from "../conf/ax.js";
 
-const Dashboard = () => {
+const HomePage = () => {
   // useEffect(() => {
   //   const fetchBooks = async () => {
   //     const result = await ax.get("/users");
@@ -35,4 +35,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default HomePage;

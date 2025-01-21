@@ -4,13 +4,13 @@ import { AuthContext } from "./context/Auth.context.js";
 // import Login from "./Login/index.js";
 // import Dashboard from "./Dashboard/index.js";
 import LoginForm from "./page/login.js";
-import Dashboard from "./page/dashboard.js";
+import HomePage from "./page/home.js";
 
 const App = () => {
   const { state } = useContext(AuthContext);
 
   if (!state.isLoggedIn) return <LoginForm />;
-  else return <Dashboard />;
+  else return <HomePage />;
 };
 
 export default App;
