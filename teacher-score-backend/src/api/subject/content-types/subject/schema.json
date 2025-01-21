@@ -1,14 +1,54 @@
-
 {
   "kind": "collectionType",
   "collectionName": "subjects",
   "info": {
     "singularName": "subject",
     "pluralName": "subjects",
-    "displayName": "Subject"
+    "displayName": "Subject",
+    "description": ""
   },
   "options": {
-    "comment": ""
+    "draftAndPublish": false
   },
-  "attributes": {}
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Description": {
+      "type": "text",
+      "required": true
+    },
+    "Time_Usage": {
+      "type": "integer",
+      "required": true
+    },
+    "create_date": {
+      "type": "datetime",
+      "required": true
+    },
+    "topic_count": {
+      "type": "integer",
+      "required": true
+    },
+    "Subject_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::student.student",
+      "inversedBy": "Subject"
+    },
+    "lecturer_owned": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::lecturer.lecturer",
+      "inversedBy": "lecturer_id"
+    },
+    "topic": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::topic.topic",
+      "mappedBy": "topic_id"
+    }
+  }
 }

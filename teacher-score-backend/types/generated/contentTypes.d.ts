@@ -369,15 +369,54 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
-  collectionName: 'subjects';
+export interface ApiLecturerLecturer extends Struct.CollectionTypeSchema {
+  collectionName: 'lecturers';
   info: {
-    displayName: 'Subject';
-    pluralName: 'subjects';
-    singularName: 'subject';
+    description: '';
+    displayName: 'Lecturer';
+    pluralName: 'lecturers';
+    singularName: 'lecturer';
   };
   options: {
-    comment: '';
+    draftAndPublish: false;
+  };
+  attributes: {
+    background: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    first_name: Schema.Attribute.String & Schema.Attribute.Required;
+    last_name: Schema.Attribute.String & Schema.Attribute.Required;
+    lecturer_id: Schema.Attribute.Relation<'oneToMany', 'api::subject.subject'>;
+    lecturer_rating: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::lecturer.lecturer'
+    > &
+      Schema.Attribute.Private;
+    password: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    topic_score: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    username: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ApiScoreScore extends Struct.CollectionTypeSchema {
+  collectionName: 'scores';
+  info: {
+    description: '';
+    displayName: 'Score';
+    pluralName: 'scores';
+    singularName: 'score';
+  };
+  options: {
     draftAndPublish: false;
   };
   attributes: {
@@ -385,15 +424,122 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::score.score'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    score: Schema.Attribute.String & Schema.Attribute.Required;
+    student_score_id: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::student.student'
+    >;
+    topic_score_id: Schema.Attribute.Relation<'manyToOne', 'api::topic.topic'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiStudentStudent extends Struct.CollectionTypeSchema {
+  collectionName: 'students';
+  info: {
+    description: '';
+    displayName: 'Student';
+    pluralName: 'students';
+    singularName: 'student';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.String & Schema.Attribute.Required;
+    first_name: Schema.Attribute.String & Schema.Attribute.Required;
+    last_name: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::student.student'
+    > &
+      Schema.Attribute.Private;
+    password: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    student_id: Schema.Attribute.Relation<'oneToOne', 'api::score.score'>;
+    Subject: Schema.Attribute.Relation<'oneToMany', 'api::subject.subject'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    username: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
+  collectionName: 'subjects';
+  info: {
+    description: '';
+    displayName: 'Subject';
+    pluralName: 'subjects';
+    singularName: 'subject';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    create_date: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Description: Schema.Attribute.Text & Schema.Attribute.Required;
+    lecturer_owned: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::lecturer.lecturer'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::subject.subject'
     > &
       Schema.Attribute.Private;
+    Name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    Subject_id: Schema.Attribute.Relation<'manyToOne', 'api::student.student'>;
+    Time_Usage: Schema.Attribute.Integer & Schema.Attribute.Required;
+    topic: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'>;
+    topic_count: Schema.Attribute.Integer & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTopicTopic extends Struct.CollectionTypeSchema {
+  collectionName: 'topics';
+  info: {
+    description: '';
+    displayName: 'Topic';
+    pluralName: 'topics';
+    singularName: 'topic';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    create_date: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    score_id: Schema.Attribute.Relation<'oneToMany', 'api::score.score'>;
+    topic_id: Schema.Attribute.Relation<'manyToOne', 'api::subject.subject'>;
+    topic_title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    upload_time: Schema.Attribute.Time & Schema.Attribute.Required;
   };
 }
 
@@ -906,7 +1052,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::lecturer.lecturer': ApiLecturerLecturer;
+      'api::score.score': ApiScoreScore;
+      'api::student.student': ApiStudentStudent;
       'api::subject.subject': ApiSubjectSubject;
+      'api::topic.topic': ApiTopicTopic;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

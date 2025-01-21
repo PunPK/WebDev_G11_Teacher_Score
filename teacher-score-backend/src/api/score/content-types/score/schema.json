@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "scores",
+  "info": {
+    "singularName": "score",
+    "pluralName": "scores",
+    "displayName": "Score",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "score": {
+      "type": "string",
+      "required": true
+    },
+    "student_score_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::student.student",
+      "mappedBy": "student_id"
+    },
+    "topic_score_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::topic.topic",
+      "inversedBy": "score_id"
+    }
+  }
+}

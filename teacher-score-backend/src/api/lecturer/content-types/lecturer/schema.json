@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lecturers",
+  "info": {
+    "singularName": "lecturer",
+    "pluralName": "lecturers",
+    "displayName": "Lecturer",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "first_name": {
+      "type": "string",
+      "required": true
+    },
+    "last_name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "username": {
+      "type": "string",
+      "required": true
+    },
+    "password": {
+      "type": "string",
+      "required": true
+    },
+    "lecturer_rating": {
+      "type": "biginteger",
+      "required": true
+    },
+    "background": {
+      "type": "biginteger",
+      "required": true
+    },
+    "topic_score": {
+      "type": "biginteger",
+      "required": true
+    },
+    "lecturer_id": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::subject.subject",
+      "mappedBy": "lecturer_owned"
+    }
+  }
+}

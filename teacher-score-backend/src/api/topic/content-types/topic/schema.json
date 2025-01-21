@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "topics",
+  "info": {
+    "singularName": "topic",
+    "pluralName": "topics",
+    "displayName": "Topic",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "topic_title": {
+      "type": "string",
+      "required": true
+    },
+    "upload_time": {
+      "type": "time",
+      "required": true
+    },
+    "create_date": {
+      "type": "datetime",
+      "required": true
+    },
+    "topic_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::subject.subject",
+      "inversedBy": "topic"
+    },
+    "score_id": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::score.score",
+      "mappedBy": "topic_score_id"
+    }
+  }
+}
