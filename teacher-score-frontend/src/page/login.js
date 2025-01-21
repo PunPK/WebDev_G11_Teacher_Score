@@ -1,109 +1,69 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { Link, useNavigate, Navigate } from "react-router-dom";
-import { Button, Form, Input, Alert, Checkbox } from "antd";
-import axios from "axios";
-import { getOverflowOptions } from "antd/es/_util/placements";
+import React, { useContext } from "react";
+import { useSetState } from "react-use";
 
-const URL_AUTH = "/api/auth/local";
+import { AuthContext } from "../context/Auth.context.js";
 
-export default function LoginScreen(props) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [errMsg, setErrMsg] = useState(null);
-  const [rememberMe, setRememberMe] = useState(false);
+const initialState = {
+  username: "wd01",
+  password: "Wd123456",
+};
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+const LoginForm = () => {
+  const { state: ContextState, login } = useContext(AuthContext);
+  const { isLoginPending, isLoggedIn, loginError } = ContextState;
+  const [state, setState] = useSetState(initialState);
 
-  useEffect(() => {
-    const savedUsername = localStorage.getItem("identifier");
-    const savedPassword = localStorage.getItem("password");
-    setUsername(savedUsername);
-    setPassword(savedPassword);
-    setRememberMe(true);
-  }, []);
-
-  const handleLogin = async (formData) => {
-    try {
-      setIsLoading(true);
-      setErrMsg(null);
-      const response = await axios.post(URL_AUTH, { ...formData });
-      console.log(response);
-      const token = response.data.jwt;
-      axios.defaults.headers.common = { Authorization: `bearer ${token}` };
-      if (rememberMe) {
-        localStorage.getItem(formData.identifier);
-        localStorage.getItem(formData.password);
-      } else {
-        localStorage.removeItem("identifier");
-        localStorage.removeItem("password");
-      }
-      props.onLoginSuccess();
-    } catch (err) {
-      console.log(err);
-      setErrMsg(err.message);
-    } finally {
-      setIsLoading(false);
-    }
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const { username, password } = state;
+    login(username, password);
+    setState({
+      username: "",
+      password: "",
+    });
   };
 
   return (
-    <div className="login-container">
-      <div className="login">
-        <header>
-          <Form
-            onFinish={handleLogin}
-            autoComplete="off"
-            style={getOverflowOptions()}
-          >
-            <Form.Item
-              label="Username"
-              name="identifier"
-              rules={[{ required: true }]}
-            >
-              <Input />
-            </Form.Item>
+    <form name="loginForm" onSubmit={onSubmit}>
+      <div className="row">
+        <div className="col-sm-3 col-md-6">
+          <label htmlFor="username">Username</label>
+        </div>
 
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[{ required: true }]}
-            >
-              <Input.Password />
-            </Form.Item>
-            <div className="login-button">
-              <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  loading={isLoading}
-                  shape="round"
-                  size="large"
-                >
-                  Log in
-                </Button>
-              </Form.Item>
-            </div>
+        <div className="col-sm-9 col-md-6">
+          <input
+            type="text"
+            name="username"
+            onChange={(e) => setState({ username: e.target.value })}
+            value={state.username}
+            placeholder="admin"
+          />
+        </div>
 
-            <Checkbox
-              check={rememberMe}
-              className="center-rememberme"
-              onChange={(data) => setRememberMe(data.target.checked)}
-            >
-              Remember me
-            </Checkbox>
+        <div className="col-sm-3 col-md-6">
+          <label htmlFor="password">Password</label>
+        </div>
+        <div className="col-sm-9 col-md-6">
+          <input
+            type="password"
+            name="password"
+            onChange={(e) => setState({ password: e.target.value })}
+            value={state.password}
+            placeholder="admin"
+          />
+        </div>
 
-            <div className="signuplink">
-              <Link Link to={"/sign-up"}>
-                Don't have an account? Sign up
-              </Link>
-            </div>
-          </Form>
-          <div className="errormsg">
-            {errMsg && <Alert message={errMsg} type="error" />}
-          </div>
-        </header>
+        <div className="col-sm-3 col-md-6"></div>
+        <div className="col-sm-9 col-md-6">
+          <input className="primary" type="submit" value="Login" />
+        </div>
       </div>
-    </div>
+
+      {isLoginPending && <div>Please wait...</div>}
+      {isLoggedIn && <div>Success.</div>}
+      {loginError && <div>{loginError.message}</div>}
+    </form>
   );
-}
+};
+
+export default LoginForm;
