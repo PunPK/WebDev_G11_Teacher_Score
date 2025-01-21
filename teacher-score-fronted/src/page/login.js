@@ -4,8 +4,8 @@ import { useSetState } from "react-use";
 import { AuthContext } from "../context/Auth.context.js";
 
 const initialState = {
-  username: "wd01",
-  password: "Wd123456",
+  username: "admin",
+  password: "admin",
 };
 
 const LoginForm = () => {
