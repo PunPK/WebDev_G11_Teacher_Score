@@ -53,13 +53,13 @@ const HomePage = () => {
 
   return (
     <div className>
-      <div className="col-sm-8">
+      <div className="col-sm-8 row-span-1">
         <h1>Hello {user.email}</h1>
       </div>
 
       <div className="col-sm-4">
         <h1>
-          <a href="/login" onClick={onLogout}>
+          <a href="/" onClick={onLogout}>
             Logout
           </a>
         </h1>
@@ -102,7 +102,7 @@ const HomePage = () => {
                   scope="col"
                   className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
                 >
-                  Updated_date
+                  Subject Status
                 </th>
                 <th
                   scope="col"
