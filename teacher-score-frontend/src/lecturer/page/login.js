@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useSetState } from "react-use";
 
-import { AuthContext } from "../context/Auth.context.js";
+import { AuthContext } from "../../context/Auth.context.js";
 
 const initialState = {
   username: "pong",

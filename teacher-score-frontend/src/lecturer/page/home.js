@@ -1,11 +1,9 @@
 import React, { useContext, useEffect } from "react";
 
-import { AuthContext } from "../context/Auth.context.js";
-import ax from "../conf/ax.js";
-import { useNavigate } from "react-router";
+import { AuthContext } from "../../context/Auth.context.js";
+import ax from "../../conf/ax.js";
 
-const HomePage = () => {
-  const navigate = useNavigate();
+const HomeLecturer = () => {
   // useEffect(() => {
   //   const fetchBooks = async () => {
   //     const result = await ax.get("/users");
@@ -23,12 +21,14 @@ const HomePage = () => {
   return (
     <div className="row">
       <div className="col-sm-8">
+        <h1>lecturer</h1>
         <h1>Hello {user.email}</h1>
+        {/* <h1>Hello {user.role}</h1> */}
       </div>
 
       <div className="col-sm-4">
         <h1>
-          <a href="/" onClick={onLogout}>
+          <a href="#" onClick={onLogout}>
             Logout
           </a>
         </h1>
@@ -37,4 +37,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default HomeLecturer;

@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { useSetState } from 'react-use';
-import conf from '../conf/main'
-import ax, { axData } from '../conf/ax'
-import { useNavigate } from 'react-router';
+import React, { useEffect } from "react";
+import { useSetState } from "react-use";
+import conf from "../conf/main";
+import ax, { axData } from "../conf/ax";
+import { useNavigate } from "react-router";
 
 export const AuthContext = React.createContext(null);
 
@@ -11,58 +11,57 @@ const initialState = {
   user: null,
   isLoginPending: false,
   loginError: null,
-}
+};
 
 const updateJwt = (jwt) => {
-  axData.jwt = jwt
+  axData.jwt = jwt;
   if (jwt) {
-    sessionStorage.setItem(conf.jwtSessionStorageKey, jwt)
+    sessionStorage.setItem(conf.jwtSessionStorageKey, jwt);
   } else {
-    sessionStorage.removeItem(conf.jwtSessionStorageKey)
+    sessionStorage.removeItem(conf.jwtSessionStorageKey);
   }
-}
+};
 
-export const ContextProvider = props => {
+export const ContextProvider = (props) => {
   const [state, setState] = useSetState(initialState);
 
   const setLoginPending = (isLoginPending) => setState({ isLoginPending });
   const setLoginSuccess = (isLoggedIn, user) => setState({ isLoggedIn, user });
   const setLoginError = (loginError) => setState({ loginError });
 
-
   const handleLoginResult = (error, result) => {
     setLoginPending(false);
 
     if (result && result.user) {
       if (result.jwt) {
-        updateJwt(result.jwt)
+        updateJwt(result.jwt);
       }
       setLoginSuccess(true, result.user);
       // navigate("/")
     } else if (error) {
       setLoginError(error);
     }
-  }
+  };
 
   useEffect(() => {
-    setLoginPending(true)
-    loadPersistedJwt(handleLoginResult)
-  }, [])
+    setLoginPending(true);
+    loadPersistedJwt(handleLoginResult);
+  }, []);
 
   const login = (username, password) => {
     setLoginPending(true);
     setLoginSuccess(false);
     setLoginError(null);
 
-    fetchLogin(username, password, handleLoginResult)
-  }
+    fetchLogin(username, password, handleLoginResult);
+  };
 
   const logout = () => {
     setLoginPending(false);
-    updateJwt(null)
+    updateJwt(null);
     setLoginSuccess(false);
     setLoginError(null);
-  }
+  };
 
   return (
     <AuthContext.Provider
@@ -81,32 +80,39 @@ const fetchLogin = async (username, password, callback) => {
   try {
     const response = await ax.post(conf.loginEndpoint, {
       identifier: username,
-      password
-    })
+      password,
+    });
+    const userRole = response.data.role?.name || "No role assigned";
+    console.log("Persisted User Role:", userRole);
     if (response.data.jwt && response.data.user.id > 0) {
-      callback(null, response.data)
+      const userRole = response.data.user.role?.name || "No role assigned";
+      console.log("User Role:", userRole);
+      callback(null, response.data);
     } else {
-      callback(new Error('Invalid username and password'))
+      callback(new Error("Invalid username and password"));
     }
   } catch (e) {
-    callback(new Error('Fail to initiate login'))
+    callback(new Error("Fail to initiate login"));
   }
-}
+};
 
 const loadPersistedJwt = async (callback) => {
   try {
-    const persistedJwt = sessionStorage.getItem(conf.jwtSessionStorageKey)
+    const persistedJwt = sessionStorage.getItem(conf.jwtSessionStorageKey);
+    // console.log(persistedJwt);
     if (persistedJwt) {
-      axData.jwt = persistedJwt
-      const response = await ax.get(conf.jwtUserEndpoint)
+      axData.jwt = persistedJwt;
+      const response = await ax.get(conf.jwtUserEndpoint);
       if (response.data.id > 0) {
-        callback(null, { user: response.data })
+        const userRole = response.data.role?.name || "No role assigned";
+        console.log("Persisted User Role:", userRole);
+        callback(null, { user: response.data });
       } else {
-        callback(null)
+        callback(null);
       }
     }
   } catch (e) {
-    console.log(e)
-    callback(new Error('Fail to initiate auto login'))
+    console.log(e);
+    callback(new Error("Fail to initiate auto login"));
   }
-}
+};
