@@ -4,51 +4,33 @@
   "info": {
     "singularName": "subject",
     "pluralName": "subjects",
-    "displayName": "Subject",
-    "description": ""
+    "displayName": "Subject"
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
-      "type": "string",
-      "required": false
+    "title": {
+      "type": "string"
     },
-    "Description": {
-      "type": "text",
-      "required": false
-    },
-    "Time_Usage": {
-      "type": "integer",
-      "required": false
+    "description": {
+      "type": "text"
     },
     "create_date": {
-      "type": "datetime",
-      "required": false
-    },
-    "topic_count": {
-      "type": "integer",
-      "required": false
-    },
-    "subject_ids": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::student.student",
-      "inversedBy": "subjects"
-    },
-    "lecturer_owned": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::lecturer.lecturer",
-      "inversedBy": "lecturer_id"
+      "type": "date"
     },
     "topic": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::topic.topic",
       "mappedBy": "topic_id"
+    },
+    "lecturer_owners": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::lecturer.lecturer",
+      "mappedBy": "lecturer_owneds"
     }
   }
 }

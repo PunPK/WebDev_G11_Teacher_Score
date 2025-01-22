@@ -12,44 +12,20 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "first_name": {
-      "type": "string",
-      "required": false
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "lecturer"
     },
-    "last_name": {
-      "type": "string",
-      "required": false
-    },
-    "email": {
-      "type": "string",
-      "required": false,
-      "unique": true
-    },
-    "username": {
-      "type": "string",
-      "required": false
-    },
-    "password": {
-      "type": "string",
-      "required": false
-    },
-    "lecturer_rating": {
-      "type": "biginteger",
-      "required": false
-    },
-    "background": {
-      "type": "biginteger",
-      "required": false
-    },
-    "topic_score": {
-      "type": "biginteger",
-      "required": false
+    "lecturer_owneds": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::subject.subject",
+      "inversedBy": "lecturer_owners"
     },
     "lecturer_id": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::subject.subject",
-      "mappedBy": "lecturer_owned"
+      "type": "string"
     }
   }
 }

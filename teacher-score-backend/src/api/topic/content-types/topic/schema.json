@@ -17,24 +17,20 @@
       "required": false
     },
     "upload_time": {
-      "type": "time",
-      "required": false
-    },
-    "create_date": {
       "type": "datetime",
       "required": false
-    },
-    "topic_id": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::subject.subject",
-      "inversedBy": "topic"
     },
     "score_id": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::score.score",
       "mappedBy": "topic_score_id"
+    },
+    "topic_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::subject.subject",
+      "inversedBy": "topic"
     }
   }
 }

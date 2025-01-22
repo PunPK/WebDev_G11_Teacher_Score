@@ -381,28 +381,28 @@ export interface ApiLecturerLecturer extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    background: Schema.Attribute.BigInteger;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.String & Schema.Attribute.Unique;
-    first_name: Schema.Attribute.String;
-    last_name: Schema.Attribute.String;
-    lecturer_id: Schema.Attribute.Relation<'oneToMany', 'api::subject.subject'>;
-    lecturer_rating: Schema.Attribute.BigInteger;
+    lecturer_id: Schema.Attribute.String;
+    lecturer_owneds: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::subject.subject'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::lecturer.lecturer'
     > &
       Schema.Attribute.Private;
-    password: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    topic_score: Schema.Attribute.BigInteger;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    username: Schema.Attribute.String;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -452,30 +452,28 @@ export interface ApiStudentStudent extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.String;
-    first_name: Schema.Attribute.String;
-    last_name: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::student.student'
     > &
       Schema.Attribute.Private;
-    password: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    student_ids: Schema.Attribute.Relation<'oneToMany', 'api::score.score'>;
-    subjects: Schema.Attribute.Relation<'manyToMany', 'api::subject.subject'>;
+    score_id: Schema.Attribute.Relation<'oneToMany', 'api::score.score'>;
+    student_id: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    username: Schema.Attribute.String;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
 export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
   collectionName: 'subjects';
   info: {
-    description: '';
     displayName: 'Subject';
     pluralName: 'subjects';
     singularName: 'subject';
@@ -485,12 +483,12 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
-    create_date: Schema.Attribute.DateTime;
+    create_date: Schema.Attribute.Date;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.Text;
-    lecturer_owned: Schema.Attribute.Relation<
-      'manyToOne',
+    description: Schema.Attribute.Text;
+    lecturer_owners: Schema.Attribute.Relation<
+      'manyToMany',
       'api::lecturer.lecturer'
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -499,15 +497,9 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
       'api::subject.subject'
     > &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    subject_ids: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::student.student'
-    >;
-    Time_Usage: Schema.Attribute.Integer;
+    title: Schema.Attribute.String;
     topic: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'>;
-    topic_count: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -527,7 +519,6 @@ export interface ApiTopicTopic extends Struct.CollectionTypeSchema {
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
-    create_date: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -540,7 +531,7 @@ export interface ApiTopicTopic extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    upload_time: Schema.Attribute.Time;
+    upload_time: Schema.Attribute.DateTime;
   };
 }
 
@@ -999,7 +990,6 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1013,6 +1003,9 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    first_name: Schema.Attribute.String;
+    last_name: Schema.Attribute.String;
+    lecturer: Schema.Attribute.Relation<'oneToOne', 'api::lecturer.lecturer'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1031,6 +1024,7 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    student: Schema.Attribute.Relation<'oneToOne', 'api::student.student'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
