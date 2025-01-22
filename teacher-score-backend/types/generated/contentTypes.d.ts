@@ -426,8 +426,8 @@ export interface ApiScoreScore extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     score: Schema.Attribute.String;
-    student_score_id: Schema.Attribute.Relation<
-      'manyToOne',
+    student_score_ids: Schema.Attribute.Relation<
+      'oneToMany',
       'api::student.student'
     >;
     topic_score_id: Schema.Attribute.Relation<'manyToOne', 'api::topic.topic'>;
@@ -459,7 +459,7 @@ export interface ApiStudentStudent extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    score_id: Schema.Attribute.Relation<'oneToMany', 'api::score.score'>;
+    score_id: Schema.Attribute.Relation<'manyToOne', 'api::score.score'>;
     student_id: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

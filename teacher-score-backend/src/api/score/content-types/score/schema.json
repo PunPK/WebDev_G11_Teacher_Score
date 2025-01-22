@@ -22,11 +22,11 @@
       "target": "api::topic.topic",
       "inversedBy": "score_id"
     },
-    "student_score_id": {
+    "student_score_ids": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "oneToMany",
       "target": "api::student.student",
-      "inversedBy": "score_id"
+      "mappedBy": "score_id"
     }
   }
 }

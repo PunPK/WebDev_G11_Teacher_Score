@@ -23,9 +23,9 @@
     },
     "score_id": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToOne",
       "target": "api::score.score",
-      "mappedBy": "student_score_id"
+      "inversedBy": "student_score_ids"
     }
   }
 }
