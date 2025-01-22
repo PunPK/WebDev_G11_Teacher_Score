@@ -119,21 +119,9 @@ export default function Login() {
               >
                 Login
               </button>
-              <div class="flex justify-between mt-4">
-                <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">
-                  Forgot Password ?
-                </span>
 
-                <a
-                  href="/sign-up"
-                  className="primary"
-                  class="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all"
-                >
-                  Don't have an account yet?
-                </a>
-              </div>
               {isLoginPending && <div>Please wait...</div>}
-              {isLoggedIn && <div>Success.</div> && navigate("/")}
+              {isLoggedIn && <div>Success.</div>}
               {loginError && <div>{loginError.message}</div>}
             </form>
           </div>

@@ -12,6 +12,7 @@ import { AuthContext } from "./context/Auth.context.js";
 // import Dashboard from "./Dashboard/index.js";
 import LoginForm from "./page/login.js";
 import HomePage from "./page/home.js";
+// import Nav from "./components/navbar.js";
 
 function App() {
   const { state } = useContext(AuthContext);
@@ -20,18 +21,19 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginForm />} />
-        <Route path="/login" element={<LoginForm />} />
       </Routes>
     </BrowserRouter>
   );
   else
     return (
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginForm />} />
-        </Routes>
-      </BrowserRouter>
+      <div>
+        {/* <Nav /> */}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     );
 }
 

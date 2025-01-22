@@ -1,6 +1,7 @@
 // import React, { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
-// import logo from "./logo.png";
+// import { } from '@heroicons/react/24/outline'
+// import { useContext } from "react";
 // import {
 //   Disclosure,
 //   DisclosureButton,
@@ -22,7 +23,6 @@
 // export default function Nav() {
 //   const { state: ContextState, logout } = useContext(AuthContext);
 //   const { user } = ContextState;
-
 //   const onLogout = (e) => {
 //     e.preventDefault();
 //     logout();
@@ -33,7 +33,6 @@
 //       <div className="mx-auto max-w-8xl px-2 sm:px-6 lg:px-8">
 //         <div className="relative flex h-16 items-center justify-between">
 //           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-//             {/* Mobile menu button*/}
 //             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
 //               <span className="absolute -inset-0.5" />
 //               <span className="sr-only">Open main menu</span>
@@ -43,7 +42,7 @@
 //           </div>
 //           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
 //             <div className="flex shrink-0 items-center">
-//               <h1>{user.name}</h1>
+//               JSON.stringify({user.username === null ? <h1>Please sign in...</h1> : <h1>Hello,{user.username}</h1>})
 //             </div>
 
 //             <form class="max-w-screen-lg items-start justify-start md:max-w-screen-md min-w ms-2  lg:ms-9 me-2 sm:items-stretch sm:justify-start my-2">
@@ -136,14 +135,6 @@
 //                 </MenuItem>
 //                 <MenuItem>
 //                   <a
-//                     href="/login"
-//                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
-//                   >
-//                     Login
-//                   </a>
-//                 </MenuItem>
-//                 <MenuItem>
-//                   <a
 //                     href="/sign-up"
 //                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
 //                   >
@@ -158,23 +149,7 @@
 
 //       <DisclosurePanel className="sm:hidden">
 //         <div className="space-y-1 px-2 pb-3 pt-2">
-//           {navigation.map((item) => (
-//             <DisclosureButton
-//               key={item.name}
-//               as="a"
-//               href={item.href}
-//               aria-current={item.current ? "page" : undefined}
-//               className={classNames(
-//                 item.current
-//                   ? "bg-gray-900 text-white"
-//                   : "text-gray-300 hover:bg-gray-700 hover:text-white",
-//                 "block rounded-md px-3 py-2 text-base font-medium"
-//               )}
-//             >
-//               {item.name}
-//             </DisclosureButton>
-//           ))}
-//         </div>
+//         </div >
 //       </DisclosurePanel>
 //     </Disclosure>
 //   );
