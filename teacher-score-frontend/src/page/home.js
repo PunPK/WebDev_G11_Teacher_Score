@@ -2,8 +2,10 @@ import React, { useContext, useEffect } from "react";
 
 import { AuthContext } from "../context/Auth.context.js";
 import ax from "../conf/ax.js";
+import { useNavigate } from "react-router";
 
-const Dashboard = () => {
+const HomePage = () => {
+  const navigate = useNavigate()
   // useEffect(() => {
   //   const fetchBooks = async () => {
   //     const result = await ax.get("/users");
@@ -26,7 +28,7 @@ const Dashboard = () => {
 
       <div className="col-sm-4">
         <h1>
-          <a href="#" onClick={onLogout}>
+          <a href="/login" onClick={onLogout && navigate("/login")}>
             Logout
           </a>
         </h1>
@@ -35,4 +37,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default HomePage;

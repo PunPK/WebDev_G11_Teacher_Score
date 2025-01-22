@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSetState } from 'react-use';
 import conf from '../conf/main'
 import ax, { axData } from '../conf/ax'
+import { useNavigate } from 'react-router';
 
 export const AuthContext = React.createContext(null);
 
@@ -14,9 +15,9 @@ const initialState = {
 
 const updateJwt = (jwt) => {
   axData.jwt = jwt
-  if(jwt){
+  if (jwt) {
     sessionStorage.setItem(conf.jwtSessionStorageKey, jwt)
-  }else{
+  } else {
     sessionStorage.removeItem(conf.jwtSessionStorageKey)
   }
 }
@@ -37,6 +38,7 @@ export const ContextProvider = props => {
         updateJwt(result.jwt)
       }
       setLoginSuccess(true, result.user);
+      // navigate("/")
     } else if (error) {
       setLoginError(error);
     }
@@ -98,7 +100,7 @@ const loadPersistedJwt = async (callback) => {
       axData.jwt = persistedJwt
       const response = await ax.get(conf.jwtUserEndpoint)
       if (response.data.id > 0) {
-        callback(null, {user: response.data})
+        callback(null, { user: response.data })
       } else {
         callback(null)
       }
