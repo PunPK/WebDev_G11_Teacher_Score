@@ -4,10 +4,6 @@ import { AuthContext } from "../context/Auth.context.js";
 import ax from "../conf/ax.js";
 import { useNavigate } from "react-router";
 import InfoCard from '../components/Cards/InfoCard'
-import ChartCard from '../components/Chart/ChartCard'
-import { Doughnut, Line } from 'react-chartjs-2'
-import ChartLegend from '../components/Chart/ChartLegend'
-import { ChatIcon, CartIcon, MoneyIcon, PeopleIcon } from '../icons'
 import RoundIcon from '../components/RoundIcon'
 import response from '../utils/demo/tableData'
 import {
@@ -22,22 +18,34 @@ import {
   Badge,
   Pagination,
 } from '@windmill/react-ui'
-
+import axios from "axios";
+import { BugAntIcon } from "@heroicons/react/16/solid";
 
 const HomePage = () => {
-
+  const [subjectData, setSubjectData] = useState([]);
   const navigate = useNavigate()
   const { state: ContextState, logout } = useContext(AuthContext);
+  const [page, setPage] = useState(1)
+  const [data, setData] = useState([])
   const { user } = ContextState;
   const onLogout = (e) => {
     e.preventDefault();
     logout();
   };
-  const [page, setPage] = useState(1)
-  const [data, setData] = useState([])
+
+  const fetchSubject = async () => {
+    try {
+      const subjectUrl = "http://localhost:1337/api/subjects"
+      const response = await ax.get(subjectUrl)
+      console.log(response.data.data)
+      setSubjectData(response.data.data)
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   // pagination setup
-  const resultsPerPage = 10
+  const resultsPerPage = 20
   const totalResults = response.length
 
   // pagination change control
@@ -45,6 +53,9 @@ const HomePage = () => {
     setPage(p)
   }
 
+  useEffect(() => {
+    fetchSubject()
+  })
   // on page change, load new sliced data
   // here you would make another server request for new data
   useEffect(() => {
@@ -66,20 +77,19 @@ const HomePage = () => {
       </div>
 
       <div class="grid gap-4">
-        <h1 class="my-5">Anounced Subjects</h1>
+        <h1 class="mx-auto my-5 text-5xl font-sans">Anounced Score Subjects</h1>
 
 
         {/* <!-- Cards --> */}
         <div className="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
           <InfoCard title="Total Subjects" value="6389">
-            <RoundIcon
-              icon={PeopleIcon}
+            {/* <RoundIcon
+              // icon={ }
               iconColorClass="text-orange-500 dark:text-orange-100"
               bgColorClass="bg-orange-100 dark:bg-orange-500"
               className="mr-4"
-            />
+            /> */}
           </InfoCard>
-
         </div>
 
         <TableContainer className="bg-cyan-900">
@@ -113,36 +123,38 @@ const HomePage = () => {
               </tr>
             </thead>
             <TableBody>
-              {data.map((user, i) => (
+              {subjectData.map((user, i) => (
                 <TableRow key={i}>
                   <TableCell>
                     <div className="flex items-center text-sm">
-                      <Avatar className="hidden mr-3 md:block" src={user.avatar} alt="User image" />
                       <div>
-                        <p className="font-semibold">{user.name}</p>
-                        <p className="text-xs text-gray-600 dark:text-gray-400">{user.job}</p>
+                        <p className="font-semibold">{user.title}</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">{user.description}</p>
                       </div>
                     </div>
                   </TableCell>
                   <TableCell>
-                    <span className="text-sm">$ {user.amount}</span>
+                    <span className="text-sm">$ {user.create_date}</span>
                   </TableCell>
                   <TableCell>
-                    <Badge type={user.status}>{user.status}</Badge>
+                    <p className="font-semibold">{user.title}</p>
+                    {/* <Badge type={user.status}>{user.status}</Badge> */}
                   </TableCell>
                   <TableCell>
-                    <span className="text-sm">{new Date(user.date).toLocaleDateString()}</span>
+                    {/* <span className="text-sm">{new Date(user.date).toLocaleDateString()}</span> */}
+                    <button>Open</button>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </table>
-          <TableFooter>
+          <TableFooter >
             <Pagination
               totalResults={totalResults}
               resultsPerPage={resultsPerPage}
               label="Table navigation"
               onChange={onPageChange}
+
             />
           </TableFooter>
         </TableContainer>

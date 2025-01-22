@@ -4,7 +4,7 @@ import { useSetState } from "react-use";
 import { AuthContext } from "../context/Auth.context.js";
 
 const initialState = {
-  username: "pong",
+  username: "mickey",
   password: "123456",
 };
 
