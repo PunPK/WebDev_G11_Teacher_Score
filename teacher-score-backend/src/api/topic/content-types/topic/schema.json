@@ -25,12 +25,6 @@
       "relation": "oneToMany",
       "target": "api::score.score",
       "mappedBy": "topic_score_id"
-    },
-    "topic_id": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::subject.subject",
-      "inversedBy": "topic"
     }
   }
 }

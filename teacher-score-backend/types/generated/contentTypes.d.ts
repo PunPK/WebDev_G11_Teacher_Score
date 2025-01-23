@@ -474,6 +474,7 @@ export interface ApiStudentStudent extends Struct.CollectionTypeSchema {
 export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
   collectionName: 'subjects';
   info: {
+    description: '';
     displayName: 'Subject';
     pluralName: 'subjects';
     singularName: 'subject';
@@ -499,7 +500,7 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String;
-    topic: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'>;
+    topics: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -526,7 +527,6 @@ export interface ApiTopicTopic extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     score_id: Schema.Attribute.Relation<'oneToMany', 'api::score.score'>;
-    topic_id: Schema.Attribute.Relation<'manyToOne', 'api::subject.subject'>;
     topic_title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
