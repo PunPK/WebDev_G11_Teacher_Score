@@ -482,8 +482,8 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    create_date: Schema.Attribute.Date;
     createdAt: Schema.Attribute.DateTime;
+    create_date: Schema.Attribute.Date;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
