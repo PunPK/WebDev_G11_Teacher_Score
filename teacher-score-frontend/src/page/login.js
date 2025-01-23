@@ -4,7 +4,7 @@ import { useSetState } from "react-use";
 import { AuthContext } from "../context/Auth.context.js";
 
 const initialState = {
-  username: "pong",
+  username: "mickey",
   password: "123456",
 };
 
@@ -102,7 +102,7 @@ export default function Login() {
                   class="pl-2 w-full outline-none border-none"
                   onChange={(e) => setState({ password: e.target.value })}
                   value={state.password}
-                  type="text"
+                  type="password"
                   name="password"
                   id="password"
                   placeholder="Password"

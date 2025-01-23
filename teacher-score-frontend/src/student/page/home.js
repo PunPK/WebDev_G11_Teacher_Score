@@ -27,7 +27,7 @@ const HomeStudent = () => {
 
       <div className="col-sm-4">
         <h1>
-          <a href="#" onClick={onLogout}>
+          <a href="/" onClick={onLogout}>
             Logout
           </a>
         </h1>

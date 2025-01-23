@@ -29,14 +29,16 @@ export const ContextProvider = (props) => {
   const setLoginSuccess = (isLoggedIn, user) => setState({ isLoggedIn, user });
   const setLoginError = (loginError) => setState({ loginError });
 
-  const handleLoginResult = (error, result) => {
+  const handleLoginResult = async (error, result) => {
     setLoginPending(false);
-
     if (result && result.user) {
       if (result.jwt) {
         updateJwt(result.jwt);
       }
-      setLoginSuccess(true, result.user);
+      const userRole = await fetchRole(result.jwt);
+      // const role = userRole.type;
+      console.log(userRole);
+      setLoginSuccess(true, { ...result.user, userRole });
       // navigate("/")
     } else if (error) {
       setLoginError(error);
@@ -76,17 +78,29 @@ export const ContextProvider = (props) => {
   );
 };
 
+const fetchRole = async (jwt) => {
+  try {
+    const response = await ax.get(`/users/me?populate=role`);
+    console.log(response);
+    if (response.data) {
+      return response.data.role?.name || "No role assigned";
+    }
+  } catch (error) {
+    console.error("Failed to fetch role:", error);
+    return "guest";
+  }
+};
+
 const fetchLogin = async (username, password, callback) => {
   try {
     const response = await ax.post(conf.loginEndpoint, {
       identifier: username,
       password,
     });
-    const userRole = response.data.role?.name || "No role assigned";
-    console.log("Persisted User Role:", userRole);
+    // console.log("Response Data:", response.data);
     if (response.data.jwt && response.data.user.id > 0) {
-      const userRole = response.data.user.role?.name || "No role assigned";
-      console.log("User Role:", userRole);
+      // const userRole = await fetchRole(response.data.jwt);
+      // console.log(userRole);
       callback(null, response.data);
     } else {
       callback(new Error("Invalid username and password"));
