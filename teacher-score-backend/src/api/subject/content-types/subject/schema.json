@@ -31,6 +31,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::topic.topic"
+    },
+    "students": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::student.student",
+      "inversedBy": "subjects"
     }
   }
 }

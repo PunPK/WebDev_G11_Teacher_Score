@@ -26,6 +26,12 @@
       "relation": "manyToOne",
       "target": "api::score.score",
       "inversedBy": "student_score_ids"
+    },
+    "subjects": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::subject.subject",
+      "mappedBy": "students"
     }
   }
 }
