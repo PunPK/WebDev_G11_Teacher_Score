@@ -2,24 +2,20 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
-import InfoCard from "../../components/Cards/InfoCard";
-import RoundIcon from "../../components/RoundIcon";
 import {
-  TableBody,
-  TableContainer,
+  Button,
   Table,
-  TableHeader,
-  TableCell,
-  TableRow,
-  TableFooter,
+  Typography,
+  Space,
+  Modal,
   Pagination,
-} from "@windmill/react-ui";
-import { Spin, Typography, Divider } from "antd";
-// import SubjectList from "../tables/TransactionList";
+} from "@mui/material";
+import { BugReport, Edit } from "@mui/icons-material";
+import { Spin } from "antd";
 import SubjectList from "../table/studentSubject.js";
+import { Box } from "@mui/system";
 import "./home.css";
-// import NavList from "../components/navbar-lecturer.js";
-// import Nav from "../../components/navbar.js";
+
 const HomeStudent = () => {
   const [subjectData, setSubjectData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -56,7 +52,6 @@ const HomeStudent = () => {
     try {
       setLoading(true);
       const response = await ax.get(subjectUrl);
-      console.log("API Response for subjects:", response.data.data);
       setSubjectData(response.data.data);
     } catch (e) {
       console.error("Error fetching subjects:", e);
@@ -74,30 +69,26 @@ const HomeStudent = () => {
     }
   }, [user]);
 
-  const resultsPerPage = 20;
-  const totalResults = subjectData.length;
-
-  const onPageChange = (p) => {
-    setPage(p);
+  const handlePageChange = (event, value) => {
+    setPage(value);
   };
 
   return (
     <div className="App">
-      <div className="col-sm-4">
-        <h1>
-          <a href="/" onClick={onLogout}>
-            Logout
-          </a>
-        </h1>
-      </div>
-
-      <body className="App-finance-body">
+      <Box sx={{ padding: 3 }}>
+        <Typography variant="h4" gutterBottom>
+          ยินดีต้อนรับ {user?.username}
+        </Typography>
+        <Button variant="outlined" color="primary" onClick={onLogout}>
+          Logout
+        </Button>
         <Spin spinning={loading}>
-          <Typography.Title>ตาราง</Typography.Title>
-          <Divider>Subject</Divider>
+          <Typography variant="h5" gutterBottom sx={{ marginTop: 2 }}>
+            ตารางวิชา
+          </Typography>
           <SubjectList data={subjectData} />
         </Spin>
-      </body>
+      </Box>
     </div>
   );
 };

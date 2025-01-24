@@ -483,8 +483,8 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    createdAt: Schema.Attribute.DateTime;
     create_date: Schema.Attribute.Date;
+    createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
@@ -528,6 +528,7 @@ export interface ApiTopicTopic extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     score_id: Schema.Attribute.Relation<'oneToMany', 'api::score.score'>;
+    subject: Schema.Attribute.Relation<'manyToOne', 'api::subject.subject'>;
     topic_title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
