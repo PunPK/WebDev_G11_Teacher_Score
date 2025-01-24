@@ -21,8 +21,8 @@ import {
 import axios from "axios";
 import { BugAntIcon } from "@heroicons/react/16/solid";
 
-const HomeLecturer = () => {
-  const [subjectData, setSubjectData] = useState([]);
+const TopicLecturer = () => {
+  const [topicData, setTopicData] = useState([]);
   const navigate = useNavigate()
   const { state: ContextState, logout } = useContext(AuthContext);
   const [page, setPage] = useState(1)
@@ -31,18 +31,15 @@ const HomeLecturer = () => {
   const onLogout = (e) => {
     e.preventDefault();
     logout();
+    navigate("/")
   };
 
-  const goToTopic = () => {
-    navigate("/topic");
-  };
-
-  const fetchSubject = async () => {
+  const fetchTopic = async () => {
     try {
-      const subjectUrl = "http://localhost:1337/api/subjects"
-      const response = await ax.get(subjectUrl)
+      const topicUrl = "http://localhost:1337/api/topics?populate=*"
+      const response = await ax.get(topicUrl)
       console.log(response.data.data)
-      setSubjectData(response.data.data)
+      setTopicData(response.data.data)
     } catch (e) {
       console.log(e);
     }
@@ -58,7 +55,7 @@ const HomeLecturer = () => {
   }
 
   useEffect(() => {
-    fetchSubject()
+    fetchTopic()
   })
 
   // on page change, load new sliced data
@@ -75,19 +72,19 @@ const HomeLecturer = () => {
 
       <div className="col-sm-4">
         <h1>
-          <a href="/" onClick={onLogout}>
+          <button  onClick={onLogout}>
             Logout
-          </a>
+          </button>
         </h1>
       </div>
 
       <div class="grid gap-4">
-        <h1 class="mx-auto my-5 text-5xl font-sans">Anounced Score Subjects</h1>
+        <h1 class="mx-auto my-5 text-5xl font-sans">Topic that announces the score</h1>
 
 
         {/* <!-- Cards --> */}
         <div className="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-          <InfoCard title="Total Subjects" value="6389">
+          <InfoCard title="Total Topics" value="1">
             {/* <RoundIcon
               // icon={ }
               iconColorClass="text-orange-500 dark:text-orange-100"
@@ -96,7 +93,6 @@ const HomeLecturer = () => {
             /> */}
           </InfoCard>
         </div>
-
         <TableContainer className="bg-cyan-900">
           <table >
             <thead >
@@ -105,49 +101,44 @@ const HomeLecturer = () => {
                   scope="col"
                   className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
                 >
-                  Subjects
+                  Topic Name
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
                 >
-                  Total Topic
+                  Upload time
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
                 >
-                  Subject Status
+                  Score
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
                 >
-                  Open Topic
+                  Edit
                 </th>
               </tr>
             </thead>
             <TableBody>
-              {subjectData.map((user, i) => (
-                <TableRow key={i}>
+              {topicData.map((user) => (
+                <TableRow >
                   <TableCell>
                     <div className="flex items-center text-sm">
                       <div>
-                        <p className="font-semibold">{user.title}</p>
-                        <p className="text-xs text-gray-600 dark:text-gray-400">{user.description}</p>
+                        <p className="font-semibold">{user.topic_title}</p>
                       </div>
                     </div>
                   </TableCell>
                   <TableCell>
-                    <span className="text-sm">$ {user.create_date}</span>
+                    <span className="text-sm">{user.upload_time}</span>
                   </TableCell>
                   <TableCell>
-                    <p className="font-semibold">{user.title}</p>
+                    <p className="font-semibold">{user.topic_id.id}</p>
                     {/* <Badge type={user.status}>{user.status}</Badge> */}
-                  </TableCell>
-                  <TableCell>
-                    {/* <span className="text-sm">{new Date(user.date).toLocaleDateString()}</span> */}
-                    <button onClick={goToTopic}>Open</button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -169,4 +160,4 @@ const HomeLecturer = () => {
   );
 };
 
-export default HomeLecturer;
+export default TopicLecturer;
