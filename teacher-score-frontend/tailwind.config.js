@@ -17,7 +17,7 @@ module.exports = withMT({
           800: "#626262",
           900: "#313131",
         },
-        blue: {
+        jade: {
           100: "#d3eaeb",
           200: "#a7d5d6",
           300: "#7ac1c2",

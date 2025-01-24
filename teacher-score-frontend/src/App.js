@@ -45,6 +45,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginForm />} />
             <Route path="/" element={<HomeLecturer />} />
+            <Route path="/test" element={<HomePage />} />
           </Routes>
         </BrowserRouter>
       );
