@@ -53,14 +53,12 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/to" element={<TopicLecturer />} />
             <Route path="/test" element={<HomePage />} />
-<<<<<<< HEAD
             <Route path="/" element={<HomeLecturer />} />
-=======
             <Route path="/" element={<TopicLecturer />} />
             <Route path="/user" element={<UserPage />} />
->>>>>>> refs/remotes/origin/main
-          </Routes>
-        </BrowserRouter>
+
+          </Routes >
+        </BrowserRouter >
       );
     }
   }
