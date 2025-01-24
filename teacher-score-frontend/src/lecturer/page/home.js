@@ -9,12 +9,8 @@ import Nav_lec from "../../components/nav_lecturer.js"
 
 const HomeLecturer = () => {
   const [subjectData, setSubjectData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
-  const [page, setPage] = useState(1);
-  const [data, setData] = useState([]);
-  const [totalTopic, setTotalTopic] = useState(0);
   const { user } = ContextState;
   const onLogout = (e) => {
     e.preventDefault();
@@ -26,7 +22,6 @@ const HomeLecturer = () => {
   };
 
   const fetchSubject = async () => {
-    setLoading(true);
     try {
       const subjectUrl = "http://localhost:1337/api/subjects?populate=*";
       const response = await ax.get(subjectUrl);
@@ -35,7 +30,6 @@ const HomeLecturer = () => {
     } catch (e) {
       console.log(e);
     } finally {
-      setLoading(false);
     }
   };
 
@@ -45,17 +39,17 @@ const HomeLecturer = () => {
   return (
     <>
       <Nav_lec />
-      <div class="grid bg-gradient-to-tl from-blue-600 to-cyan-400 h-screen mt-0 top-0">
+      <div class="grid bg-gradient-to-tl from-blue-800 to-cyan-300 h-screen ">
 
-        <Card className="mt-14 col-sm-4 items-center justify-between mx-auto w-96 h-auto shadow-xl bg-white-100">
+        <Card className="mt-16 mx-auto w-96 h-auto shadow-xl bg-white-100 mb-4">
 
-          <Typography className="my-6 justify-center items-center">
-            <h1 class="mx-auto my-5 text-5xl font-sans items-center justify-between">Score Anouncer</h1>
+          <Typography className="items-center justify-items-center w-fit mx-auto my-auto">
+            <h1 class="mx-auto text-5xl font-sans">รายการวิชา</h1>
           </Typography>
 
         </Card>
 
-        <div className="grid grid-cols-4 gap-6 mb-8 mx-28 ">
+        <div className="grid grid-cols-4 gap-6 mb-4 mx-28 ">
           <Card title="Total Subjects" className="bg-white-100">
 
           </Card>

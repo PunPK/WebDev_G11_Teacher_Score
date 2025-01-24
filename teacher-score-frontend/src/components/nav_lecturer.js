@@ -14,20 +14,23 @@ export default function Nav_lec() {
         navigate("/")
     };
 
+
     return (
-        <Disclosure as="nav" className="bg-white-100 drop-shadow-md mt-0 ml-0 w-full">
-            <div className=" max-w-7xl w-full  mx-auto px-2 sm:px-6 lg:px-8  ">
-                <div className="relative flex items-center mx-6 h-12 justify-between">
-                    <div className="absolute flex inset-y-0 left-0 items-center sm:hidden">
+        <div as="nav" className="bg-white-100 drop-shadow-md  w-full h-12 fixed z-10">
+            <div id="sticky-banner" tabIndex="-1 n" className=" max-w-7xl w-full  mx-auto px-2 sm:px-6 lg:px-8  ">
+                <div className=" flex items-center mx-6 h-12 justify-between">
+                    <div className="flex inset-y-0 left-0 items-center sm:hidden">
                         <Typography>
                             Hello, Lecturer {user.username}
                         </Typography>
-                        <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-indigo-500 hover:text-indigo-700 w-auto h-8 bg-transparent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-light-blue-700 focus:bg-light-blue-700 focus:text-white-100">
-                            <span>Home</span>
-                        </DisclosureButton>
-                        <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-indigo-500 hover:text-indigo-700 w-auto h-8 bg-transparent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-light-blue-700 focus:bg-light-blue-700 focus:text-white-100">
-                            <span>User</span>
-                        </DisclosureButton>
+                        <div className="flex ml-3">
+                            <button className="flex-initial mx-3 group relative inline-flex items-center justify-center rounded-md p-2 text-indigo-500 hover:text-indigo-700 w-auto h-8 bg-transparent focus:outline-none focus:underline-offset-8 focus:un ">
+                                <span>Home</span>
+                            </button>
+                            <button className="flex-initial group relative inline-flex items-center justify-center rounded-md p-2 text-indigo-500 hover:text-indigo-700 w-auto h-8 bg-transparent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-light-blue-700 focus:bg-light-blue-700 focus:text-white-100">
+                                <span>User</span>
+                            </button>
+                        </div>
                     </div>
 
 
@@ -41,7 +44,7 @@ export default function Nav_lec() {
                     </div>
                 </div>
             </div>
-        </Disclosure>
+        </div>
     )
 
 }
