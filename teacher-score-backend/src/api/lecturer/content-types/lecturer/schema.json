@@ -18,14 +18,14 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "lecturer"
     },
+    "lecturer_id": {
+      "type": "string"
+    },
     "lecturer_owneds": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::subject.subject",
       "inversedBy": "lecturer_owners"
-    },
-    "lecturer_id": {
-      "type": "string"
     }
   }
 }

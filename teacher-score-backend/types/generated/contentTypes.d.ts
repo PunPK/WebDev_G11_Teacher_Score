@@ -461,6 +461,7 @@ export interface ApiStudentStudent extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     score_id: Schema.Attribute.Relation<'manyToOne', 'api::score.score'>;
     student_id: Schema.Attribute.String;
+    subjects: Schema.Attribute.Relation<'manyToMany', 'api::subject.subject'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -474,6 +475,7 @@ export interface ApiStudentStudent extends Struct.CollectionTypeSchema {
 export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
   collectionName: 'subjects';
   info: {
+    description: '';
     displayName: 'Subject';
     pluralName: 'subjects';
     singularName: 'subject';
@@ -482,8 +484,8 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    createdAt: Schema.Attribute.DateTime;
     create_date: Schema.Attribute.Date;
+    createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
@@ -498,8 +500,9 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    students: Schema.Attribute.Relation<'manyToMany', 'api::student.student'>;
     title: Schema.Attribute.String;
-    topic: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'>;
+    topics: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -526,7 +529,6 @@ export interface ApiTopicTopic extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     score_id: Schema.Attribute.Relation<'oneToMany', 'api::score.score'>;
-    topic_id: Schema.Attribute.Relation<'manyToOne', 'api::subject.subject'>;
     topic_title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
