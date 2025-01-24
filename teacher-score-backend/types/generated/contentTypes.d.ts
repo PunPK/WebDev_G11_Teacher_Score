@@ -369,42 +369,6 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiLecturerLecturer extends Struct.CollectionTypeSchema {
-  collectionName: 'lecturers';
-  info: {
-    description: '';
-    displayName: 'Lecturer';
-    pluralName: 'lecturers';
-    singularName: 'lecturer';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    lecturer_owneds: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::subject.subject'
-    >;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::lecturer.lecturer'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    users_permissions_user: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-  };
-}
-
 export interface ApiScoreScore extends Struct.CollectionTypeSchema {
   collectionName: 'scores';
   info: {
@@ -425,47 +389,12 @@ export interface ApiScoreScore extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     score: Schema.Attribute.String;
-    student_score_ids: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::student.student'
-    >;
     topic_score_id: Schema.Attribute.Relation<'manyToOne', 'api::topic.topic'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-  };
-}
-
-export interface ApiStudentStudent extends Struct.CollectionTypeSchema {
-  collectionName: 'students';
-  info: {
-    description: '';
-    displayName: 'Student';
-    pluralName: 'students';
-    singularName: 'student';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::student.student'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    score_id: Schema.Attribute.Relation<'manyToOne', 'api::score.score'>;
-    student_id: Schema.Attribute.String;
-    subjects: Schema.Attribute.Relation<'manyToMany', 'api::subject.subject'>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    users_permissions_user: Schema.Attribute.Relation<
-      'oneToOne',
+    users_owner: Schema.Attribute.Relation<
+      'manyToOne',
       'plugin::users-permissions.user'
     >;
   };
@@ -488,10 +417,6 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
-    lecturer_owners: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::lecturer.lecturer'
-    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -499,12 +424,15 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    students: Schema.Attribute.Relation<'manyToMany', 'api::student.student'>;
     title: Schema.Attribute.String;
     topics: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    users_owner: Schema.Attribute.Relation<
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -1007,7 +935,6 @@ export interface PluginUsersPermissionsUser
       }>;
     first_name: Schema.Attribute.String;
     last_name: Schema.Attribute.String;
-    lecturer: Schema.Attribute.Relation<'oneToOne', 'api::lecturer.lecturer'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1026,7 +953,11 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    student: Schema.Attribute.Relation<'oneToOne', 'api::student.student'>;
+    score_owers: Schema.Attribute.Relation<'oneToMany', 'api::score.score'>;
+    subject_owners: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::subject.subject'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1049,9 +980,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::lecturer.lecturer': ApiLecturerLecturer;
       'api::score.score': ApiScoreScore;
-      'api::student.student': ApiStudentStudent;
       'api::subject.subject': ApiSubjectSubject;
       'api::topic.topic': ApiTopicTopic;
       'plugin::content-releases.release': PluginContentReleasesRelease;

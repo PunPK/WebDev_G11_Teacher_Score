@@ -65,23 +65,23 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "student": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::student.student",
-      "inversedBy": "users_permissions_user"
-    },
-    "lecturer": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::lecturer.lecturer",
-      "mappedBy": "users_permissions_user"
-    },
     "first_name": {
       "type": "string"
     },
     "last_name": {
       "type": "string"
+    },
+    "subject_owners": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::subject.subject",
+      "inversedBy": "users_owner"
+    },
+    "score_owers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::score.score",
+      "mappedBy": "users_owner"
     }
   }
 }

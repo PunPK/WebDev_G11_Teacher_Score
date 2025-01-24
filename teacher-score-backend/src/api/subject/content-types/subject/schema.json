@@ -21,23 +21,17 @@
     "create_date": {
       "type": "date"
     },
-    "lecturer_owners": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::lecturer.lecturer",
-      "mappedBy": "lecturer_owneds"
-    },
     "topics": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::topic.topic",
       "mappedBy": "subject"
     },
-    "students": {
+    "users_owner": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::student.student",
-      "inversedBy": "subjects"
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "subject_owners"
     }
   }
 }

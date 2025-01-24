@@ -1,3 +1,5 @@
+const subject = require("../../api/subject/controllers/subject");
+
 module.exports = (plugin) => {
   plugin.controllers.user.me = async (ctx) => {
     const user = ctx.state.user;
@@ -19,7 +21,8 @@ module.exports = (plugin) => {
       email: completeUser.email,
       confirmed: completeUser.confirmed,
       blocked: completeUser.blocked,
-      role: completeUser.role, // Add role here
+      role: completeUser.role,
+      subject: completeUser.subject,
     };
   };
 

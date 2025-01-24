@@ -17,7 +17,7 @@ import TopicLecturer from "./lecturer/page/topic.js";
 import HomeStudent from "./student/page/home.js";
 import LoginFormTest from "./page/login-test.js";
 import TopicStudent from "./student/page/topic.js";
-import DataTable from "./student/page/test.js";
+// import DataTable from "./student/page/test.js";
 import UserPage from "./page/user.js";
 function App() {
   const { state } = useContext(AuthContext);
@@ -41,7 +41,7 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/" element={<HomeStudent />} />
             <Route path="/topic/:subject" element={<TopicStudent />} />
-            <Route path="/test" element={<DataTable />} />
+            {/* <Route path="/test" element={<DataTable />} /> */}
             <Route path="/user" element={<UserPage />} />
           </Routes>
         </BrowserRouter>
