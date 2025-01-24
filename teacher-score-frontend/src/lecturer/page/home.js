@@ -4,7 +4,7 @@ import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
 import { useSearchParams } from 'react-router-dom';
 import dayjs from "dayjs";
-import { Card, CardBody, Typography } from "@material-tailwind/react";
+import { Card, CardBody, CardHeader, Typography } from "@material-tailwind/react";
 import Nav_lec from "../../components/nav_lecturer.js"
 
 const HomeLecturer = () => {
@@ -50,8 +50,18 @@ const HomeLecturer = () => {
         </Card>
 
         <div className="grid grid-cols-4 gap-6 mb-4 mx-28 ">
-          <Card title="Total Subjects" className="bg-white-100">
+          <Card className="bg-white-100">
+            <div>
+              <CardBody>
+                <Typography>
+                  จำนวนวิชาที่เป็นเจ้าของ
+                </Typography>
+                <Typography>
+                  {subjectData.length} วิชา
+                </Typography>
 
+              </CardBody>
+            </div>
           </Card>
         </div>
         <Card className="mx-28 h-auto bg-white-100">
