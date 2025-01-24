@@ -4,7 +4,14 @@ import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
 import { Spin, Typography, Divider } from "antd";
 import SubjectList from "../table/studentSubject.js";
+<<<<<<< HEAD
 import "./home.css";
+=======
+// import "./home.css";
+// import NavList from "../components/navbar-lecturer.js";
+// import Nav from "../../components/navbar.js";
+import Bar from "../components/navBar.js";
+>>>>>>> refs/remotes/origin/main
 const HomeStudent = () => {
   const [subjectData, setSubjectData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -75,7 +82,7 @@ const HomeStudent = () => {
           </a>
         </h1>
       </div>
-
+      <Bar></Bar>
       <body className="App-finance-body">
         <Spin spinning={loading}>
           <Typography.Title>ตาราง</Typography.Title>
