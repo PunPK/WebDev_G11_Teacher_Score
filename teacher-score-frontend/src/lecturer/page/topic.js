@@ -115,7 +115,7 @@ const TopicLecturer = () => {
                   <span className="text-sm">{user.upload_time}</span>
                 </td>
                 <td>
-                  <p className="font-semibold">{user.topic_id.id}</p>
+                  <p className="font-semibold">{user.topic_id}</p>
                   {/* <Badge type={user.status}>{user.status}</Badge> */}
                 </td>
               </tr>

@@ -49,9 +49,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/to" element={<HomeLecturer />} />
+            <Route path="/to" element={<TopicLecturer />} />
             <Route path="/test" element={<HomePage />} />
-            <Route path="/" element={<TopicLecturer />} />
+            <Route path="/" element={<HomeLecturer />} />
           </Routes>
         </BrowserRouter>
       );

@@ -2,18 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
-import {
-  Button,
-  Table,
-  Typography,
-  Space,
-  Modal,
-  Pagination,
-} from "@mui/material";
-import { BugReport, Edit } from "@mui/icons-material";
 import { Spin } from "antd";
 import SubjectList from "../table/studentSubject.js";
-import { Box } from "@mui/system";
 import "./home.css";
 
 const HomeStudent = () => {
@@ -73,24 +63,24 @@ const HomeStudent = () => {
     setPage(value);
   };
 
-  return (
-    <div className="App">
-      <Box sx={{ padding: 3 }}>
-        <Typography variant="h4" gutterBottom>
-          ยินดีต้อนรับ {user?.username}
-        </Typography>
-        <Button variant="outlined" color="primary" onClick={onLogout}>
-          Logout
-        </Button>
-        <Spin spinning={loading}>
-          <Typography variant="h5" gutterBottom sx={{ marginTop: 2 }}>
-            ตารางวิชา
-          </Typography>
-          <SubjectList data={subjectData} />
-        </Spin>
-      </Box>
-    </div>
-  );
+  // return (
+  //   // <div className="App">
+  //   //   <Box sx={{ padding: 3 }}>
+  //   //     <Typography variant="h4" gutterBottom>
+  //   //       ยินดีต้อนรับ {user?.username}
+  //   //     </Typography>
+  //   //     <Button variant="outlined" color="primary" onClick={onLogout}>
+  //   //       Logout
+  //   //     </Button>
+  //   //     <Spin spinning={loading}>
+  //   //       <Typography variant="h5" gutterBottom sx={{ marginTop: 2 }}>
+  //   //         ตารางวิชา
+  //   //       </Typography>
+  //   //       <SubjectList data={subjectData} />
+  //   //     </Spin>
+  //   //   </Box>
+  //   // </div>
+  // );
 };
 
 export default HomeStudent;

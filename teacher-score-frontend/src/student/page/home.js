@@ -5,8 +5,6 @@ import { useNavigate } from "react-router";
 import { Spin, Typography, Divider } from "antd";
 import SubjectList from "../table/studentSubject.js";
 import "./home.css";
-// import NavList from "../components/navbar-lecturer.js";
-// import Nav from "../../components/navbar.js";
 const HomeStudent = () => {
   const [subjectData, setSubjectData] = useState([]);
   const [loading, setLoading] = useState(false);

@@ -3,18 +3,6 @@ import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
-import InfoCard from "../../components/Cards/InfoCard";
-import RoundIcon from "../../components/RoundIcon";
-import {
-  TableBody,
-  TableContainer,
-  Table,
-  TableHeader,
-  TableCell,
-  TableRow,
-  TableFooter,
-  Pagination,
-} from "@windmill/react-ui";
 import { Spin, Typography, Divider } from "antd";
 import TopicList from "../table/studentTopic.js";
 import "./home.css";
