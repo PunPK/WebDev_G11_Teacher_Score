@@ -384,7 +384,6 @@ export interface ApiLecturerLecturer extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    lecturer_id: Schema.Attribute.String;
     lecturer_owneds: Schema.Attribute.Relation<
       'manyToMany',
       'api::subject.subject'
@@ -484,8 +483,8 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    create_date: Schema.Attribute.Date;
     createdAt: Schema.Attribute.DateTime;
+    create_date: Schema.Attribute.Date;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;

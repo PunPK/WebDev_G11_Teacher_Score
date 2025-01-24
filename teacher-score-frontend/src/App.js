@@ -25,7 +25,7 @@ function App() {
         <Routes>
           {/* <Route path="/" element={<LoginForm />} /> */}
           <Route path="/" element={<LoginForm />} />
-          <Route path="/test" element={<LoginFormTest />} />
+          {/* <Route path="/test" element={<LoginFormTest />} /> */}
         </Routes>
       </BrowserRouter>
     );
@@ -46,6 +46,8 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginForm />} />
             <Route path="/" element={<HomeLecturer />} />
+            <Route path="/test" element={<HomePage />} />
+
             <Route path="/topic" element={<TopicLecturer />} />
           </Routes>
         </BrowserRouter>
