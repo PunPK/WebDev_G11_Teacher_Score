@@ -3,6 +3,7 @@ import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
 import { Spin, Typography, Divider } from "antd";
+// import SubjectList from "../tables/TransactionList";
 import SubjectList from "../table/studentSubject.js";
 // import "./home.css";
 // import NavList from "../components/navbar-lecturer.js";
