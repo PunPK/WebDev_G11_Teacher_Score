@@ -2,20 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
-import InfoCard from "../../components/Cards/InfoCard";
-import RoundIcon from "../../components/RoundIcon";
-import {
-  TableBody,
-  TableContainer,
-  Table,
-  TableHeader,
-  TableCell,
-  TableRow,
-  TableFooter,
-  Pagination,
-} from "@windmill/react-ui";
 import { Spin, Typography, Divider } from "antd";
-// import SubjectList from "../tables/TransactionList";
 import SubjectList from "../table/studentSubject.js";
 // import NavList from "../components/navbar-lecturer.js";
 // import Nav from "../../components/navbar.js";
