@@ -17,9 +17,10 @@ import {
 import { Spin, Typography, Divider } from "antd";
 // import SubjectList from "../tables/TransactionList";
 import SubjectList from "../table/studentSubject.js";
-import "./home.css";
+// import "./home.css";
 // import NavList from "../components/navbar-lecturer.js";
 // import Nav from "../../components/navbar.js";
+import Bar from "../components/navBar.js";
 const HomeStudent = () => {
   const [subjectData, setSubjectData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -90,7 +91,7 @@ const HomeStudent = () => {
           </a>
         </h1>
       </div>
-
+      <Bar></Bar>
       <body className="App-finance-body">
         <Spin spinning={loading}>
           <Typography.Title>ตาราง</Typography.Title>
