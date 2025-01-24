@@ -1,11 +1,14 @@
 const withMT = require("@material-tailwind/react/utils/withMT");
-const colors = require("tailwindcss/colors");
 
-module.exports = withMT({
+const config = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
     "./src/**/**/*.{js,jsx,ts,tsx}",
+    "./src/**/**/**/*.{js,jsx,ts,tsx}",
+    "./src/**/**/**/**/*.{js,jsx,ts,tsx}",
     "./src/*.{js,jsx,ts,tsx}",
+    "path-to-your-node_modules/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}",
+    "path-to-your-node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -69,4 +72,6 @@ module.exports = withMT({
     },
   },
   plugins: [],
-});
+};
+
+module.exports = withMT(config);

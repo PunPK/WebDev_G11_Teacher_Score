@@ -5,12 +5,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ContextProvider } from "./context/Auth.context.js";
 import "./output.css";
+import { ThemeProvider } from "@material-tailwind/react";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ContextProvider>
-      <App />
-    </ContextProvider>
+    <ThemeProvider>
+      <ContextProvider>
+        <App />
+      </ContextProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 

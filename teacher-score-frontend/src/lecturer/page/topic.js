@@ -3,23 +3,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
-import InfoCard from '../../components/Cards/InfoCard'
-import RoundIcon from '../../components/RoundIcon'
 import response from '../../utils/demo/tableData'
-import {
-  TableBody,
-  TableContainer,
-  Table,
-  TableHeader,
-  TableCell,
-  TableRow,
-  TableFooter,
-  Avatar,
-  Badge,
-  Pagination,
-} from '@windmill/react-ui'
 import axios from "axios";
 import { BugAntIcon } from "@heroicons/react/16/solid";
+import { TableCell } from "flowbite-react";
 
 const TopicLecturer = () => {
   const [topicData, setTopicData] = useState([]);
@@ -56,7 +43,7 @@ const TopicLecturer = () => {
 
   useEffect(() => {
     fetchTopic()
-  })
+  }, [])
 
   // on page change, load new sliced data
   // here you would make another server request for new data
@@ -72,7 +59,7 @@ const TopicLecturer = () => {
 
       <div className="col-sm-4">
         <h1>
-          <button  onClick={onLogout}>
+          <button onClick={onLogout}>
             Logout
           </button>
         </h1>
@@ -84,76 +71,57 @@ const TopicLecturer = () => {
 
         {/* <!-- Cards --> */}
         <div className="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-          <InfoCard title="Total Topics" value="1">
-            {/* <RoundIcon
-              // icon={ }
-              iconColorClass="text-orange-500 dark:text-orange-100"
-              bgColorClass="bg-orange-100 dark:bg-orange-500"
-              className="mr-4"
-            /> */}
-          </InfoCard>
         </div>
-        <TableContainer className="bg-cyan-900">
-          <table >
-            <thead >
+        <table >
+          <thead >
+            <tr >
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
+              >
+                Topic Name
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
+              >
+                Upload time
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
+              >
+                Score
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
+              >
+                Edit
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {topicData.map((user) => (
               <tr >
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
-                >
-                  Topic Name
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
-                >
-                  Upload time
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
-                >
-                  Score
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
-                >
-                  Edit
-                </th>
-              </tr>
-            </thead>
-            <TableBody>
-              {topicData.map((user) => (
-                <TableRow >
-                  <TableCell>
-                    <div className="flex items-center text-sm">
-                      <div>
-                        <p className="font-semibold">{user.topic_title}</p>
-                      </div>
+                <td>
+                  <div className="flex items-center text-sm">
+                    <div>
+                      <p className="font-semibold">{user.topic_title}</p>
                     </div>
-                  </TableCell>
-                  <TableCell>
-                    <span className="text-sm">{user.upload_time}</span>
-                  </TableCell>
-                  <TableCell>
-                    <p className="font-semibold">{user.topic_id.id}</p>
-                    {/* <Badge type={user.status}>{user.status}</Badge> */}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </table>
-          <TableFooter >
-            <Pagination
-              totalResults={totalResults}
-              resultsPerPage={resultsPerPage}
-              label="Table navigation"
-              onChange={onPageChange}
-
-            />
-          </TableFooter>
-        </TableContainer>
+                  </div>
+                </td>
+                <td>
+                  <span className="text-sm">{user.upload_time}</span>
+                </td>
+                <td>
+                  <p className="font-semibold">{user.topic_id.id}</p>
+                  {/* <Badge type={user.status}>{user.status}</Badge> */}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
 
