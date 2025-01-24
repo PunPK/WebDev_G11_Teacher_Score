@@ -6,15 +6,12 @@ import { useNavigate } from "react-router";
 import dayjs from "dayjs";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 import { Button, Spinner } from "flowbite-react";
+import Nav_lec from "../components/nav_lecturer.js";
 
 const HomeLecturer = () => {
   const [subjectData, setSubjectData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
-  const [page, setPage] = useState(1)
-  const [data, setData] = useState([])
-  const [totalTopic, setTotalTopic] = useState(0)
   const { user } = ContextState;
   const onLogout = (e) => {
     e.preventDefault();
@@ -22,7 +19,6 @@ const HomeLecturer = () => {
   };
 
   const fetchSubject = async () => {
-    setLoading(true)
     try {
       const subjectUrl = "http://localhost:1337/api/subjects?populate=*"
       const response = await ax.get(subjectUrl)
@@ -33,7 +29,6 @@ const HomeLecturer = () => {
       console.log(e);
     }
     finally {
-      setLoading(false)
     }
   };
 
@@ -41,20 +36,10 @@ const HomeLecturer = () => {
     try {
       const subjectUrl = "http://localhost:1337/api/subjects?populate=*"
       const response = await ax.get(subjectUrl)
-      console.log(response.data.data)
       setSubjectData(response.data.data)
     } catch (e) {
       console.log(e);
     }
-  }
-
-  // pagination setup
-  const resultsPerPage = 10
-  const totalResults = subjectData.length
-
-  // pagination change control
-  function onPageChange(p) {
-    setPage(p)
   }
 
   useEffect(() => {
@@ -68,10 +53,11 @@ const HomeLecturer = () => {
   //   setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage))
   // }, [page])
 
-  const TABLE_HEAD = ["รายชื่อวิชา", "จำนวนเรื่อง", "อาจารย์ผู้สอน", "วันที่สร้าง", "แก้ไขล่าสุด", "เข้ารายวิชา"]
-
   return (
-    <div class="">
+
+    <div class="bg-gradient-to-tl from-cyan-50 h-screen">
+      <Nav_lec />
+
       <div className="col-sm-8 row-span-1">
         <h1>Hello lecturer {user.username}</h1>
       </div>
@@ -85,7 +71,7 @@ const HomeLecturer = () => {
 
 
 
-      <Card className="col-sm-4 items-center justify-items-center mx-auto w-full h-auto shadow-xl">
+      <Card className="col-sm-4 items-center justify-items-center mx-auto w-full h-auto shadow-xl bg-white-100">
         <Typography>
           <h1 class="mx-auto my-5 text-5xl font-sans">Score Anouncer</h1>
         </Typography>
@@ -106,15 +92,21 @@ const HomeLecturer = () => {
         </Card>
       </div>
 
-      <div class=" grid grid-cols-3 gap-6 mx-24">
+      <div class=" grid grid-cols-3 gap-4 mx-24">
         {subjectData.map((user) => (
           <>
-            <Card className="h-full w-auto  bg-gradient-to-tr from-blue-600 hover:drop-shadow-x1" onClick={""} herf="/">
+            { }
+            <Card className="h-full w-fit  bg-gradient-to-tr from-blue-50 hover:drop-shadow-2xl cursor-pointer" onClick={""} herf="/"
+              style={{
+                transformStyle: "preserve-3d"
+              }}>
               <CardBody>
-                <Typography vatiant="h5" className="mb-2 text-2xl">
+                <Typography vatiant="h5" className="mb-2 text-2xl font-bold peer-focus-within:">
                   {user.title}
                 </Typography>
+                <Typography>
 
+                </Typography>
                 <Typography>
                   {user.description}
                 </Typography>
@@ -125,7 +117,7 @@ const HomeLecturer = () => {
 
                 <Typography class="px-6 py-4">
 
-                  <span className="text-sm">{user.lecturer_owners.documentId}</span>
+                  <span className="text-sm"></span>
                 </Typography>
                 <Typography class="px-6 py-4">
                   สร้างเมื่อ {dayjs(user.createdAt).format("DD / MM / YYYY เวลา HH:mm น.")}
