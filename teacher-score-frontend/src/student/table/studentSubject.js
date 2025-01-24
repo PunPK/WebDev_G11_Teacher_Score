@@ -1,9 +1,12 @@
 import React from "react";
 import { Button, Table, Space, Tag, Modal } from "antd";
-import { BugOutlined } from "@ant-design/icons";
+import { BugOutlined, EditOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
+import "../page/home.css";
 
 export default function SubjectList(props) {
+  const navigate = useNavigate();
   const columns = [
     {
       title: "Title",
@@ -53,6 +56,13 @@ export default function SubjectList(props) {
                 content: JSON.stringify(record.title),
               });
             }}
+          />
+          <Button
+            // danger
+            type="primary"
+            shape="circle"
+            icon={<EditOutlined twoToneColor="#eb2f96" />}
+            onClick={() => navigate(`/topic/${record.documentId}`)}
           />
         </Space>
       ),

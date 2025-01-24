@@ -2,13 +2,26 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
+import { useParams } from "react-router-dom";
+import InfoCard from "../../components/Cards/InfoCard";
+import RoundIcon from "../../components/RoundIcon";
+import {
+  TableBody,
+  TableContainer,
+  Table,
+  TableHeader,
+  TableCell,
+  TableRow,
+  TableFooter,
+  Pagination,
+} from "@windmill/react-ui";
 import { Spin, Typography, Divider } from "antd";
-import SubjectList from "../table/studentSubject.js";
+import TopicList from "../table/studentTopic.js";
 import "./home.css";
 // import NavList from "../components/navbar-lecturer.js";
 // import Nav from "../../components/navbar.js";
 const HomeStudent = () => {
-  const [subjectData, setSubjectData] = useState([]);
+  const [topicData, setTopicData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
@@ -16,18 +29,26 @@ const HomeStudent = () => {
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
   const { user } = ContextState;
+  const { subject } = useParams();
 
   const onLogout = (e) => {
     e.preventDefault();
     logout();
+    navigate("/");
   };
 
-  const fetchStudent = async (user) => {
+  const fetchTopic = async () => {
     setLoading(true);
     try {
-      const studentUrl = `http://localhost:1337/api/students?populate=*&filters[users_permissions_user][id][$eq]=${user.id}`;
-      const response = await ax.get(studentUrl);
-      fetchSubject(response.data.data);
+      console.log(subject);
+      const response = await ax.get("/topics", {
+        params: {
+          populate: "*",
+          "filters[subject][documentId][$eq]": subject,
+        },
+      });
+      console.log(response.data.data);
+      setTopicData(response.data.data);
     } catch (e) {
       console.error("Error fetching student data:", e);
       setError("Error fetching student data. Please try again.");
@@ -36,37 +57,11 @@ const HomeStudent = () => {
     }
   };
 
-  const fetchSubject = async (students) => {
-    const studentIds = students.map((student) => student.id).join(",");
-    const subjectUrl = `http://localhost:1337/api/subjects?populate=*&filters[students][id][$in]=${studentIds}`;
-
-    try {
-      setLoading(true);
-      const response = await ax.get(subjectUrl);
-      console.log("API Response for subjects:", response.data.data);
-      setSubjectData(response.data.data);
-    } catch (e) {
-      console.error("Error fetching subjects:", e);
-      setError("Error fetching subjects. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    if (user) {
-      fetchStudent(user);
-    } else {
-      console.error("User is undefined");
+    if (subject) {
+      fetchTopic();
     }
-  }, [user]);
-
-  const resultsPerPage = 20;
-  const totalResults = subjectData.length;
-
-  const onPageChange = (p) => {
-    setPage(p);
-  };
+  }, [subject]);
 
   return (
     <div className="App">
@@ -76,13 +71,14 @@ const HomeStudent = () => {
             Logout
           </a>
         </h1>
+        <a href="/">Subject</a>
       </div>
 
       <body className="App-finance-body">
         <Spin spinning={loading}>
           <Typography.Title>ตาราง</Typography.Title>
-          <Divider>Subject</Divider>
-          <SubjectList data={subjectData} />
+          <Divider>topic</Divider>
+          <TopicList data={topicData} />
         </Spin>
       </body>
     </div>
