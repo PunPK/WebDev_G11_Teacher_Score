@@ -384,7 +384,6 @@ export interface ApiLecturerLecturer extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    lecturer_id: Schema.Attribute.String;
     lecturer_owneds: Schema.Attribute.Relation<
       'manyToMany',
       'api::subject.subject'
@@ -461,6 +460,7 @@ export interface ApiStudentStudent extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     score_id: Schema.Attribute.Relation<'manyToOne', 'api::score.score'>;
     student_id: Schema.Attribute.String;
+    subjects: Schema.Attribute.Relation<'manyToMany', 'api::subject.subject'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -483,8 +483,8 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    createdAt: Schema.Attribute.DateTime;
     create_date: Schema.Attribute.Date;
+    createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
@@ -499,6 +499,7 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    students: Schema.Attribute.Relation<'manyToMany', 'api::student.student'>;
     title: Schema.Attribute.String;
     topics: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'>;
     updatedAt: Schema.Attribute.DateTime;

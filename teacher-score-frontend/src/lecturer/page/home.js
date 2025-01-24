@@ -25,6 +25,10 @@ const HomeLecturer = () => {
     logout();
   };
 
+  const goToTopic = () => {
+    navigate("/topic");
+  };
+
   const fetchSubject = async () => {
     setLoading(true)
     try {
@@ -147,7 +151,7 @@ const HomeLecturer = () => {
                       <span className="text-sm">{user.topics.length === 0 ? <Typography class="text-red-600">ไม่มีหัวข้อ</Typography> : user.topics.length}</span>
                     </td>
                     <td class="px-6 py-4">
-                      <span className="text-sm">{user.lecturer_owners.documentId}</span>
+                      <span className="text-sm"></span>
                     </td>
                     <td class="px-6 py-4">
                       <span className="text-sm">{dayjs(user.createdAt).format("DD/MM/YYYY - HH:mm")}</span>
@@ -162,6 +166,7 @@ const HomeLecturer = () => {
                     </td>
                   </tr>
                 ))}
+
             </tbody>
           </table>
         </Card>

@@ -27,8 +27,12 @@
       "target": "api::score.score",
       "inversedBy": "student_score_ids"
     },
-    "student_id": {
-      "type": "integer"
+
+    "subjects": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::subject.subject",
+      "mappedBy": "students"
     }
   }
 }

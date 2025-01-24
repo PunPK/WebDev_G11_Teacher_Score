@@ -13,6 +13,7 @@ import { AuthContext } from "./context/Auth.context.js";
 import LoginForm from "./page/login.js";
 import HomePage from "./page/home.js";
 import HomeLecturer from "./lecturer/page/home.js";
+import TopicLecturer from "./lecturer/page/topic.js";
 import HomeStudent from "./student/page/home.js";
 import LoginFormTest from "./page/login-test.js";
 function App() {
@@ -24,7 +25,7 @@ function App() {
         <Routes>
           {/* <Route path="/" element={<LoginForm />} /> */}
           <Route path="/" element={<LoginForm />} />
-          <Route path="/test" element={<LoginFormTest />} />
+          {/* <Route path="/test" element={<LoginFormTest />} /> */}
         </Routes>
       </BrowserRouter>
     );
@@ -46,6 +47,8 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/" element={<HomeLecturer />} />
             <Route path="/test" element={<HomePage />} />
+
+            <Route path="/topic" element={<TopicLecturer />} />
           </Routes>
         </BrowserRouter>
       );
