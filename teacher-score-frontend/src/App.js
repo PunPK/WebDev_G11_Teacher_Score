@@ -19,6 +19,7 @@ import LoginFormTest from "./page/login-test.js";
 import TopicStudent from "./student/page/topic.js";
 import DataTable from "./student/page/test.js";
 import UserPage from "./page/user.js";
+import ExcelFetch from "./lecturer/page/exelfetch.js";
 function App() {
   const { state } = useContext(AuthContext);
 
@@ -56,6 +57,7 @@ function App() {
             <Route path="/" element={<HomeLecturer />} />
             <Route path="/" element={<TopicLecturer />} />
             <Route path="/user" element={<UserPage />} />
+            <Route path="/excelfetch" element={<ExcelFetch />} />
 
           </Routes >
         </BrowserRouter >
