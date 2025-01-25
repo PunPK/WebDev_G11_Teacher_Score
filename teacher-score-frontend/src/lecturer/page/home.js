@@ -58,7 +58,7 @@ const HomeLecturer = () => {
   return (
     <>
       <Nav_lec />
-      <div class="grid bg-gradient-to-tl from-blue-800 to-cyan-300 h-max min-h-screen">
+      <div class="grid bg-gradient-to-tl from-blue-800 to-cyan-300 min-h-screen max-h-screen top-0 mt-0 z-10">
         <Card className="mt-16 mx-auto w-72 h-24 shadow-xl bg-white mb-4">
           <Typography className="items-center justify-items-center w-fit mx-auto my-auto">
             <h1 class="mx-auto text-5xl font-sans">รายการวิชา</h1>
@@ -83,7 +83,7 @@ const HomeLecturer = () => {
           <div class=" grid grid-cols-3 gap-4 mx-6 my-5">
             {subjectData.map((user) => (
               <>
-                {}
+                { }
                 <Card
                   onClick={() => navigate(`/topic/${user.documentId}`)}
                   className="group h-full w-full  bg-gradient-to-tr from-blue-50 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-blue-700 hover:to-blue-900  hover:shadow-blue-400 "
