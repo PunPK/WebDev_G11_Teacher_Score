@@ -9,10 +9,10 @@ import Nav_lec from "../../components/navbar.js";
 
 const HomeStudent = () => {
   const [subjectData, setSubjectData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
+  const [query, setQuery] = useState("");
   const [studentid, setstudentid] = useState();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
   const { user } = ContextState;
@@ -23,19 +23,6 @@ const HomeStudent = () => {
     logout();
   };
 
-  // const fetchStudent = async (user) => {
-  //   setLoading(true);
-  //   try {
-  //     const studentUrl = `http://localhost:1337/api/students?populate=*&filters[users_permissions_user][id][$eq]=${user.id}`;
-  //     const response = await ax.get(studentUrl);
-  //     fetchSubject(response.data.data);
-  //   } catch (e) {
-  //     console.error("Error fetching student data:", e);
-  //     setError("Error fetching student data. Please try again.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   const fetchSubject = async (userId) => {
     // const studentIds = students.map((student) => student.id).join(",");
@@ -89,26 +76,34 @@ const HomeStudent = () => {
 
         </Card>
 
-        <div className="grid grid-cols-4 gap-10 mb-4 mx-28 ">
-          <Card className="bg-white">
+        <div className="flex gap-10 mb-4 mx-28 ">
+          <div>
+            <Card className="bg-white">
+              <div>
+                <CardBody>
+                  <Typography className="font-bold text-lg">
+                    จำนวนวิชาที่เป็นเจ้าของ
+                  </Typography>
+                  <Typography className="ml-4">
+                    {subjectData.lenght} วิชา
+                  </Typography>
+                </CardBody>
+              </div>
+            </Card>
+          </div>
+          <Card>
             <div>
-              <CardBody>
-                <Typography className="font-bold text-lg">
-                  จำนวนวิชาที่เป็นเจ้าของ
-                </Typography>
-                <Typography className="ml-4">
-                  {subjectData.lenght} วิชา
-                </Typography>
-              </CardBody>
+              <input>
+              </input>
             </div>
           </Card>
         </div>
         <Card className="mx-28 h-auto bg-white my-2">
-          <div class=" grid grid-cols-1 gap-4 mx-6 my-5">
+          <div class=" grid grid-cols-2 gap-6 mx-6 my-6">
             {subjectData.map((user) => (
               <>
                 { }
-                <Card className="group h-full w-full  bg-gradient-to-tr from-blue-50 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-blue-700 hover:to-blue-900  hover:shadow-blue-400 " onClick={""} herf="/"
+                <Card onClick={() => navigate(`/topic/${user.documentId}`)} className="group h-full w-full  bg-gradient-to-tr from-blue-50 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-blue-700 hover:to-blue-900  hover:shadow-blue-400 "
                   style={{
                     transformStyle: "preserve-3d"
                   }}>

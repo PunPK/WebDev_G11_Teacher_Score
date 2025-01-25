@@ -45,6 +45,8 @@ const HomeStudent = () => {
     }
   };
 
+  console.log(subject)
+
   useEffect(() => {
     if (subject) {
       fetchTopic();

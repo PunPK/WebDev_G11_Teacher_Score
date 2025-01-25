@@ -68,7 +68,7 @@ const HomeLecturer = () => {
           </Card>
         </div>
         <Card className="mx-28 h-auto bg-white my-2">
-          <div class=" grid grid-cols-1 gap-4 mx-6 my-5">
+          <div class=" grid grid-cols-3 gap-4 mx-6 my-5">
             {subjectData.map((user) => (
               <>
                 { }
