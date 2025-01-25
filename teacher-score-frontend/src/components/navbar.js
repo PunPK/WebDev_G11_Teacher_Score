@@ -33,16 +33,16 @@ export default function Nav_lec() {
                             Hello, {user.userRole} {user.username}
                         </Typography>
                         <div className="flex ml-3">
-                            <NavLink onClick={navigate("/")} className="flex-initial mx-3 group relative inline-flex items-center justify-center rounded-md p-2 text-indigo-500 hover:text-indigo-700 w-auto h-8 bg-transparent focus:outline-none focus:underline-offset-8">
+                            <button onClick={() => navigate("/")} className="flex-initial mx-3 group relative inline-flex items-center justify-center rounded-md p-2 text-indigo-500 hover:text-indigo-700 w-auto h-8 bg-transparent focus:outline-none focus:underline-offset-8">
                                 <svg class="h-5 w-5 " width="20" height="20" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z" />  <polyline points="5 12 3 12 12 3 21 12 19 12" />  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
                                 </svg><Typography className="translate-y-0.5 ml-0.5"> Home</Typography>
-                            </NavLink>
+                            </button>
 
-                            <NavLink onClick={navigate("/user")} className="flex-initial mx-3 group relative inline-flex items-center justify-center rounded-md p-2 text-indigo-500 hover:text-indigo-700 w-auto h-8 bg-transparent focus:outline-none focus:underline-offset-8">
+                            <button onClick={() => navigate("/user")} className="flex-initial mx-3 group relative inline-flex items-center justify-center rounded-md p-2 text-indigo-500 hover:text-indigo-700 w-auto h-8 bg-transparent focus:outline-none focus:underline-offset-8">
                                 <svg class="h-5 w-5 text-slate-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg><Typography className="translate-y-0.5 ml-0.5"> User</Typography>
-                            </NavLink>
+                            </button>
                         </div>
                     </div>
 
