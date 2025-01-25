@@ -8,7 +8,7 @@ export default function UserTable(props) {
     {
       title: "Name",
       dataIndex: "name",
-      render: (text, record) => `${record.firstname} ${record.lastname}`,
+      render: (text, record) => `${record.first_name} ${record.last_name}`,
     },
     {
       title: "Role",

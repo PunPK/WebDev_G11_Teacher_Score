@@ -19,6 +19,17 @@ export default function TopicList(props) {
       key: "documentId",
     },
     {
+      title: "Max Score",
+      dataIndex: "max_score",
+      key: "max_score",
+      render: (max_score) => {
+        if (max_score) {
+          return max_score;
+        }
+        return "No max score";
+      },
+    },
+    {
       title: "Score",
       dataIndex: "score_id",
       key: "score",

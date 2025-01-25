@@ -19,13 +19,14 @@ export default function SubjectList(props) {
       key: "description",
     },
     {
-      title: "Lecturer IDs",
-      dataIndex: "lecturer_owners",
-      key: "lecturer_owners",
-      render: (lecturerOwners) =>
-        lecturerOwners
-          .map((owner, index) => `${index + 1}. ${owner.lecturer_id}`)
-          .join("\n"),
+      title: "Lecturer",
+      dataIndex: "users_owner",
+      key: "users_owner",
+      render: (users_owner) =>
+        users_owner
+          .filter((owner) => owner.role.name === "Lecturer")
+          .map((owner, index) => `${index + 1}. ${owner.username}`)
+          .map((text, index) => <div key={index}>{text}</div>),
     },
     {
       title: "Topics",

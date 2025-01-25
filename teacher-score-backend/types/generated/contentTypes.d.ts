@@ -454,6 +454,13 @@ export interface ApiTopicTopic extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'> &
       Schema.Attribute.Private;
+    max_score: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
     publishedAt: Schema.Attribute.DateTime;
     score_id: Schema.Attribute.Relation<'oneToMany', 'api::score.score'>;
     subject: Schema.Attribute.Relation<'manyToOne', 'api::subject.subject'>;

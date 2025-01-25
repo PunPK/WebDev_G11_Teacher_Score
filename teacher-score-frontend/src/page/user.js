@@ -30,34 +30,34 @@ function UserPage() {
     setEditData(null);
   };
 
-  const handleChangedPassword = async () => {
-    try {
-      const jwtToken =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0NzE0NjU1LCJleHAiOjE3MzczMDY2NTV9.nAKGVpQ-iqTRUFcwI21MgH3F0m4mCp4JKSkwwJwBOPs"; // Ensure this is retrieved securely
-      const resetCode = "";
+  // const handleChangedPassword = async () => {
+  //   try {
+  //     const jwtToken =
+  //       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0NzE0NjU1LCJleHAiOjE3MzczMDY2NTV9.nAKGVpQ-iqTRUFcwI21MgH3F0m4mCp4JKSkwwJwBOPs"; // Ensure this is retrieved securely
+  //     const resetCode = "";
 
-      const response = await axios.post(
-        "http://localhost:1337/auth/local/reset-password",
-        {
-          code: resetCode,
-          password: "1234567",
-          passwordConfirmation: "1234567",
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-          },
-        }
-      );
+  //     const response = await axios.post(
+  //       "http://localhost:1337/auth/local/reset-password",
+  //       {
+  //         code: resetCode,
+  //         password: "1234567",
+  //         passwordConfirmation: "1234567",
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${jwtToken}`,
+  //         },
+  //       }
+  //     );
 
-      console.log("Your user's password has been changed.", response.data);
-    } catch (error) {
-      console.error(
-        "An error occurred:",
-        error.response?.data || error.message
-      );
-    }
-  };
+  //     console.log("Your user's password has been changed.", response.data);
+  //   } catch (error) {
+  //     console.error(
+  //       "An error occurred:",
+  //       error.response?.data || error.message
+  //     );
+  //   }
+  // };
 
   const handleRowEdited = async (item) => {
     try {
