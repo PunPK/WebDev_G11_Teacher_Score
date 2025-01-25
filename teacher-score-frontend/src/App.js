@@ -8,16 +8,12 @@ import {
 } from "react-router-dom";
 import React, { useContext } from "react";
 import { AuthContext } from "./context/Auth.context.js";
-// import Login from "./Login/index.js";
-// import Dashboard from "./Dashboard/index.js";
 import LoginForm from "./page/login.js";
 import HomePage from "./page/home.js";
 import HomeLecturer from "./lecturer/page/home.js";
 import TopicLecturer from "./lecturer/page/topic.js";
 import HomeStudent from "./student/page/home.js";
-import LoginFormTest from "./page/login-test.js";
 import TopicStudent from "./student/page/topic.js";
-// import DataTable from "./student/page/test.js";
 import UserPage from "./page/user.js";
 function App() {
   const { state } = useContext(AuthContext);
@@ -26,9 +22,7 @@ function App() {
     return (
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<LoginForm />} /> */}
           <Route path="/" element={<LoginForm />} />
-          {/* <Route path="/test" element={<LoginFormTest />} /> */}
         </Routes>
       </BrowserRouter>
     );
@@ -41,7 +35,6 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/" element={<HomeStudent />} />
             <Route path="/topic/:subject" element={<TopicStudent />} />
-            {/* <Route path="/test" element={<DataTable />} /> */}
             <Route path="/user" element={<UserPage />} />
           </Routes>
         </BrowserRouter>
@@ -55,9 +48,8 @@ function App() {
             <Route path="/test" element={<HomePage />} />
             <Route path="/" element={<HomeLecturer />} />
             <Route path="/user" element={<UserPage />} />
-
-          </Routes >
-        </BrowserRouter >
+          </Routes>
+        </BrowserRouter>
       );
     }
   }

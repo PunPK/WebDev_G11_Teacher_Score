@@ -32,6 +32,11 @@
       "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
       "mappedBy": "subject_owners"
+    },
+    "subject_id": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }
