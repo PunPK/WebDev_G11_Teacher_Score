@@ -1,69 +1,62 @@
-// import React, { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { } from '@heroicons/react/24/outline'
-// import { useContext } from "react";
-// import {
-//     Disclosure,
-//     DisclosureButton,
-//     DisclosurePanel,
-//     Menu,
-//     MenuButton,
-//     MenuItem,
-//     MenuItems,
-// } from "@headlessui/react";
-// import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-// import { AuthContext } from "../context/Auth.context.js";
-// import ax from "../conf/ax.js";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/Auth.context";
+import { useNavigate } from "react-router";
+import { Typography } from "@material-tailwind/react";
+import { Disclosure, DisclosureButton } from '@headlessui/react';
+import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
+
+export default function Nav_lec() {
+    const { state: ContextState, logout } = useContext(AuthContext);
+    const { user } = ContextState;
+    const navigate = useNavigate()
+    const onLogout = (e) => {
+        e.preventDefault();
+        logout();
+        navigate("/")
+    };
+
+    useEffect(() => {
+        if (user) {
+
+        } else {
+
+        }
+    }, [user]);
+
+    return (
+        <header className="bg-white/90 drop-shadow-sm  w-full h-1/6 sticky z-20 top-0">
+            <div id="sticky-banner" tabIndex="-1 n" className=" max-w-7xl w-full  mx-auto px-2 sm:px-6 lg:px-8  ">
+                <div className=" flex items-center mx-6 h-12 justify-between">
+                    <div className="flex inset-y-0 left-0 items-center sm:hidden">
+                        <Typography>
+                            Hello, {user.userRole} {user.username}
+                        </Typography>
+                        <div className="flex ml-3">
+                            <NavLink onClick={navigate("/")} className="flex-initial mx-3 group relative inline-flex items-center justify-center rounded-md p-2 text-indigo-500 hover:text-indigo-700 w-auto h-8 bg-transparent focus:outline-none focus:underline-offset-8">
+                                <svg class="h-5 w-5 " width="20" height="20" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z" />  <polyline points="5 12 3 12 12 3 21 12 19 12" />  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                                </svg><Typography className="translate-y-0.5 ml-0.5"> Home</Typography>
+                            </NavLink>
+
+                            <NavLink onClick={navigate("/user")} className="flex-initial mx-3 group relative inline-flex items-center justify-center rounded-md p-2 text-indigo-500 hover:text-indigo-700 w-auto h-8 bg-transparent focus:outline-none focus:underline-offset-8">
+                                <svg class="h-5 w-5 text-slate-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg><Typography className="translate-y-0.5 ml-0.5"> User</Typography>
+                            </NavLink>
+                        </div>
+                    </div>
 
 
-// function classNames(...classes) {
-//     return classes.filter(Boolean).join(" ");
-// }
+                    <div className="absolute inset-y-0 flex right-0 items-center pr-2 mr-4 my-auto">
+                        <button onClick={onLogout} className="items-center  bg-white text-black hover: hover:ring-black left-0 w-18 rounded-lg h-7">
+                            <a href="/" className="text-black">
+                                Logout
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+    )
 
-// export default function Nav() {
-//     const { state: ContextState, logout } = useContext(AuthContext);
-//     const { user } = ContextState;
-//     const onLogout = (e) => {
-//         e.preventDefault();
-//         logout();
-//     };
-
-//     return (
-//         <Disclosure as="nav" className="bg-red-400">
-//             <div className="mx-auto max-w-8xl px-2 sm:px-6 lg:px-8">
-//                 <div className="relative flex h-16 items-center justify-between">
-//                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-//                         <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-//                             <span className="absolute -inset-0.5" />
-//                             <span className="sr-only">Open main menu</span>
-//                             <Bars3Icon aria-hidden="true" className="block size-6 group-data-[open]:hidden" />
-//                             <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-[open]:block" />
-//                         </DisclosureButton>
-//                     </div>
-//                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-//                         <div className="flex shrink-0 items-center">
-//                             JSON.stringify({user.username === null ? <h1>Please sign in...</h1> : <h1>Hello,{user.username}</h1>})
-//                         </div>
-
-//                     </div>
-
-//                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-//                         <button
-//                             type="button"
-//                             className="relative rounded-full bg-pink-400 p-1 text-indigo-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-//                         >
-//                             <span className="absolute -inset-1.5" />
-//                             <span className="sr-only">View notifications</span>
-//                             <BellIcon aria-hidden="true" className="size-6" />
-//                         </button>
-//                     </div>
-//                 </div>
-//             </div>
-
-//             <DisclosurePanel className="sm:hidden">
-//                 <div className="space-y-1 px-2 pb-3 pt-2">
-//                 </div >
-//             </DisclosurePanel>
-//         </Disclosure>
-//     );
-// }
+}

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { useSearchParams } from 'react-router-dom';
 import dayjs from "dayjs";
 import { Card, CardBody, CardHeader, Typography } from "@material-tailwind/react";
-import Nav_lec from "../../components/nav_lecturer.js"
+import Nav_lec from "../../components/navbar.js"
 
 const HomeLecturer = () => {
   const [subjectData, setSubjectData] = useState([]);
@@ -25,8 +25,8 @@ const HomeLecturer = () => {
     try {
       const subjectUrl = "http://localhost:1337/api/subjects?populate=*";
       const response = await ax.get(subjectUrl);
-      console.log(response.data.data);
-      setSubjectData(response.data.data);
+      console.log(response.data);
+      setSubjectData(response.data);
     } catch (e) {
       console.log(e);
     } finally {
@@ -34,12 +34,16 @@ const HomeLecturer = () => {
   };
 
   useEffect(() => {
-    fetchSubject();
-  }, [])
+    if (user) {
+      fetchSubject(user.id);
+    } else {
+    }
+  }, [user]);
+
   return (
     <>
       <Nav_lec />
-      <div class="grid bg-gradient-to-tl from-blue-800 to-cyan-300 h-max ">
+      <div class="grid bg-gradient-to-tl from-blue-800 to-cyan-300 h-max min-h-screen">
 
         <Card className="mt-16 mx-auto w-72 h-24 shadow-xl bg-white mb-4">
 
@@ -57,7 +61,7 @@ const HomeLecturer = () => {
                   จำนวนวิชาที่เป็นเจ้าของ
                 </Typography>
                 <Typography className="ml-4">
-                  {subjectData.length} วิชา
+                  {subjectData.lenght} วิชา
                 </Typography>
               </CardBody>
             </div>
@@ -82,7 +86,7 @@ const HomeLecturer = () => {
                     </Typography>
 
                     < Typography className="group-hover:text-white">
-                      จำนวนเรื่อง : {user.topics.length === 0 ? "ไม่มีหัวข้อ" : user.topics.length}
+                      จำนวนเรื่อง : {user.topics.lenght === 0 ? "ไม่มีหัวข้อ" : user.topics.lenght}
                     </Typography>
 
                     <Typography className="group-hover:text-white">

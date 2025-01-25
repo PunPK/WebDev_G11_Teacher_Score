@@ -7,7 +7,7 @@ import { UserOutlined } from "@ant-design/icons";
 import axios from "axios";
 import UserTable from "./UserTable";
 import "./user.css";
-import Nav_lec from "../components/nav_lecturer.js";
+import Nav_lec from "../components/navbar.js";
 
 function UserPage() {
   //   const [user, setUser] = useState({});
@@ -93,11 +93,9 @@ function UserPage() {
 
   return (
     <>
-      <div class="grid bg-gradient-to-tl from-blue-800 to-cyan-300 h-screen ">
-        <header >
-          <Nav_lec></Nav_lec>
-        </header>
-        <body className="bg-white rounded-md">
+      <Nav_lec />
+      <div class="grid bg-gradient-to-tl from-blue-800 to-cyan-300 h-screen">
+        <body className="bg-white rounded-md mx-14 my-4">
           <Spin spinning={isLoading}>
             <UserOutlined className="custom-icon" />
             <Typography.Title>Profile {user.firstname} :</Typography.Title>
