@@ -14,35 +14,47 @@ const HomeStudent = () => {
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
   const { user } = ContextState;
+  // console.log(user);
 
   const onLogout = (e) => {
     e.preventDefault();
     logout();
   };
 
-  const fetchStudent = async (user) => {
-    setLoading(true);
-    try {
-      const studentUrl = `http://localhost:1337/api/students?populate=*&filters[users_permissions_user][id][$eq]=${user.id}`;
-      const response = await ax.get(studentUrl);
-      fetchSubject(response.data.data);
-    } catch (e) {
-      console.error("Error fetching student data:", e);
-      setError("Error fetching student data. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const fetchStudent = async (user) => {
+  //   setLoading(true);
+  //   try {
+  //     const studentUrl = `http://localhost:1337/api/students?populate=*&filters[users_permissions_user][id][$eq]=${user.id}`;
+  //     const response = await ax.get(studentUrl);
+  //     fetchSubject(response.data.data);
+  //   } catch (e) {
+  //     console.error("Error fetching student data:", e);
+  //     setError("Error fetching student data. Please try again.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
-  const fetchSubject = async (students) => {
-    const studentIds = students.map((student) => student.id).join(",");
-    const subjectUrl = `http://localhost:1337/api/subjects?populate=*&filters[students][id][$in]=${studentIds}`;
+  const fetchSubject = async (userId) => {
+    // const studentIds = students.map((student) => student.id).join(",");
+    // const subjectUrl = `http://localhost:1337/api/subjects?populate=*&filters[students][id][$in]=${studentIds}`;
 
     try {
       setLoading(true);
-      const response = await ax.get(subjectUrl);
-      console.log("API Response for subjects:", response.data.data);
-      setSubjectData(response.data.data);
+      const response = await ax.get("http://localhost:1337/api/subjects", {
+        params: {
+          populate: "*",
+          filters: {
+            users_owner: {
+              id: {
+                $eq: userId,
+              },
+            },
+          },
+        },
+      });
+      console.log(response.data);
+      setSubjectData(response.data);
     } catch (e) {
       console.error("Error fetching subjects:", e);
       setError("Error fetching subjects. Please try again.");
@@ -53,14 +65,15 @@ const HomeStudent = () => {
 
   useEffect(() => {
     if (user) {
-      fetchStudent(user);
+      fetchSubject(user.id);
+      // setSubjectData(user.subject);
     } else {
-      console.error("User is undefined");
+      // console.error("User is undefined");
     }
   }, [user]);
 
   const resultsPerPage = 20;
-  const totalResults = subjectData.length;
+  // const totalResults = subjectData.length;
 
   const onPageChange = (p) => {
     setPage(p);
