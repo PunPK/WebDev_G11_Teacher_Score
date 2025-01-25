@@ -54,7 +54,6 @@ function App() {
             <Route path="/to" element={<TopicLecturer />} />
             <Route path="/test" element={<HomePage />} />
             <Route path="/" element={<HomeLecturer />} />
-            <Route path="/" element={<TopicLecturer />} />
             <Route path="/user" element={<UserPage />} />
 
           </Routes >

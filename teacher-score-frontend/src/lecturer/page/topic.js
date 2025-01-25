@@ -77,25 +77,25 @@ const TopicLecturer = () => {
             <tr >
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
+                className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white uppercase tracking-wider"
               >
                 Topic Name
               </th>
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
+                className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white uppercase tracking-wider"
               >
                 Upload time
               </th>
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
+                className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white uppercase tracking-wider"
               >
                 Score
               </th>
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white-100 uppercase tracking-wider"
+                className="px-6 py-3 text-left text-lg font-semibold bg-cyan-900 text-white uppercase tracking-wider"
               >
                 Edit
               </th>

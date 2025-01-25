@@ -42,7 +42,7 @@ const HomeLecturer = () => {
 
       <div class="bg-gradient-to-tl from-cyan-50 h-screen ">
 
-        <Card className="mt-14 col-sm-4 items-center justify-items-center mx-auto w-full h-auto shadow-xl bg-white-100">
+        <Card className="mt-14 col-sm-4 items-center justify-items-center mx-auto w-full h-auto shadow-xl bg-white">
           <Typography>
             <h1 class="mx-auto my-5 text-5xl font-sans">Score Anouncer</h1>
           </Typography>
@@ -72,23 +72,23 @@ const HomeLecturer = () => {
                   transformStyle: "preserve-3d"
                 }}>
                 <CardBody>
-                  <Typography vatiant="h5" className="mb-2 text-2xl font-bold group-hover:text-white-100">
+                  <Typography vatiant="h5" className="mb-2 text-2xl font-bold group-hover:text-white">
                     {user.title}
                   </Typography>
 
-                  <Typography className="group-hover:text-white-100">
+                  <Typography className="group-hover:text-white">
                     {user.description}
                   </Typography>
 
-                  < Typography className="group-hover:text-white-100">
+                  < Typography className="group-hover:text-white">
                     จำนวนเรื่อง : {user.topics.length === 0 ? "ไม่มีหัวข้อ" : user.topics.length}
                   </Typography>
 
-                  <Typography className="group-hover:text-white-100">
+                  <Typography className="group-hover:text-white">
                     สร้างเมื่อ {dayjs(user.createdAt).format("DD / MM / YYYY เวลา HH:mm น.")}
                   </Typography>
 
-                  <Typography className="group-hover:text-white-100">
+                  <Typography className="group-hover:text-white">
                     อัพเดพล่าสุด {dayjs(user.updatedAt).format("DD / MM / YYYY เวลา HH:mm น.")}
                   </Typography>
 
