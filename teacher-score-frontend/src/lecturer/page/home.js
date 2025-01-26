@@ -65,8 +65,9 @@ const HomeLecturer = () => {
           </Typography>
         </Card>
 
-        <div className="grid grid-cols-4 gap-10 mb-4 mx-28 ">
-          <Card className="bg-white">
+        <div className="flex gap-10 mb-4 mx-28 ">
+
+          <Card className="bg-white flex-initial">
             <div>
               <CardBody>
                 <Typography className="font-bold text-lg">
@@ -78,25 +79,22 @@ const HomeLecturer = () => {
               </CardBody>
             </div>
           </Card>
-          <Card onClick={() => navigate("")} className="group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900  hover:shadow-red-400">
-            <div>
-              <CardBody >
-                <Typography className="font-bold text-lg group-hover:text-white">
+          <Card onClick={() => navigate("")} className="justify-between flex-none h-10 w-36 group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900  hover:shadow-red-400">
+            <div className="h-10 w-36 items-center">
+              <CardBody className="justify-between">
+                <Typography className="font-semibold text-md group-hover:text-white text-center">
                   Add Subject
                 </Typography>
               </CardBody>
             </div>
           </Card>
         </div>
+
         <Card className="mx-28 h-fit bg-white my-2 ">
-          <div class=" grid grid-cols-2 gap-4 mx-6 my-5">
+          <div class=" grid grid-cols-2 gap-4 mx-6 my-5 g">
             {subjectData.map((user) => (
-              <>
-                <>
-                  <Card >
-                    <button onClick={() => navigate("/edit")}>Edit</button>
-                  </Card>
-                </>
+              <div>
+
                 <>
 
                   <Card
@@ -137,8 +135,14 @@ const HomeLecturer = () => {
                       </Typography>
                     </CardBody>
                   </Card>
+
                 </>
-              </>
+                <>
+                  <Card className="group hover:ring-2 z-20 hover:bg-gradient-to-t bg-white hover:to-orange-50 hover:from-red-400 hover:ring-inherit hover:ring-offset-2">
+                    <button onClick={() => navigate("/edit")} className="group-hover:text-white ">Edit</button>
+                  </Card>
+                </>
+              </div>
             ))}
           </div>
         </Card>

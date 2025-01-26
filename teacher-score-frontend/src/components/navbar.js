@@ -48,11 +48,13 @@ export default function Nav_lec() {
                     </div>
 
 
-                    <div className="absolute inset-y-0 flex right-0 items-center pr-2 mr-4 my-auto">
-                        <button onClick={onLogout} className="items-center  bg-white text-black hover: hover:ring-black left-0 w-18 rounded-lg h-7 my-auto">
-                            <a href="/" className="text-black">
-                                Logout
-                            </a>
+                    <div className="absolute inset-y-0 flex right-0 items-center pr-2 mr-4 my-2 w-18">
+                        <button onClick={onLogout} className="items-center hover:bg-light-blue-400/20 hover:text-black bg-transparent text-black hover:ring-1 hover:ring-offset-2 hover:ring-black/45  w-20 rounded-lg h-7 my-auto">
+                            <div className="my-1">
+                                <a href="/" className="items-center no-underline hover:no-underline justify-items-center my-1 mx-auto">
+                                    Logout
+                                </a>
+                            </div>
                         </button>
                     </div>
                 </div>
