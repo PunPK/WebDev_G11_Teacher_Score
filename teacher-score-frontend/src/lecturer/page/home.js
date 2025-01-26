@@ -61,15 +61,15 @@ const HomeLecturer = () => {
     <>
       <Nav_lec />
       <div class="grid bg-gradient-to-tr from-red-400 to-pink-500 min-h-screen max-h-full top-0 mt-0 z-10">
-        <Card className="mt-16 mx-auto w-72 h-24 shadow-xl bg-white mb-4">
+        <Card className="mt-8 mx-auto w-72 h-24 shadow-xl bg-white mb-4">
           <Typography className="items-center justify-items-center w-fit mx-auto my-auto">
             <h1 class="mx-auto text-5xl font-sans">รายการวิชา</h1>
           </Typography>
         </Card>
 
-        <div className="flex gap-10 mb-4 mx-28 ">
+        <div className="flex gap-10 mb-2 mx-28 ">
 
-          <Card className="bg-white flex-initial justify-between">
+          <Card className="bg-white flex-none justify-between h-24 w-64 mt-4">
             <div>
               <CardBody>
                 <Typography className="font-bold text-lg">
@@ -84,8 +84,8 @@ const HomeLecturer = () => {
           <div className="bg-transparent flex-1 justify-between">
 
           </div>
-          <div className="items-end">
-            <Card onClick={() => navigate("")} className="justify-center mt-14 items-end flex-none h-12 w-36 group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800">
+          <div className="mt-16 h-12 bottom-0 inset-x-0 justify-items-end">
+            <Card onClick={() => navigate("")} className="justify-center  bottom-0 inset-x-0 flex-none h-12 w-36 group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800">
               <div className=" w-36 items-center">
                 <Typography className="font-semibold text-md group-hover:text-white my-auto justify-self-center text-center">
                   Add Subject
