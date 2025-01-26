@@ -43,7 +43,7 @@ const HomeLecturer = () => {
       });
       console.log(response.data);
       setSubjectData(response.data);
-      setSubjectDataCount(response.data.length)
+      setSubjectDataCount(response.data.length);
     } catch (e) {
       console.log(e);
     } finally {
@@ -81,11 +81,12 @@ const HomeLecturer = () => {
               </CardBody>
             </div>
           </Card>
-          <div className="bg-transparent flex-1 justify-between">
-
-          </div>
-          <div className="mt-16 h-12 bottom-0 inset-x-0 justify-items-end">
-            <Card onClick={() => navigate("")} className="justify-center  bottom-0 inset-x-0 flex-none h-12 w-36 group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800">
+          <div className="bg-transparent flex-1 justify-between"></div>
+          <div className="items-end">
+            <Card
+              onClick={() => navigate("/subject/create")}
+              className="justify-center mt-14 items-end flex-none h-12 w-36 group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800"
+            >
               <div className=" w-36 items-center">
                 <Typography className="font-semibold text-md group-hover:text-white my-auto justify-self-center text-center">
                   Add Subject
@@ -101,7 +102,7 @@ const HomeLecturer = () => {
               <div>
                 <Card className="bg-white shadow-xl shadow-red-900/20  h-72">
                   <Card
-                    onClick={() => navigate(`/topic/${user.documentId}`)}
+                    onClick={() => navigate(`/topic/${user.id}`)}
                     className="z-20 group mt-3  mx-3 h-46 w-auto rounded-t-lg bg-gradient-to-tl from-red-50 hover:-translate-y-2 transition-all duration-200 delay-75 cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900 hover:drop-shadow-2xl hover:shadow-red-400 "
                   >
                     <CardBody>
@@ -140,27 +141,34 @@ const HomeLecturer = () => {
                   </Card>
                   <div className="mt-3 mx-2">
                     <div className="grid grid-cols-2 h-14 gap-2">
-
                       <Card className="group shadow-md shadow-black items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400  text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer">
-                        <span onClick={() => navigate("/edit")} className="justify-self-center my-auto font-semibold" >
-
+                        <span
+                          onClick={() =>
+                            navigate(`/subject/addstudent/${user.documentId}`)
+                          }
+                          className="justify-self-center my-auto font-semibold"
+                        >
                           Add Student
-
                         </span>
                       </Card>
                       <Card className="group items-center justify-items-center rounded-br-lg hover:bg-gradient-to-tl bg-gradient-to-tr from-red-700 to-red-400 bg-red-600 text-white hover:to-pink-500 hover:from-red-400 hover:translate-y-0.5 hover:translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer">
-                        <span onClick={() => navigate("/edit")} className="justify-self-center my-auto font-semibold">Edit</span>
+                        <span
+                          onClick={() =>
+                            navigate(`/subject/edit/${user.documentId}`)
+                          }
+                          className="justify-self-center my-auto font-semibold"
+                        >
+                          Edit
+                        </span>
                       </Card>
                     </div>
                   </div>
                 </Card>
-
-
               </div>
             ))}
           </div>
-        </Card >
-      </div >
+        </Card>
+      </div>
     </>
   );
 };

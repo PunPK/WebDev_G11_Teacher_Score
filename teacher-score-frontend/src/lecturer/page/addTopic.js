@@ -4,7 +4,7 @@ import { Form, Input, Button, Card, message, InputNumber } from "antd";
 import axios from "axios";
 import ax from "../../conf/ax";
 import * as XLSX from "xlsx";
-
+import Nav_lec from "../../components/navbar";
 const { TextArea } = Input;
 
 const CreateTopic = () => {
@@ -55,20 +55,32 @@ const CreateTopic = () => {
       //       });
       //     }
       //   });
-      const response = await ax.get(`users`);
-      const existingData = response.data;
-      console.log(existingData);
 
       for (const newItem of data) {
+        const response = await ax.get(`users`);
+        const existingData = response.data;
+        console.log(existingData);
         // ใช้ for...of แทน forEach
         console.log("Processing:", newItem);
-        console.log("Existing Data:", existingData);
-        console.log("New Data:", data);
-
-        const match = existingData.find(
-          (existing) => existing.username === newItem.username
-        );
-
+        // console.log("Existing Data:", existingData.username);
+        // console.log("New Data:", newItem.username);
+        const match = existingData.find((existing) => {
+          const existingUsername = String(existing.username || "")
+            .trim()
+            .toLowerCase();
+          const newUsername = String(newItem.username || "")
+            .trim()
+            .toLowerCase();
+          //   console.log(`newItem.username:`, newUsername);
+          //   console.log(`Type of newUsername:`, typeof newUsername);
+          //   console.log(`newItem.username:`, existing.username);
+          //   console.log(`Type of existingUsername:`, typeof existingUsername);
+          return existingUsername === newUsername;
+        });
+        // const match = existingData.find(
+        //   (existing) => existingUsername === newItem.username
+        // );
+        console.log(match);
         if (match) {
           match.score = match.score || [];
           match.score.push(newItem.score);
@@ -88,7 +100,7 @@ const CreateTopic = () => {
       }
 
       console.log("Data successfully uploaded to Strapi!");
-      alert("Data successfully uploaded to Strapi!");
+      //   alert("Data successfully uploaded to Strapi!");
 
       message.success("created successfully!");
     } catch (error) {
@@ -127,23 +139,25 @@ const CreateTopic = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Card
-        title="Create New Topic"
-        className="w-full max-w-md shadow-lg rounded-xl"
-      >
-        <Form layout="vertical" onFinish={handleSubmit}>
-          <Form.Item
-            label="Title"
-            name="title"
-            rules={[
-              { required: true, message: "Please enter the topic title!" },
-            ]}
-          >
-            <Input placeholder="Enter topic title" />
-          </Form.Item>
+    <div>
+      <Nav_lec />
+      <div className="flex justify-center items-center min-h-screen">
+        <Card
+          title="Create New Topic"
+          className="w-full max-w-md shadow-lg rounded-xl"
+        >
+          <Form layout="vertical" onFinish={handleSubmit}>
+            <Form.Item
+              label="Title"
+              name="title"
+              rules={[
+                { required: true, message: "Please enter the topic title!" },
+              ]}
+            >
+              <Input placeholder="Enter topic title" />
+            </Form.Item>
 
-          {/* <Form.Item
+            {/* <Form.Item
             label="Description"
             name="description"
             rules={[
@@ -156,48 +170,56 @@ const CreateTopic = () => {
             <TextArea rows={4} placeholder="Enter topic description" />
           </Form.Item> */}
 
-          <Form.Item
-            label="Max Score"
-            name="maxScore"
-            rules={[
-              { required: true, message: "Please enter the maximum score!" },
-            ]}
-          >
-            <InputNumber placeholder="Enter maximum score" className="w-full" />
-          </Form.Item>
-          <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
-          {data.length > 0 && (
-            <table className="table">
-              <thead>
-                <tr>
-                  {Object.keys(data[0]).map((key) => (
-                    <th key={key}>{key}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((row, index) => (
-                  <tr key={index}>
-                    {Object.values(row).map((value, idx) => (
-                      <td key={idx}>{value}</td>
+            <Form.Item
+              label="Max Score"
+              name="maxScore"
+              rules={[
+                { required: true, message: "Please enter the maximum score!" },
+              ]}
+            >
+              <InputNumber
+                placeholder="Enter maximum score"
+                className="w-full"
+              />
+            </Form.Item>
+            <input
+              type="file"
+              accept=".xlsx, .xls"
+              onChange={handleFileUpload}
+            />
+            {data.length > 0 && (
+              <table className="table">
+                <thead>
+                  <tr>
+                    {Object.keys(data[0]).map((key) => (
+                      <th key={key}>{key}</th>
                     ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={loading}
-              className="w-full"
-            >
-              Create Topic
-            </Button>
-          </Form.Item>
-        </Form>
-      </Card>
+                </thead>
+                <tbody>
+                  {data.map((row, index) => (
+                    <tr key={index}>
+                      {Object.values(row).map((value, idx) => (
+                        <td key={idx}>{value}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={loading}
+                className="w-full"
+              >
+                Create Topic
+              </Button>
+            </Form.Item>
+          </Form>
+        </Card>
+      </div>
     </div>
   );
 };

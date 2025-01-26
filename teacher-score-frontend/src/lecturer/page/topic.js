@@ -7,14 +7,16 @@ import { useNavigate } from "react-router";
 import response from "../../utils/demo/tableData";
 import Nav_lec from "../../components/navbar.js";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
-
+import { useParams } from "react-router-dom";
 const TopicLecturer = () => {
+  const { subject } = useParams();
   const [topicData, setTopicData] = useState([]);
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const { user } = ContextState;
+
   const onLogout = (e) => {
     e.preventDefault();
     logout();
@@ -23,8 +25,12 @@ const TopicLecturer = () => {
 
   const fetchTopic = async () => {
     try {
-      const topicUrl = "http://localhost:1337/api/topics?populate=*";
-      const response = await ax.get(topicUrl);
+      const response = await ax.get("/topics", {
+        params: {
+          populate: "*",
+          "filters[subject][id][$eq]": subject,
+        },
+      });
       console.log(response.data.data);
       setTopicData(response.data.data);
     } catch (e) {
@@ -51,6 +57,7 @@ const TopicLecturer = () => {
   return (
     <>
       <Nav_lec />
+
       <div class="grid bg-gradient-to-tr from-red-400 to-pink-500 min-h-screen max-h-full top-0 mt-0 z-10">
         <Card className="mt-7 mx-auto w-auto h-24 shadow-xl bg-white mb-6">
           <Typography className="font-extrabold items-center justify-items-center w-fit mx-auto my-auto">
@@ -58,7 +65,7 @@ const TopicLecturer = () => {
           </Typography>
         </Card>
         <div className="justify-items-end mb-4 mr-[8.5rem]">
-          <Card onClick={() => navigate("")} className=" h-8 w-28 group bg-gradient-to-bl from-cyan-700 to-green-900 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800">
+          <Card onClick={() => navigate(`/topic/create/${subject}`)} className=" h-8 w-28 group bg-gradient-to-bl from-cyan-700 to-green-900 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800">
             <div className=" w-28 items-center">
               <Typography className="font-semibold text-md text-white group-hover:text-white my-auto justify-self-center text-center">
                 Add Topic
@@ -154,13 +161,16 @@ const TopicLecturer = () => {
                         vatiant="h5"
                         className="my-auto mx-auto text-md font-semibold"
                       >
-                        {user.max_score === null ? "ยังไม่กำหนดคะแนนเต็ม" : user.max_score}
+                        {user.max_score === null
+                          ? "ยังไม่กำหนดคะแนนเต็ม"
+                          : user.max_score}
                       </Typography>
                     </CardBody>
                   </Card>
                   <Card
                     className="flex-none group w-64  bg-gradient-to-tr from-red-50"
                   >
+
                     <CardBody>
                       <Typography
                         vatiant="h"
@@ -186,7 +196,7 @@ const TopicLecturer = () => {
                       </Typography>
                     </CardBody>
                   </Card>
-                </div >
+                </div>
               </>
             ))}
           </div>
@@ -271,7 +281,6 @@ const TopicLecturer = () => {
     //     </div>
     //   </div>
     // </ >
-
   );
 };
 
