@@ -101,7 +101,7 @@ const HomeLecturer = () => {
               <div>
                 <Card className="bg-white shadow-xl shadow-red-900/20  h-72">
                   <Card
-                    onClick={() => navigate(`/topic/${user.documentId}`)}
+                    onClick={() => navigate(`/topic/${user.id}`)}
                     className="z-20 group mt-3  mx-3 h-46 w-auto rounded-t-lg bg-gradient-to-tl from-red-50 hover:-translate-y-2 transition-all duration-200 delay-75 cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900 hover:drop-shadow-2xl hover:shadow-red-400 "
                   >
                     <CardBody>
