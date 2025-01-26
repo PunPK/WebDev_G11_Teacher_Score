@@ -66,7 +66,7 @@ const HomeStudent = () => {
   return (
     <>
       <Nav_lec />
-      <div class="grid bg-gradient-to-tl from-blue-800 to-cyan-300 h-max ">
+      <div class="grid bg-gradient-to-tl from-blue-800 to-cyan-300 min-h-screen max-h-screen top-0 mt-0 z-10">
 
         <Card className="mt-16 mx-auto w-72 h-24 shadow-xl bg-white mb-4">
 
@@ -98,7 +98,7 @@ const HomeStudent = () => {
             </div>
           </Card>
         </div>
-        <Card className="mx-28 h-auto bg-white my-2">
+        <Card className="mx-28 h-fit bg-white my-2">
           <div class=" grid grid-cols-2 gap-6 mx-6 my-6">
             {subjectData.map((user) => (
               <>
