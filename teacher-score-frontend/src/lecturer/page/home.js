@@ -97,9 +97,9 @@ const HomeLecturer = () => {
 
                 <>
 
-                  <Card
+                  <div
                     onClick={() => navigate(`/topic/${user.documentId}`)}
-                    className="z-10 group h-full w-full  bg-gradient-to-tr from-blue-50 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900  hover:shadow-red-400 "
+                    className="z-10 group h-full w-full round-t-lg bg-gradient-to-tr from-blue-50 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900  hover:shadow-red-400 "
                   >
                     <CardBody>
                       <Typography
@@ -134,14 +134,25 @@ const HomeLecturer = () => {
                         )}
                       </Typography>
                     </CardBody>
-                  </Card>
+                  </div>
 
                 </>
-                <>
-                  <Card className="group hover:ring-2 z-20 hover:bg-gradient-to-t bg-white hover:to-orange-50 hover:from-red-400 hover:ring-inherit hover:ring-offset-2">
-                    <button onClick={() => navigate("/edit")} className="group-hover:text-white ">Edit</button>
-                  </Card>
-                </>
+                <div className="grid grid-cols-2">
+                  <>
+                    <div className="group z-20 justify-items-center rounded-l-lg hover:bg-gradient-to-t bg-light-blue-700 text-white hover:to-orange-50 hover:from-red-400 ">
+                      <button onClick={() => navigate("/edit")} className="group-hover:text-white items-center">
+                        <Typography>
+                          Add Student
+                        </Typography>
+                      </button>
+                    </div>
+                  </>
+                  <>
+                    <div className="group z-20 justify-items-center rounded-r-lg hover:bg-gradient-to-t bg-red-800 text-white hover:to-orange-50 hover:from-red-400 ">
+                      <button onClick={() => navigate("/edit")} className="group-hover:text-white ">Edit</button>
+                    </div>
+                  </>
+                </div>
               </div>
             ))}
           </div>
