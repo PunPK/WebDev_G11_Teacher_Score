@@ -12,10 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "score": {
-      "type": "string",
-      "required": false
-    },
     "topic_score_id": {
       "type": "relation",
       "relation": "manyToOne",
@@ -27,6 +23,10 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "score_owers"
+    },
+    "score": {
+      "type": "integer",
+      "required": false
     }
   }
 }
