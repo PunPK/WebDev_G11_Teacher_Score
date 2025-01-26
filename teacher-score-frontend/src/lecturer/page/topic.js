@@ -7,14 +7,16 @@ import { useNavigate } from "react-router";
 import response from "../../utils/demo/tableData";
 import Nav_lec from "../../components/navbar.js";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
-
+import { useParams } from "react-router-dom";
 const TopicLecturer = () => {
+  const { subject } = useParams();
   const [topicData, setTopicData] = useState([]);
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const { user } = ContextState;
+
   const onLogout = (e) => {
     e.preventDefault();
     logout();
@@ -23,8 +25,12 @@ const TopicLecturer = () => {
 
   const fetchTopic = async () => {
     try {
-      const topicUrl = "http://localhost:1337/api/topics?populate=*";
-      const response = await ax.get(topicUrl);
+      const response = await ax.get("/topics", {
+        params: {
+          populate: "*",
+          "filters[subject][id][$eq]": subject,
+        },
+      });
       console.log(response.data.data);
       setTopicData(response.data.data);
     } catch (e) {
@@ -51,13 +57,23 @@ const TopicLecturer = () => {
   return (
     <>
       <Nav_lec />
+
       <div class="grid bg-gradient-to-tr from-red-400 to-pink-500 min-h-screen max-h-full top-0 mt-0 z-10">
         <Card className="mt-6 mx-auto w-auto h-24 shadow-xl bg-white mb-6">
           <Typography className="font-extrabold items-center justify-items-center w-fit mx-auto my-auto">
             <h1 class="mx-12 text-3xl font-sans ">All score</h1>
           </Typography>
         </Card>
-
+        <Card
+          onClick={() => navigate(`/topic/create/${subject}`)}
+          className="justify-between flex-none h-10 w-36 group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900  hover:shadow-red-400"
+        >
+          <div className=" w-36 items-center">
+            <Typography className="font-semibold text-md group-hover:text-white my-auto justify-self-center text-center">
+              Add Topic
+            </Typography>
+          </div>
+        </Card>
         <div className="flex gap-10 mb-4 mx-36 ">
           <Card className="bg-white w-26 flex-one">
             <div>
@@ -71,9 +87,7 @@ const TopicLecturer = () => {
           <Card className="bg-white w-20 flex-auto">
             <div>
               <CardBody>
-                <Typography className="font-bold text-lg">
-                  คะแนนเต็ม
-                </Typography>
+                <Typography className="font-bold text-lg">คะแนนเต็ม</Typography>
               </CardBody>
             </div>
           </Card>
@@ -83,9 +97,7 @@ const TopicLecturer = () => {
             {topicData.map((user) => (
               <>
                 <div className="flex gap-4 w-auto my-4">
-                  <Card
-                    className="flex-1 z-10 group h-16 w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl"
-                  >
+                  <Card className="flex-1 z-10 group h-16 w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl">
                     <CardBody>
                       <Typography
                         vatiant="h5"
@@ -95,33 +107,31 @@ const TopicLecturer = () => {
                       </Typography>
                     </CardBody>
                   </Card>
-                  <Card
-                    className="flex-none z-10 group h-16 w-60 text-center  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl"
-                  >
+                  <Card className="flex-none z-10 group h-16 w-60 text-center  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl">
                     <CardBody>
                       <Typography
                         vatiant="h5"
                         className="my-auto mx-auto text-md font-semibold"
                       >
-                        {user.score_id.length === 0 ? "ยังไม่มีการประกาศคะแนน" : user.score_id.length}
+                        {user.score_id.length === 0
+                          ? "ยังไม่มีการประกาศคะแนน"
+                          : user.score_id.length}
                       </Typography>
                     </CardBody>
                   </Card>
-                  <Card
-                    className="flex-none z-10 group h-16 w-60 text-center  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl"
-                  >
+                  <Card className="flex-none z-10 group h-16 w-60 text-center  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl">
                     <CardBody>
                       <Typography
                         vatiant="h5"
                         className="my-auto mx-auto text-md font-semibold"
                       >
-                        {user.max_score === null ? "ยังไม่กำหนดคะแนนเต็ม" : user.max_score}
+                        {user.max_score === null
+                          ? "ยังไม่กำหนดคะแนนเต็ม"
+                          : user.max_score}
                       </Typography>
                     </CardBody>
                   </Card>
-                  <Card
-                    className="flex-none z-10 group h-16 w-64  bg-gradient-to-tr from-red-50"
-                  >
+                  <Card className="flex-none z-10 group h-16 w-64  bg-gradient-to-tr from-red-50">
                     <CardBody>
                       <Typography
                         vatiant="h"
@@ -147,12 +157,12 @@ const TopicLecturer = () => {
                       </Typography>
                     </CardBody>
                   </Card>
-                </div >
+                </div>
               </>
             ))}
           </div>
-        </Card >
-      </div >
+        </Card>
+      </div>
     </>
     // <>
     //   <Nav_lec />
@@ -232,7 +242,6 @@ const TopicLecturer = () => {
     //     </div>
     //   </div>
     // </ >
-
   );
 };
 
