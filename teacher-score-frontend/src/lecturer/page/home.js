@@ -14,6 +14,7 @@ import Nav_lec from "../../components/navbar.js";
 
 const HomeLecturer = () => {
   const [subjectData, setSubjectData] = useState([]);
+  const [subjectDataCount, setSubjectDataCount] = useState(0);
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
   const { user } = ContextState;
@@ -42,6 +43,7 @@ const HomeLecturer = () => {
       });
       console.log(response.data);
       setSubjectData(response.data);
+      setSubjectDataCount(response.data.length)
     } catch (e) {
       console.log(e);
     } finally {
@@ -74,18 +76,16 @@ const HomeLecturer = () => {
                   จำนวนวิชาที่เป็นเจ้าของ
                 </Typography>
                 <Typography className="ml-4">
-                  {subjectData.lenght} วิชา
+                  {subjectDataCount} วิชา
                 </Typography>
               </CardBody>
             </div>
           </Card>
           <Card onClick={() => navigate("")} className="justify-between flex-none h-10 w-36 group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900  hover:shadow-red-400">
-            <div className="h-10 w-36 items-center">
-              <CardBody className="justify-between">
-                <Typography className="font-semibold text-md group-hover:text-white text-center">
-                  Add Subject
-                </Typography>
-              </CardBody>
+            <div className=" w-36 items-center">
+              <Typography className="font-semibold text-md group-hover:text-white my-auto justify-self-center text-center">
+                Add Subject
+              </Typography>
             </div>
           </Card>
         </div>
