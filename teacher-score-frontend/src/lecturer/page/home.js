@@ -69,7 +69,7 @@ const HomeLecturer = () => {
 
         <div className="flex gap-10 mb-4 mx-28 ">
 
-          <Card className="bg-white flex-initial">
+          <Card className="bg-white flex-initial justify-between">
             <div>
               <CardBody>
                 <Typography className="font-bold text-lg">
@@ -81,25 +81,28 @@ const HomeLecturer = () => {
               </CardBody>
             </div>
           </Card>
-          <Card onClick={() => navigate("")} className="justify-between flex-none h-10 w-36 group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900  hover:shadow-red-400">
-            <div className=" w-36 items-center">
-              <Typography className="font-semibold text-md group-hover:text-white my-auto justify-self-center text-center">
-                Add Subject
-              </Typography>
-            </div>
-          </Card>
+          <div className="bg-transparent flex-1 justify-between">
+
+          </div>
+          <div className="items-end">
+            <Card onClick={() => navigate("")} className="justify-center mt-14 items-end flex-none h-12 w-36 group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800">
+              <div className=" w-36 items-center">
+                <Typography className="font-semibold text-md group-hover:text-white my-auto justify-self-center text-center">
+                  Add Subject
+                </Typography>
+              </div>
+            </Card>
+          </div>
         </div>
 
-        <Card className="mx-28 h-fit bg-white my-2 ">
-          <div class=" grid grid-cols-2 gap-4 mx-6 my-5 g">
+        <Card className="mx-28 min-h-fit h-fit bg-white my-2 ">
+          <div class=" grid grid-cols-2 gap-4 mx-6 mt-5 mb-12">
             {subjectData.map((user) => (
               <div>
-
-                <>
-
-                  <div
+                <Card className="bg-white shadow-xl shadow-red-900/20  h-72">
+                  <Card
                     onClick={() => navigate(`/topic/${user.documentId}`)}
-                    className="z-10 group h-full w-full round-t-lg bg-gradient-to-tr from-blue-50 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900  hover:shadow-red-400 "
+                    className="z-20 group mt-3  mx-3 h-46 w-auto rounded-t-lg bg-gradient-to-tl from-red-50 hover:-translate-y-2 transition-all duration-200 delay-75 cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900 hover:drop-shadow-2xl hover:shadow-red-400 "
                   >
                     <CardBody>
                       <Typography
@@ -134,30 +137,30 @@ const HomeLecturer = () => {
                         )}
                       </Typography>
                     </CardBody>
-                  </div>
+                  </Card>
+                  <div className="mt-3 mx-2">
+                    <div className="grid grid-cols-2 h-14 gap-2">
 
-                </>
-                <div className="grid grid-cols-2">
-                  <>
-                    <div className="group z-20 justify-items-center rounded-l-lg hover:bg-gradient-to-t bg-light-blue-700 text-white hover:to-orange-50 hover:from-red-400 ">
-                      <button onClick={() => navigate("/edit")} className="group-hover:text-white items-center">
-                        <Typography>
+                      <Card className="group shadow-md shadow-black items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400  text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer">
+                        <span onClick={() => navigate("/edit")} className="justify-self-center my-auto font-semibold" >
+
                           Add Student
-                        </Typography>
-                      </button>
+
+                        </span>
+                      </Card>
+                      <Card className="group items-center justify-items-center rounded-br-lg hover:bg-gradient-to-tl bg-gradient-to-tr from-red-700 to-red-400 bg-red-600 text-white hover:to-pink-500 hover:from-red-400 hover:translate-y-0.5 hover:translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer">
+                        <span onClick={() => navigate("/edit")} className="justify-self-center my-auto font-semibold">Edit</span>
+                      </Card>
                     </div>
-                  </>
-                  <>
-                    <div className="group z-20 justify-items-center rounded-r-lg hover:bg-gradient-to-t bg-red-800 text-white hover:to-orange-50 hover:from-red-400 ">
-                      <button onClick={() => navigate("/edit")} className="group-hover:text-white ">Edit</button>
-                    </div>
-                  </>
-                </div>
+                  </div>
+                </Card>
+
+
               </div>
             ))}
           </div>
-        </Card>
-      </div>
+        </Card >
+      </div >
     </>
   );
 };
