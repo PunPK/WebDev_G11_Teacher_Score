@@ -64,6 +64,10 @@ function App() {
               element={<AddStudent />}
             />
             <Route
+              path="/subject/student/:id/:subject"
+              element={<StudentListPage />}
+            />
+            <Route
               path="/subject/edit/:subject"
               element={<EditSubjectInfo />}
             />
