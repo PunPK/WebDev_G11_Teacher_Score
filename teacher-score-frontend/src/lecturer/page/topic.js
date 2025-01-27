@@ -59,11 +59,13 @@ const TopicLecturer = () => {
       <Nav_lec />
 
       <div class="grid bg-gradient-to-tr from-red-400 to-pink-500 min-h-screen max-h-full top-0 mt-0 z-10">
+
         <Card className="mt-7 mx-auto w-auto h-24 shadow-xl bg-white mb-6">
           <Typography className="font-extrabold items-center justify-items-center w-fit mx-auto my-auto">
             <h1 class="mx-12 text-3xl font-sans ">หัวข้อประกาศคะแนน</h1>
           </Typography>
         </Card>
+
         <div className="justify-items-end mb-4 mr-[8.5rem]">
           <Card onClick={() => navigate(`/topic/create/${subject}`)} className=" h-8 w-28 group bg-gradient-to-bl from-cyan-700 to-green-900 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800">
             <div className=" w-28 items-center">
@@ -73,7 +75,9 @@ const TopicLecturer = () => {
             </div>
           </Card>
         </div>
+
         <div className="flex gap-4 mb-4 mx-[8.5rem] h-12 ">
+
           <Card className="bg-white flex-1 group w-18 justify-center">
             <div className="my-auto mx-auto">
               <CardBody>
@@ -83,6 +87,7 @@ const TopicLecturer = () => {
               </CardBody>
             </div>
           </Card>
+
           <Card className="bg-white w-60 flex-none justify-center">
             <div className="my-auto mx-auto">
               <CardBody>
@@ -92,6 +97,7 @@ const TopicLecturer = () => {
               </CardBody>
             </div>
           </Card>
+
           <Card className="bg-white flex-none group w-60 justify-center">
             <div className="my-auto mx-auto">
               <CardBody>
@@ -101,6 +107,7 @@ const TopicLecturer = () => {
               </CardBody>
             </div>
           </Card>
+
           <Card className="bg-white w-64 flex-none justify-center">
             <div className="my-auto mx-auto">
               <CardBody>
@@ -110,6 +117,7 @@ const TopicLecturer = () => {
               </CardBody>
             </div>
           </Card>
+
           <Card className="bg-white w-20 flex-none group justify-center">
             <div className="my-auto mx-auto">
               <CardBody>
@@ -119,28 +127,31 @@ const TopicLecturer = () => {
               </CardBody>
             </div>
           </Card>
+
         </div>
         <Card className="mx-28 h-fit bg-white/15 my-2">
           <div class="  mx-6 my-5">
             {topicData.map((user) => (
               <>
                 <div className="flex gap-4 w-auto my-4 h-12">
+
                   <Card
-                    className="flex-1 group w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl"
+                    className="flex-1 group w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl items-start justify-center"
                   >
                     <div className="my-auto">
-                      <CardBody className="">
+                      <CardBody className="items-center">
                         <Typography
                           vatiant="h5"
-                          className=" text-xl font-bold justify-items-center"
+                          className=" text-xl font-bold items-center"
                         >
                           {user.topic_title}
                         </Typography>
                       </CardBody>
                     </div>
                   </Card>
+
                   <Card
-                    className="flex-none group w-60 text-center  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl"
+                    className="flex-none group w-60 text-center  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl items-start justify-center"
                   >
                     <div className="my-auto mx-auto">
                       <CardBody >
@@ -153,8 +164,9 @@ const TopicLecturer = () => {
                       </CardBody>
                     </div>
                   </Card>
+
                   <Card
-                    className="flex-none group w-60 text-center  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl"
+                    className="flex-none group w-60 text-center  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl items-center justify-center"
                   >
                     <CardBody>
                       <Typography
@@ -166,9 +178,10 @@ const TopicLecturer = () => {
                           : user.max_score}
                       </Typography>
                     </CardBody>
-                  </Card>
+                  </Card
+                  >
                   <Card
-                    className="flex-none group w-64  bg-gradient-to-tr from-red-50"
+                    className="flex-none group w-64  bg-gradient-to-tr from-red-50 items-start justify-center"
                   >
 
                     <CardBody>
@@ -185,7 +198,7 @@ const TopicLecturer = () => {
 
                   <Card
                     onClick={() => navigate(`/edit/${user.documentId}`)}
-                    className="flex-none group w-20 bg-gradient-to-tr from-red-200 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900  hover:shadow-red-400 "
+                    className="flex-none group w-20 bg-gradient-to-tr from-red-200 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900  hover:shadow-red-400 items-center justify-center"
                   >
                     <CardBody>
                       <Typography

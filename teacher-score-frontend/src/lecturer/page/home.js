@@ -141,23 +141,25 @@ const HomeLecturer = () => {
                   </Card>
                   <div className="mt-3 mx-2">
                     <div className="grid grid-cols-2 h-14 gap-2">
-                      <Card className="group shadow-md shadow-black items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400  text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer">
+                      <Card
+                        onClick={() =>
+                          navigate(
+                            `/subject/student/${user.id}/${user.documentId}`
+                          )
+                        }
+                        className="group shadow-md shadow-black items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400  text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer">
                         <span
-                          onClick={() =>
-                            navigate(
-                              `/subject/student/${user.id}/${user.documentId}`
-                            )
-                          }
                           className="justify-self-center my-auto font-semibold"
                         >
                           Add Student
                         </span>
                       </Card>
-                      <Card className="group items-center justify-items-center rounded-br-lg hover:bg-gradient-to-tl bg-gradient-to-tr from-red-700 to-red-400 bg-red-600 text-white hover:to-pink-500 hover:from-red-400 hover:translate-y-0.5 hover:translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer">
+                      <Card
+                        onClick={() =>
+                          navigate(`/subject/edit/${user.documentId}`)
+                        }
+                        className="group items-center justify-items-center rounded-br-lg hover:bg-gradient-to-tl bg-gradient-to-tr from-red-700 to-red-400 bg-red-600 text-white hover:to-pink-500 hover:from-red-400 hover:translate-y-0.5 hover:translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer">
                         <span
-                          onClick={() =>
-                            navigate(`/subject/edit/${user.documentId}`)
-                          }
                           className="justify-self-center my-auto font-semibold"
                         >
                           Edit

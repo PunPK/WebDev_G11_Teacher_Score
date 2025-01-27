@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Form, Input, Button, Card, message, InputNumber } from "antd";
+import { Form, Input, Button, message, InputNumber } from "antd";
+import { Card } from "@material-tailwind/react";
 import axios from "axios";
 import ax from "../../conf/ax";
 import * as XLSX from "xlsx";
@@ -100,55 +101,23 @@ const AddStudent = () => {
   return (
     <div>
       <Nav_lec />
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex mx-20 justify-center items-center min-h-screen">
+
         <Card
-          title="Add Student"
-          className="w-full items-center max-w-md shadow-lg rounded-xl"
+          className="mx-24 items-center  shadow-lg"
         >
-          <Card className="group shadow-md shadow-black items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400  text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer">
+
+          <div className="group h-12 w-full shadow-md shadow-black items-center justify-items-center rounded-t-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400  text-white">
             <span
               onClick={() => navigate(`/subject/addstudent/${id}/${subject}`)}
-              className="justify-self-center my-auto font-semibold"
+              className="justify-self-center my-auto font-semibold text-center"
             >
               Add Student
             </span>
-          </Card>
+          </div>
+
           <Form layout="vertical" onFinish={handleSubmit}>
-            {/* <Form.Item
-              label="Title"
-              name="title"
-              rules={[
-                { required: true, message: "Please enter the topic title!" },
-              ]}
-            >
-              <Input placeholder="Enter topic title" />
-            </Form.Item> */}
 
-            {/* <Form.Item
-            label="Description"
-            name="description"
-            rules={[
-              {
-                required: true,
-                message: "Please enter the topic description!",
-              },
-            ]}
-          >
-            <TextArea rows={4} placeholder="Enter topic description" />
-          </Form.Item> */}
-
-            {/* <Form.Item
-              label="Max Score"
-              name="maxScore"
-              rules={[
-                { required: true, message: "Please enter the maximum score!" },
-              ]}
-            >
-              <InputNumber
-                placeholder="Enter maximum score"
-                className="w-full"
-              />
-            </Form.Item> */}
             <input
               type="file"
               accept=".xlsx, .xls"
@@ -186,8 +155,8 @@ const AddStudent = () => {
             </Form.Item>
           </Form>
         </Card>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 

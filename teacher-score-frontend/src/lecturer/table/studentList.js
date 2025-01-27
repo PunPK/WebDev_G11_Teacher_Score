@@ -11,11 +11,11 @@ export default function UserTable(props) {
       dataIndex: "name",
       render: (text, record) => `${record.first_name} ${record.last_name}`,
     },
-    {
-      title: "Role",
-      dataIndex: "role",
-      render: (text, record) => `${record.role.name}`,
-    },
+    // {
+    //   title: "Role",
+    //   dataIndex: "role",
+    //   render: (text, record) => `${record.role.name}`,
+    // },
     {
       title: "Email",
       dataIndex: "email",
@@ -54,6 +54,6 @@ export default function UserTable(props) {
         </Space>
       ),
     },
-  ];
+  ]; console.log(props.data[0])
   return <Table columns={columns} dataSource={props.data[0]} rowKey="id" />;
 }
