@@ -61,14 +61,15 @@ const HomeLecturer = () => {
     <>
       <Nav_lec />
       <div class="grid bg-gradient-to-tr from-red-400 to-pink-500 min-h-screen max-h-full top-0 mt-0 z-10">
-        <Card className="mt-16 mx-auto w-72 h-24 shadow-xl bg-white mb-4">
+        <Card className="mt-8 mx-auto w-72 h-24 shadow-xl bg-white mb-4">
           <Typography className="items-center justify-items-center w-fit mx-auto my-auto">
             <h1 class="mx-auto text-5xl font-sans">รายการวิชา</h1>
           </Typography>
         </Card>
 
-        <div className="flex gap-10 mb-4 mx-28 ">
-          <Card className="bg-white flex-initial justify-between">
+        <div className="flex gap-10 mb-2 mx-28 ">
+
+          <Card className="bg-white flex-none justify-between h-24 w-64 mt-4">
             <div>
               <CardBody>
                 <Typography className="font-bold text-lg">
@@ -143,7 +144,9 @@ const HomeLecturer = () => {
                       <Card className="group shadow-md shadow-black items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400  text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer">
                         <span
                           onClick={() =>
-                            navigate(`/subject/addstudent/${user.documentId}`)
+                            navigate(
+                              `/subject/student/${user.id}/${user.documentId}`
+                            )
                           }
                           className="justify-self-center my-auto font-semibold"
                         >

@@ -19,7 +19,8 @@ import EditSubject from "./lecturer/page/editSubject.js";
 import ExcelFetch from "./lecturer/page/excelfetch.js";
 import CreateTopic from "./lecturer/page/addTopic.js";
 import CreateSubject from "./lecturer/page/addSubject.js";
-import AddStudent from "./lecturer/page/addStudent-test.js";
+import AddStudent from "./lecturer/page/addStudent.js";
+import StudentListPage from "./lecturer/page/Student.js";
 function App() {
   const { state } = useContext(AuthContext);
 
@@ -53,7 +54,7 @@ function App() {
             <Route path="/topic/:subject" element={<TopicLecturer />} />
             <Route path="/topic/create/:subject" element={<CreateTopic />} />
             <Route
-              path="/subject/addstudent/:subject"
+              path="/subject/addstudent/:id/:subject"
               element={<AddStudent />}
             />
             <Route path="/subject/edit/:subject" element={<EditSubjectInfo/>}/>
