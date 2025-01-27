@@ -10,7 +10,7 @@ import { Card, CardBody, Typography } from "@material-tailwind/react";
 import { useParams } from "react-router-dom";
 import { Popconfirm } from "antd";
 // import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-const TopicLecturer = () => {
+const detailTopicLecturer = () => {
   const { subject } = useParams();
   const [topicData, setTopicData] = useState([]);
   const navigate = useNavigate();
@@ -52,11 +52,9 @@ const TopicLecturer = () => {
     }
   };
 
-  // pagination setup
   const resultsPerPage = 20;
   const totalResults = response.length;
 
-  // pagination change control
   function onPageChange(p) {
     setPage(p);
   }
@@ -64,9 +62,6 @@ const TopicLecturer = () => {
   useEffect(() => {
     fetchTopic();
   }, []);
-
-  // on page change, load new sliced data
-  // here you would make another server request for new data
 
   return (
     <>
@@ -143,7 +138,9 @@ const TopicLecturer = () => {
                   <Card className="flex-1 group w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl">
                     <div className="my-auto">
                       <CardBody
-                        onClick={() => navigate(`/topic/detail/${user.id}`)}
+                        onClick={() =>
+                          navigate(`/topic/detail/${user.documentId}`)
+                        }
                       >
                         <Typography
                           vatiant="h5"
@@ -211,85 +208,7 @@ const TopicLecturer = () => {
         </Card>
       </div>
     </>
-    // <>
-    //   <Nav_lec />
-    //   <div className="bg-gradient-to-tr from-red-800 to-pink-300 min-h-screen max-h-screen top-0 mt-0 z-10">
-
-    //     <Card class=" mb-8 mx-96 w-auto h-24 shadow-xl bg-white rounded-xl">
-    //       <Typography className="items-center justify-items-center my-auto w-fit mx-auto">
-    //         <h1 className="mx-auto my-auto text-3xl font-sans">
-    //           Topic that announces the score
-    //         </h1>
-    //       </Typography>
-    //     </Card>
-
-    //     <div classname="grid grid-cols-4 gap-4">
-
-    //       <Card
-    //         className="px-6 py-3 text-center  text-lg font-semibold bg-white text-black uppercase "
-    //       >
-    //         <CardBody>
-    //           <Typography className="font-bold text-lg">
-    //             Title
-    //           </Typography>
-    //         </CardBody>
-    //       </Card>
-
-    //       <Card
-    //         className="px-6 py-3 text-center text-lg font-semibold bg-white text-black uppercase "
-    //       >
-    //         <CardBody>
-    //           <Typography className="font-bold text-lg">
-    //             Upload time
-    //           </Typography>
-    //         </CardBody>
-    //       </Card>
-
-    //       <Card
-    //         className="px-6 py-3 text-center text-lg font-semibold bg-white text-black uppercase "
-    //       >
-    //         <CardBody>
-    //           <Typography className="font-bold text-lg">
-    //             Score
-    //           </Typography>
-    //         </CardBody>
-    //       </Card>
-    //       <Card
-    //         className="px-6 py-3 text-center text-lg font-semibold bg-white text-black uppercase "
-    //       >
-    //         <CardBody>
-    //           <Typography className="font-bold text-lg">
-    //             Edit
-    //           </Typography>
-    //         </CardBody>
-    //       </Card>
-
-    //     </div>
-
-    //     <div>
-    //       {topicData.map((user) => (
-    //         <Card className="z-10 group h-full w-full  bg-gradient-to-tr from-blue-50 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900  hover:shadow-red-400 ">
-    //           <td>
-    //             <div className="flex items-center text-sm">
-    //               <div>
-    //                 <p className="font-semibold">{user.topic_title}</p>
-    //               </div>
-    //             </div>
-    //           </td>
-    //           <td>
-    //             <span className="text-sm">{user.score_id.score}</span>
-    //           </td>
-    //           <td>
-    //             <p className="font-semibold">{user.topic_id}</p>
-    //             {/* <Badge type={user.status}>{user.status}</Badge> */}
-    //           </td>
-    //         </Card>
-    //       ))}
-
-    //     </div>
-    //   </div>
-    // </ >
   );
 };
 
-export default TopicLecturer;
+export default detailTopicLecturer;
