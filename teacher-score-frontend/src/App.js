@@ -21,6 +21,8 @@ import CreateTopic from "./lecturer/page/addTopic.js";
 import CreateSubject from "./lecturer/page/addSubject.js";
 import AddStudent from "./lecturer/page/addStudent.js";
 import StudentListPage from "./lecturer/page/Student.js";
+import EditSubjectInfo from "./lecturer/page/editSubjectInfo.js";
+import DetailTopicLecturer from "./lecturer/page/detailTopic.js";
 function App() {
   const { state } = useContext(AuthContext);
 
@@ -52,16 +54,19 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/edit/:subject" element={<EditSubject />} />
             <Route path="/topic/:subject" element={<TopicLecturer />} />
+            <Route
+              path="/topic/detail/:subject"
+              element={<DetailTopicLecturer />}
+            />
             <Route path="/topic/create/:subject" element={<CreateTopic />} />
             <Route
               path="/subject/addstudent/:id/:subject"
               element={<AddStudent />}
             />
             <Route
-              path="/subject/student/:id/:subject"
-              element={<StudentListPage />}
+              path="/subject/edit/:subject"
+              element={<EditSubjectInfo />}
             />
-            {/* <Route path="/subject/edit/:subject" element={} /> */}
             <Route path="/subject/create" element={<CreateSubject />} />
             <Route path="/" element={<HomeLecturer />} />
             <Route path="/user" element={<UserPage />} />
