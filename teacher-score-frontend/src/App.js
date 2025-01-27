@@ -56,7 +56,7 @@ function App() {
               path="/subject/addstudent/:subject"
               element={<AddStudent />}
             />
-            {/* <Route path="/subject/edit/:subject" element={} /> */}
+            <Route path="/subject/edit/:subject" element={<EditSubjectInfo/>}/>
             <Route path="/subject/create" element={<CreateSubject />} />
             <Route path="/" element={<HomeLecturer />} />
             <Route path="/user" element={<UserPage />} />
