@@ -67,8 +67,8 @@ const TopicLecturer = () => {
         </Card>
 
         <div className="justify-items-end mb-4 mr-[8.5rem]">
-          <Card onClick={() => navigate(`/topic/create/${subject}`)} className=" h-8 w-28 group bg-gradient-to-bl from-cyan-700 to-green-900 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800">
-            <div className=" w-28 items-center">
+          <Card onClick={() => navigate(`/topic/create/${subject}`)} className="items-center justify-center h-8 w-28 group bg-gradient-to-bl from-cyan-700 to-green-900 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800">
+            <div className=" w-28 items-center justify-center">
               <Typography className="font-semibold text-md text-white group-hover:text-white my-auto justify-self-center text-center">
                 Add Topic
               </Typography>
