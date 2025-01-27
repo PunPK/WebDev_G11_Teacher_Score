@@ -10,7 +10,7 @@ import { Card, CardBody, Typography } from "@material-tailwind/react";
 import { useParams } from "react-router-dom";
 import { Popconfirm } from "antd";
 // import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-const detailTopicLecturer = () => {
+const DetailTopicLecturer = () => {
   const { subject } = useParams();
   const [topicData, setTopicData] = useState([]);
   const navigate = useNavigate();
@@ -211,4 +211,4 @@ const detailTopicLecturer = () => {
   );
 };
 
-export default detailTopicLecturer;
+export default DetailTopicLecturer;
