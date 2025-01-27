@@ -144,7 +144,9 @@ const HomeLecturer = () => {
                       <Card className="group shadow-md shadow-black items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400  text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer">
                         <span
                           onClick={() =>
-                            navigate(`/subject/addstudent/${user.documentId}`)
+                            navigate(
+                              `/subject/student/${user.id}/${user.documentId}`
+                            )
                           }
                           className="justify-self-center my-auto font-semibold"
                         >
