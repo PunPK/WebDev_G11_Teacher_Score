@@ -1,22 +1,22 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Form, Input, Button, Card, message, InputNumber } from "antd";
-import axios from "axios";
 import ax from "../../conf/ax";
 import * as XLSX from "xlsx";
 import Nav_lec from "../../components/navbar";
-const { TextArea } = Input;
+import "../components/edit.css";
 
 const CreateTopic = () => {
   const { subject } = useParams();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (values) => {
     setLoading(true);
     try {
       if (!subject) {
-        throw new Error("Subject ID is missing.");
+        message.error("Subject ID is missing.");
       }
       const topicResponse = await ax.post("topics?populate=*", {
         data: {
@@ -26,68 +26,25 @@ const CreateTopic = () => {
           upload_time: new Date().toISOString(),
         },
       });
-      console.log(topicResponse);
       const topicId = topicResponse.data.data.id;
       message.success("Topic created successfully!");
-      console.log(data);
-      //   const response = await ax.get(`users`);
-      //   const existingData = response.data;
-      //   console.log(existingData);
-      //   data.forEach(async (newItem) => {
-      //     console.log("Processing:", newItem);
-      //     const match = existingData.find(
-      //         (existing) => existing.username === newItem.username
-      //     );
-
-      //     if (match) {
-      //       match.score = match.score || [];
-      //       match.score.push(newItem.score);
-      //       console.log(match);
-
-      //       await ax.post("scores?populate=*", {
-      //         data: {
-      //           score: match.score,
-      //           topic_score_id: {
-      //             id: topicId,
-      //           },
-      //           users_owner: match.id,
-      //         },
-      //       });
-      //     }
-      //   });
 
       for (const newItem of data) {
         const response = await ax.get(`users`);
         const existingData = response.data;
-        console.log(existingData);
-        // ใช้ for...of แทน forEach
-        console.log("Processing:", newItem);
-        // console.log("Existing Data:", existingData.username);
-        // console.log("New Data:", newItem.username);
         const match = existingData.find((existing) => {
-          const existingUsername = String(existing.username || "")
+          const existingUsername = String(existing.username)
             .trim()
             .toLowerCase();
-          const newUsername = String(newItem.username || "")
-            .trim()
-            .toLowerCase();
-          //   console.log(`newItem.username:`, newUsername);
-          //   console.log(`Type of newUsername:`, typeof newUsername);
-          //   console.log(`newItem.username:`, existing.username);
-          //   console.log(`Type of existingUsername:`, typeof existingUsername);
+          const newUsername = String(newItem.username).trim().toLowerCase();
           return existingUsername === newUsername;
         });
-        // const match = existingData.find(
-        //   (existing) => existingUsername === newItem.username
-        // );
-        console.log(match);
         if (match) {
           match.score = match.score || [];
           match.score.push(newItem.score);
           console.log(match);
         }
 
-        // รอให้ POST เสร็จสมบูรณ์ก่อนที่จะไปยังรอบถัดไป
         await ax.post("scores?populate=*", {
           data: {
             score: match.score,
@@ -100,15 +57,11 @@ const CreateTopic = () => {
       }
 
       console.log("Data successfully uploaded to Strapi!");
-      //   alert("Data successfully uploaded to Strapi!");
-
       message.success("created successfully!");
     } catch (error) {
       if (error.response) {
         console.error("Error response:", error.response.data);
-        message.error(
-          `Error: ${error.response.data.error || "Failed to create topic."}`
-        );
+        message.error(`Error: "Failed to create topic."`);
       } else {
         console.error("Error:", error.message);
         message.error(`Error: ${error.message}`);
@@ -130,7 +83,6 @@ const CreateTopic = () => {
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
       const parsedData = XLSX.utils.sheet_to_json(sheet);
-      console.log(parsedData);
       setData(parsedData);
     };
     reader.onerror = (error) => {
@@ -141,10 +93,30 @@ const CreateTopic = () => {
   return (
     <div>
       <Nav_lec />
-      <div className="flex justify-center items-center min-h-screen">
+      <Card
+        onClick={() => navigate(-1)}
+        className="mt-3 ml-7 w-32 h-22 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="size-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+          />
+        </svg>
+        <p className="font-extrabold w-20 text-center">Back</p>
+      </Card>
+      <div className="flex mx-20 justify-center items-center min-h-screen">
         <Card
           title="Create New Topic"
-          className="w-full max-w-md shadow-lg rounded-xl"
+          className="custom-modal mx-24 items-center  shadow-lg"
         >
           <Form layout="vertical" onFinish={handleSubmit}>
             <Form.Item
@@ -156,19 +128,6 @@ const CreateTopic = () => {
             >
               <Input placeholder="Enter topic title" />
             </Form.Item>
-
-            {/* <Form.Item
-            label="Description"
-            name="description"
-            rules={[
-              {
-                required: true,
-                message: "Please enter the topic description!",
-              },
-            ]}
-          >
-            <TextArea rows={4} placeholder="Enter topic description" />
-          </Form.Item> */}
 
             <Form.Item
               label="Max Score"

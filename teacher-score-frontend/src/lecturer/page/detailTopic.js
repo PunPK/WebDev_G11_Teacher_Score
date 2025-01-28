@@ -1,23 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import dayjs from "dayjs";
 import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
-import response from "../../utils/demo/tableData";
 import Nav_lec from "../../components/navbar.js";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 import { useParams } from "react-router-dom";
 import { Popconfirm } from "antd";
-// import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 const DetailTopicLecturer = () => {
   const { subject } = useParams();
   const [topicData, setTopicData] = useState([]);
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
-  const [page, setPage] = useState(1);
-  const [data, setData] = useState([]);
-  const { user } = ContextState;
   const [isLoading, setIsLoading] = useState(null);
 
   const onLogout = (e) => {
@@ -31,13 +25,6 @@ const DetailTopicLecturer = () => {
       const response = await ax.get(
         `/topics/${subject}?populate=score_id.users_owner`
       );
-      //     , {
-      //     params: {
-      //       populate: "*",
-      //       "filters[subject][id][$eq]": subject,
-      //     },
-      //   });
-      console.log(response.data.data.score_id);
       setTopicData(response.data.data.score_id);
     } catch (e) {
       console.log(e);
@@ -54,13 +41,6 @@ const DetailTopicLecturer = () => {
       setIsLoading(false);
     }
   };
-
-
-
-  function onPageChange(p) {
-    setPage(p);
-  }
-
   useEffect(() => {
     fetchTopic();
   }, []);
@@ -70,11 +50,25 @@ const DetailTopicLecturer = () => {
       <Nav_lec />
 
       <div class="grid bg-gradient-to-tr from-red-400 to-pink-500 min-h-screen max-h-full top-0 mt-0 z-10">
-        <Card onClick={() => navigate(-1)} className="mt-3 ml-7 w-24 h-12 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
-          <p className="font-extrabold w-20 text-center">
-            Back
-          </p>
+        <Card
+          onClick={() => navigate(-1)}
+          className="mt-3 ml-7 w-24 h-12 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="size-5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+            />
+          </svg>
+          <p className="font-extrabold w-20 text-center">Back</p>
         </Card>
         <Card className="mt-7 mx-auto w-auto h-24 shadow-xl bg-white mb-6">
           <Typography className="font-extrabold items-center justify-items-center w-fit mx-auto my-auto">
@@ -98,6 +92,13 @@ const DetailTopicLecturer = () => {
             <div className="my-auto mx-auto">
               <CardBody>
                 <Typography className="font-bold text-md">ลำดับ</Typography>
+              </CardBody>
+            </div>
+          </Card>
+          <Card className="bg-white flex-1 group w-18 justify-center">
+            <div className="my-auto mx-auto">
+              <CardBody>
+                <Typography className="font-bold text-md">ID</Typography>
               </CardBody>
             </div>
           </Card>
@@ -138,22 +139,29 @@ const DetailTopicLecturer = () => {
         </div>
         <Card className="mx-28 h-fit bg-white/15 my-2">
           <div class="  mx-6 my-5">
-            {topicData.map((user) => (
+            {topicData.map((topic, index) => (
               <>
                 <div className="flex gap-4 w-auto my-4 h-12">
                   <Card className="flex-1 group w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl">
                     <div className="my-auto">
-                      <CardBody
-                        onClick={() =>
-                          navigate(`/topic/detail/${user.documentId}`)
-                        }
-                      >
+                      <CardBody>
                         <Typography
                           vatiant="h5"
                           className=" text-xl font-bold justify-items-center"
                         >
-                          {user.id}
-                          {/* {user.users_owner.first_name} */}
+                          {index + 1}
+                        </Typography>
+                      </CardBody>
+                    </div>
+                  </Card>
+                  <Card className="flex-1 group w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl">
+                    <div className="my-auto">
+                      <CardBody>
+                        <Typography
+                          vatiant="h5"
+                          className=" text-xl font-bold justify-items-center"
+                        >
+                          {`${topic.id} : ${topic.users_owner.username}`}
                         </Typography>
                       </CardBody>
                     </div>
@@ -166,10 +174,7 @@ const DetailTopicLecturer = () => {
                           className="my-auto mx-auto text-md font-semibold"
                         >
                           {" "}
-                          {`${user.users_owner.first_name} ${user.users_owner.last_name}`}
-                          {/* {user.score_id.length === 0
-                            ? "ยังไม่มีการประกาศคะแนน"
-                            : user.score_id.length} */}
+                          {`${topic.users_owner.first_name} ${topic.users_owner.last_name}`}
                         </Typography>
                       </CardBody>
                     </div>
@@ -180,9 +185,9 @@ const DetailTopicLecturer = () => {
                         vatiant="h5"
                         className="my-auto mx-auto text-md font-semibold"
                       >
-                        {user.score === null
+                        {topic.score === null
                           ? "ยังไม่กำหนดคะแนนเต็ม"
-                          : user.score}
+                          : topic.score}
                       </Typography>
                     </CardBody>
                   </Card>
@@ -192,7 +197,7 @@ const DetailTopicLecturer = () => {
                         vatiant="h"
                         className="my-auto mx-auto text-md"
                       >
-                        {dayjs(user.updatedAt).format(
+                        {dayjs(topic.updatedAt).format(
                           "DD / MM / YYYY เวลา HH:mm น."
                         )}
                       </Typography>
@@ -204,7 +209,7 @@ const DetailTopicLecturer = () => {
                     <Popconfirm
                       title="Delete the topic"
                       description="Are you sure to delete this topic?"
-                      onConfirm={() => handleRowDeleted(user.documentId)}
+                      onConfirm={() => handleRowDeleted(topic.documentId)}
                     >
                       <CardBody>Delete</CardBody>
                     </Popconfirm>

@@ -1,0 +1,28 @@
+.custom-modal .ant-modal {
+    border-radius: 12px;
+    background-color: #fff1f0;
+    border: 1px solid #ffa39e;
+  }
+  
+  .custom-modal .ant-modal-header {
+    background-color: #fd7b7d;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 16px;
+  }
+  
+  .custom-modal .ant-input,
+  .custom-modal .ant-input-number {
+    border-radius: 8px;
+    border: 1px solid #ffa39e;
+    background-color: #fff1f0;
+    padding: 8px;
+  }
+
+  .custom-modal .ant-form {
+    background-color: #fff7f6;
+    padding: 16px; 
+    border-radius: 12px; 
+  }
+  

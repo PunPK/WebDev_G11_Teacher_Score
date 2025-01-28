@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { Modal, Form, Input, Button, message } from "antd";
+import { Modal, Form, Input, Button, message, InputNumber } from "antd";
 import ax from "../../conf/ax.js";
 import "./edit.css";
 
-const EditSubject = ({ userId, defaultValue, closeModal, onSubmit }) => {
+const EditTopic = ({ userId, defaultValue, closeModal, onSubmit }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
 
   const handleRowEdited = async () => {
     try {
       const formData = await form.validateFields();
-
       setIsLoading(true);
       const response = await ax.put(
-        `http://localhost:1337/api/subjects/${userId}`,
+        `http://localhost:1337/api/topics/${userId}`,
+
         { data: formData }
       );
       message.success("Update successfully!");
@@ -29,10 +29,11 @@ const EditSubject = ({ userId, defaultValue, closeModal, onSubmit }) => {
       setIsLoading(false);
     }
   };
+
   return (
     <Modal
       className="custom-modal"
-      title="Edit transaction"
+      title="Edit Topic"
       open={true}
       onCancel={closeModal}
       footer={[
@@ -48,27 +49,27 @@ const EditSubject = ({ userId, defaultValue, closeModal, onSubmit }) => {
         form={form}
         layout="vertical"
         initialValues={{
-          title: defaultValue.title,
-          description: defaultValue.description,
+          topic_title: defaultValue.topic_title,
+          max_score: defaultValue.max_score,
         }}
       >
         <Form.Item
-          name="title"
-          label="ชื่อวิชา :"
-          rules={[{ required: true, message: "กรุณาระบุชื่อวิชา" }]}
+          name="topic_title"
+          label="ชื่อหัวข้อ :"
+          rules={[{ required: true, message: "กรุณาระบุชื่อหัวข้อ" }]}
         >
           <Input placeholder="ชื่อวิชา" />
         </Form.Item>
         <Form.Item
-          name="description"
-          label="รายละเอียด :"
-          rules={[{ required: true, message: "กรุณาระบุรายละเอียด" }]}
+          name="max_score"
+          label="Max Score :"
+          rules={[{ required: true, message: "กรุณาระบุคะแนนเต็ม" }]}
         >
-          <Input.TextArea placeholder="รายละเอียดวิชา" rows={4} />
+          <InputNumber placeholder="Enter maximum score" className="w-full" />
         </Form.Item>
       </Form>
     </Modal>
   );
 };
 
-export default EditSubject;
+export default EditTopic;

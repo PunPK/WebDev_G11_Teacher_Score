@@ -1,67 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../../context/Auth.context.js";
 import { useNavigate, useParams } from "react-router-dom";
-import { Form, Input, Button, message, InputNumber } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { Card } from "@material-tailwind/react";
-import axios from "axios";
 import ax from "../../conf/ax";
 import * as XLSX from "xlsx";
 import Nav_lec from "../../components/navbar";
-const { TextArea } = Input;
+import "../components/edit.css";
 
 const AddStudent = () => {
   const { id, subject } = useParams();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { state: ContextState } = useContext(AuthContext);
+  const { user } = ContextState;
 
   const handleSubmit = async (values) => {
     setLoading(true);
     try {
       if (!subject) {
-        throw new Error("Subject ID is missing.");
+        message.error("Subject ID is missing.");
       }
-      console.log(data);
-      //   const list = [];
-      //   for (const newItem of data) {
-      //     console.log(newItem.id);
-
-      //     // ดึงข้อมูลปัจจุบันของ subjects ก่อน
-      //     // const response = await ax.get(`subjects/${subject}?populate=*`);
-      //     // const currentData = response.data.data.users_owner;
-      //     // console.log(currentData);
-      //     // const currentUsersOwner = currentData?.id || [];
-      //     // console.log(currentUsersOwner);
-      //     // รวม id ของ newItem ลงใน users_owner
-      //     // const updatedUsersOwner = [...currentUsersOwner, newItem.id];
-      //     // console.log(updatedUsersOwner);
-      //     list.append(newItem.id);
-      //     console.log(list);
-      //   }
-      //   await ax.put(`subjects/${subject}?populate=*`, {
-      //     data: {
-      //       users_owner: list,
-      //     },
-      //   });
       const list = [];
+      list.push(user.id);
       for (const newItem of data) {
         console.log(newItem.id);
-
-        // เพิ่ม id ของ newItem ลงใน list
-        list.push(newItem.id); // ใช้ push แทน append
+        list.push(newItem.id);
         console.log(list);
       }
 
-      // ส่งคำขอ PUT เพื่ออัปเดต users_owner
       await ax.put(`subjects/${subject}?populate=*`, {
         data: {
-          users_owner: list, // ส่งอาเรย์ของ id ไปใน users_owner
+          users_owner: list,
         },
       });
-
-      console.log(`Successfully updated users_owner for subject: ${subject}`);
-
       console.log("Data successfully uploaded to Strapi!");
-
       message.success("created successfully!");
     } catch (error) {
       if (error.response) {
@@ -101,23 +75,35 @@ const AddStudent = () => {
   return (
     <div>
       <Nav_lec />
-      <div className="flex mx-20 justify-center items-center min-h-screen">
-
-        <Card
-          className="mx-24 items-center  shadow-lg"
+      <Card
+        onClick={() => navigate(-1)}
+        className="mt-3 ml-7 w-32 h-22 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="size-5"
         >
-
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+          />
+        </svg>
+        <p className="font-extrabold w-20 text-center">Back</p>
+      </Card>
+      <div className="flex mx-20 justify-center items-center min-h-screen">
+        <Card className="custom-modal mx-24 items-center  shadow-lg">
           <div className="group h-12 w-full shadow-md shadow-black items-center justify-items-center rounded-t-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400  text-white">
-            <span
-              onClick={() => navigate(`/subject/addstudent/${id}/${subject}`)}
-              className="justify-self-center my-auto font-semibold text-center"
-            >
+            <span className="justify-self-center my-auto font-semibold text-center">
               Add Student
             </span>
           </div>
 
           <Form layout="vertical" onFinish={handleSubmit}>
-
             <input
               type="file"
               accept=".xlsx, .xls"
@@ -155,8 +141,8 @@ const AddStudent = () => {
             </Form.Item>
           </Form>
         </Card>
-      </div >
-    </div >
+      </div>
+    </div>
   );
 };
 

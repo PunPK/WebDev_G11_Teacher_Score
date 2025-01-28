@@ -3,31 +3,28 @@ import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
 import dayjs from "dayjs";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Typography,
-} from "@material-tailwind/react";
+import { Card, CardBody, Typography } from "@material-tailwind/react";
 import Nav_lec from "../../components/navbar.js";
 import Edit from "../components/editSubject.js";
-import { Form } from "antd";
 
 const HomeLecturer = () => {
   const [subjectData, setSubjectData] = useState([]);
   const [subjectDataCount, setSubjectDataCount] = useState(0);
   const navigate = useNavigate();
-  const { state: ContextState, logout } = useContext(AuthContext);
+  const { state: ContextState } = useContext(AuthContext);
   const { user } = ContextState;
   const [isModalShow, setIsModalShow] = useState(false);
   const [currentUserId, setCurrentUserId] = useState(null);
-  const openModal = (id) => {
+  const [currentData, setCurrentData] = useState(null);
+  const openModal = (id, data) => {
     setCurrentUserId(id);
+    setCurrentData(data);
     console.log("Open modal...");
     setIsModalShow(true);
   };
 
   const closeModal = () => {
+    setCurrentData(null);
     setCurrentUserId(null);
     console.log("Closing modal...");
     setIsModalShow(false);
@@ -47,7 +44,6 @@ const HomeLecturer = () => {
           },
         },
       });
-      console.log(response.data);
       setSubjectData(response.data);
       setSubjectDataCount(response.data.length);
     } catch (e) {
@@ -74,7 +70,6 @@ const HomeLecturer = () => {
         </Card>
 
         <div className="flex gap-10 mx-28 items-end h-fit">
-
           <Card className="bg-white flex-none justify-between h-24 w-64 mt-4">
             <div>
               <CardBody>
@@ -104,11 +99,11 @@ const HomeLecturer = () => {
 
         <Card className="mx-28 min-h-fit h-fit bg-white mb-2 ">
           <div class=" grid grid-cols-2 gap-4 mx-6 mt-5 mb-12">
-            {subjectData.map((user) => (
+            {subjectData.map((subject) => (
               <div>
                 <Card className="bg-white shadow-xl shadow-red-900/20  h-72">
                   <Card
-                    onClick={() => navigate(`/topic/${user.id}`)}
+                    onClick={() => navigate(`/topic/${subject.id}`)}
                     className="z-20 group mt-3  mx-3 h-46 w-auto rounded-t-lg bg-gradient-to-tl from-red-50 hover:-translate-y-2 transition-all duration-200 delay-75 cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900 hover:drop-shadow-2xl hover:shadow-red-400 "
                   >
                     <CardBody>
@@ -116,30 +111,30 @@ const HomeLecturer = () => {
                         vatiant="h5"
                         className="mb-2 text-2xl font-bold group-hover:text-white"
                       >
-                        {user.title}
+                        {subject.title}
                       </Typography>
 
                       <Typography className="group-hover:text-white">
-                        {user.description}
+                        {subject.description}
                       </Typography>
 
                       <Typography className="group-hover:text-white">
                         จำนวนเรื่อง :{" "}
-                        {user.topics.lenght === 0
+                        {subject.topics.length === 0
                           ? "ไม่มีหัวข้อ"
-                          : user.topics.lenght}
+                          : subject.topics.length}
                       </Typography>
 
                       <Typography className="group-hover:text-white">
                         สร้างเมื่อ{" "}
-                        {dayjs(user.createdAt).format(
+                        {dayjs(subject.createdAt).format(
                           "DD / MM / YYYY เวลา HH:mm น."
                         )}
                       </Typography>
 
                       <Typography className="group-hover:text-white">
                         อัพเดพล่าสุด{" "}
-                        {dayjs(user.updatedAt).format(
+                        {dayjs(subject.updatedAt).format(
                           "DD / MM / YYYY เวลา HH:mm น."
                         )}
                       </Typography>
@@ -150,7 +145,7 @@ const HomeLecturer = () => {
                       <Card
                         onClick={() =>
                           navigate(
-                            `/subject/student/${user.id}/${user.documentId}`
+                            `/subject/student/${subject.id}/${subject.documentId}`
                           )
                         }
                         className="group shadow-md shadow-black items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400  text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer"
@@ -160,7 +155,7 @@ const HomeLecturer = () => {
                         </span>
                       </Card>
                       <Card
-                        onClick={() => openModal(user.documentId)}
+                        onClick={() => openModal(subject.documentId, subject)}
                         className="group items-center justify-items-center rounded-br-lg hover:bg-gradient-to-tl bg-gradient-to-tr from-red-700 to-red-400 bg-red-600 text-white hover:to-pink-500 hover:from-red-400 hover:translate-y-0.5 hover:translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer"
                       >
                         <span className="justify-self-center my-auto font-semibold">
@@ -176,6 +171,7 @@ const HomeLecturer = () => {
           {isModalShow && (
             <Edit
               userId={currentUserId}
+              defaultValue={currentData}
               closeModal={closeModal}
               onSubmit={(updatedData) =>
                 console.log("Updated Data:", updatedData)

@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { Form, Input, Button, Card, message, InputNumber } from "antd";
-import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { Form, Input, Button, Card, message } from "antd";
 import ax from "../../conf/ax";
-import * as XLSX from "xlsx";
 import Nav_lec from "../../components/navbar";
-// import "../components/add.css";
+import "../components/edit.css";
 
 const { TextArea } = Input;
 
 const CreateSubject = () => {
-  const { subject } = useParams();
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (values) => {
     setLoading(true);
@@ -24,10 +22,8 @@ const CreateSubject = () => {
           subject_id: values.subject_id,
         },
       });
-      console.log(SubjectResponse);
       message.success("Subject created successfully!");
       console.log("Data successfully uploaded to Strapi!");
-      //   alert("Data successfully uploaded to Strapi!");
     } catch (error) {
       if (error.response) {
         console.error("Error response:", error.response.data);
@@ -46,10 +42,31 @@ const CreateSubject = () => {
   return (
     <div>
       <Nav_lec />
+      <Card
+        onClick={() => navigate(-1)}
+        className="mt-3 ml-7 w-32 h-22 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="size-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+          />
+        </svg>
+        <p className="font-extrabold w-20 text-center">Back</p>
+      </Card>
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <Card
           title="Create New Subject"
-          className="w-full max-w-md shadow-lg rounded-xl"
+          className="custom-modal w-full max-w-md shadow-lg rounded-xl"
+          // className="w-full max-w-md shadow-lg rounded-xl"
         >
           <Form layout="vertical" onFinish={handleSubmit}>
             <Form.Item
