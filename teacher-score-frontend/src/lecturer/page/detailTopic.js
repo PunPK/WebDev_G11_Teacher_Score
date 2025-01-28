@@ -28,14 +28,17 @@ const DetailTopicLecturer = () => {
 
   const fetchTopic = async () => {
     try {
-      const response = await ax.get("/topics", {
-        params: {
-          populate: "*",
-          "filters[subject][id][$eq]": subject,
-        },
-      });
-      console.log(response.data.data);
-      setTopicData(response.data.data);
+      const response = await ax.get(
+        `/topics/${subject}?populate=score_id.users_owner`
+      );
+      //     , {
+      //     params: {
+      //       populate: "*",
+      //       "filters[subject][id][$eq]": subject,
+      //     },
+      //   });
+      console.log(response.data.data.score_id);
+      setTopicData(response.data.data.score_id);
     } catch (e) {
       console.log(e);
     }
@@ -43,7 +46,7 @@ const DetailTopicLecturer = () => {
   const handleRowDeleted = async (itemId) => {
     try {
       setIsLoading(true);
-      await ax.delete(`topics/${itemId}`);
+      await ax.delete(`scores/${itemId}`);
       fetchTopic();
     } catch (err) {
       console.log(err);
@@ -52,8 +55,7 @@ const DetailTopicLecturer = () => {
     }
   };
 
-  const resultsPerPage = 20;
-  const totalResults = response.length;
+
 
   function onPageChange(p) {
     setPage(p);
@@ -95,9 +97,7 @@ const DetailTopicLecturer = () => {
           <Card className="bg-white flex-1 group w-18 justify-center">
             <div className="my-auto mx-auto">
               <CardBody>
-                <Typography className="font-bold text-md">
-                  ชื่อหัวข้อ
-                </Typography>
+                <Typography className="font-bold text-md">ลำดับ</Typography>
               </CardBody>
             </div>
           </Card>
@@ -113,7 +113,7 @@ const DetailTopicLecturer = () => {
           <Card className="bg-white flex-none group w-60 justify-center">
             <div className="my-auto mx-auto">
               <CardBody>
-                <Typography className="font-bold text-md">คะแนนเต็ม</Typography>
+                <Typography className="font-bold text-md">คะแนน</Typography>
               </CardBody>
             </div>
           </Card>
@@ -152,7 +152,8 @@ const DetailTopicLecturer = () => {
                           vatiant="h5"
                           className=" text-xl font-bold justify-items-center"
                         >
-                          {user.topic_title}
+                          {user.id}
+                          {/* {user.users_owner.first_name} */}
                         </Typography>
                       </CardBody>
                     </div>
@@ -164,9 +165,11 @@ const DetailTopicLecturer = () => {
                           vatiant="h5"
                           className="my-auto mx-auto text-md font-semibold"
                         >
-                          {user.score_id.length === 0
+                          {" "}
+                          {`${user.users_owner.first_name} ${user.users_owner.last_name}`}
+                          {/* {user.score_id.length === 0
                             ? "ยังไม่มีการประกาศคะแนน"
-                            : user.score_id.length}
+                            : user.score_id.length} */}
                         </Typography>
                       </CardBody>
                     </div>
@@ -177,9 +180,9 @@ const DetailTopicLecturer = () => {
                         vatiant="h5"
                         className="my-auto mx-auto text-md font-semibold"
                       >
-                        {user.max_score === null
+                        {user.score === null
                           ? "ยังไม่กำหนดคะแนนเต็ม"
-                          : user.max_score}
+                          : user.score}
                       </Typography>
                     </CardBody>
                   </Card>

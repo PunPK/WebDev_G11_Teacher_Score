@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
-import { useSearchParams } from "react-router-dom";
 import dayjs from "dayjs";
 import {
   Card,
@@ -11,6 +10,8 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import Nav_lec from "../../components/navbar.js";
+import Edit from "../components/editSubject.js";
+import { Form } from "antd";
 
 const HomeLecturer = () => {
   const [subjectData, setSubjectData] = useState([]);
@@ -18,13 +19,18 @@ const HomeLecturer = () => {
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
   const { user } = ContextState;
-  const onLogout = (e) => {
-    e.preventDefault();
-    logout();
+  const [isModalShow, setIsModalShow] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState(null);
+  const openModal = (id) => {
+    setCurrentUserId(id);
+    console.log("Open modal...");
+    setIsModalShow(true);
   };
 
-  const goToTopic = () => {
-    navigate("/topic");
+  const closeModal = () => {
+    setCurrentUserId(null);
+    console.log("Closing modal...");
+    setIsModalShow(false);
   };
 
   const fetchSubject = async (userId) => {
@@ -147,22 +153,18 @@ const HomeLecturer = () => {
                             `/subject/student/${user.id}/${user.documentId}`
                           )
                         }
-                        className="group shadow-md shadow-black items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400  text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer">
-                        <span
-                          className="justify-self-center my-auto font-semibold"
-                        >
+                        className="group shadow-md shadow-black items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400  text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer"
+                      >
+                        <span className="justify-self-center my-auto font-semibold">
                           Add Student
                         </span>
                       </Card>
                       <Card
-                        onClick={() =>
-                          navigate(`/subject/edit/${user.documentId}`)
-                        }
-                        className="group items-center justify-items-center rounded-br-lg hover:bg-gradient-to-tl bg-gradient-to-tr from-red-700 to-red-400 bg-red-600 text-white hover:to-pink-500 hover:from-red-400 hover:translate-y-0.5 hover:translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer">
-                        <span
-                          className="justify-self-center my-auto font-semibold"
-                        >
-                          Edit
+                        onClick={() => openModal(user.documentId)}
+                        className="group items-center justify-items-center rounded-br-lg hover:bg-gradient-to-tl bg-gradient-to-tr from-red-700 to-red-400 bg-red-600 text-white hover:to-pink-500 hover:from-red-400 hover:translate-y-0.5 hover:translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer"
+                      >
+                        <span className="justify-self-center my-auto font-semibold">
+                          Edit Subject
                         </span>
                       </Card>
                     </div>
@@ -171,6 +173,15 @@ const HomeLecturer = () => {
               </div>
             ))}
           </div>
+          {isModalShow && (
+            <Edit
+              userId={currentUserId}
+              closeModal={closeModal}
+              onSubmit={(updatedData) =>
+                console.log("Updated Data:", updatedData)
+              }
+            />
+          )}
         </Card>
       </div>
     </>
