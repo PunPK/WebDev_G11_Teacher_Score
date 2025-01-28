@@ -61,13 +61,13 @@ const HomeLecturer = () => {
     <>
       <Nav_lec />
       <div class="grid bg-gradient-to-tr from-red-400 to-pink-500 min-h-screen max-h-full top-0 mt-0 z-10">
-        <Card className="mt-8 mx-auto w-72 h-24 shadow-xl bg-white mb-4">
+        <Card className="mt-8 mx-auto w-72 h-24 shadow-xl bg-white mb-1">
           <Typography className="items-center justify-items-center w-fit mx-auto my-auto">
             <h1 class="mx-auto text-5xl font-sans">รายการวิชา</h1>
           </Typography>
         </Card>
 
-        <div className="flex gap-10 mb-2 mx-28 ">
+        <div className="flex gap-10 mx-28 items-end h-fit">
 
           <Card className="bg-white flex-none justify-between h-24 w-64 mt-4">
             <div>
@@ -85,10 +85,10 @@ const HomeLecturer = () => {
           <div className="items-end">
             <Card
               onClick={() => navigate("/subject/create")}
-              className="justify-center mt-14 items-end flex-none h-12 w-36 group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800"
+              className="justify-center mt-14 items-end flex-none h-12 w-36 group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-white  hover:shadow-teal-800"
             >
               <div className=" w-36 items-center">
-                <Typography className="font-semibold text-md group-hover:text-white my-auto justify-self-center text-center">
+                <Typography className="font-semibold text-md  my-auto justify-self-center text-center">
                   Add Subject
                 </Typography>
               </div>
@@ -96,7 +96,7 @@ const HomeLecturer = () => {
           </div>
         </div>
 
-        <Card className="mx-28 min-h-fit h-fit bg-white my-2 ">
+        <Card className="mx-28 min-h-fit h-fit bg-white mb-2 ">
           <div class=" grid grid-cols-2 gap-4 mx-6 mt-5 mb-12">
             {subjectData.map((user) => (
               <div>

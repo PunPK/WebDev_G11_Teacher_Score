@@ -5,8 +5,7 @@ import ax from "../../conf/ax.js";
 import { Spin, Typography, Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
-// import UserTable from "./UserTable";
-// import UserTable from "../../page/UserTable.js";
+import { Card } from "@material-tailwind/react";
 import UserTable from "../table/studentList.js";
 // import "./user.css";
 import Nav_lec from "../../components/navbar.js";
@@ -70,6 +69,12 @@ function StudentListPage() {
     <>
       <Nav_lec />
       <div class="grid bg-gradient-to-tl from-red-400 to-pink-500 h-screen">
+        <Card onClick={() => navigate("/")} className="mt-3 ml-7 w-24 h-12 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
+          <p className="font-extrabold w-20 text-center">
+            Back
+          </p>
+        </Card>
         <body className="bg-white rounded-md mx-14 my-4">
           <Button
             onClick={() => navigate(`/subject/addstudent/${id}/${subject}`)}

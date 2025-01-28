@@ -68,24 +68,30 @@ const DetailTopicLecturer = () => {
       <Nav_lec />
 
       <div class="grid bg-gradient-to-tr from-red-400 to-pink-500 min-h-screen max-h-full top-0 mt-0 z-10">
+        <Card onClick={() => navigate(-1)} className="mt-3 ml-7 w-24 h-12 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
+          <p className="font-extrabold w-20 text-center">
+            Back
+          </p>
+        </Card>
         <Card className="mt-7 mx-auto w-auto h-24 shadow-xl bg-white mb-6">
           <Typography className="font-extrabold items-center justify-items-center w-fit mx-auto my-auto">
             <h1 class="mx-12 text-3xl font-sans ">หัวข้อประกาศคะแนน</h1>
           </Typography>
         </Card>
-        <div className="justify-items-end mb-4 mr-[8.5rem]">
+        <div className="justify-items-end mb-3 mr-[8.5rem] h-8">
           <Card
             onClick={() => navigate(`/topic/create/${subject}`)}
-            className=" h-8 w-28 group bg-gradient-to-bl from-cyan-700 to-green-900 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800"
+            className=" h-8 w-28 group  bg-green-700 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800 items-center justify-center"
           >
             <div className=" w-28 items-center">
               <Typography className="font-semibold text-md text-white group-hover:text-white my-auto justify-self-center text-center">
-                Add Topic
+                Add Score
               </Typography>
             </div>
           </Card>
         </div>
-        <div className="flex gap-4 mb-4 mx-[8.5rem] h-12 ">
+        <div className="flex gap-4 mb-4 mx-[8.5rem] h-12">
           <Card className="bg-white flex-1 group w-18 justify-center">
             <div className="my-auto mx-auto">
               <CardBody>
