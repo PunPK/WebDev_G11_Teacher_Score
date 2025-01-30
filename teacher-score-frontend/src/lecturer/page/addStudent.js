@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/Auth.context.js";
 import { useNavigate, useParams } from "react-router-dom";
 import { Form, Input, Button, message } from "antd";
@@ -11,10 +11,33 @@ import "../components/edit.css";
 const AddStudent = () => {
   const { id, subject } = useParams();
   const [data, setData] = useState([]);
+  const [studentdata, setStudentData] = useState([]);
+  const [selectedStudents, setSelectedStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { state: ContextState } = useContext(AuthContext);
   const { user } = ContextState;
+
+  useEffect(() => {
+    const fetchSubject = async () => {
+      try {
+        const response = await ax.get(
+          `/subjects/${subject}?populate=users_owner`
+        );
+
+        console.log(response.data.data);
+        const studentIds = response.data.data.users_owner.map(
+          (user) => user.id
+        );
+
+        console.log(studentIds);
+        setSelectedStudents(studentIds);
+      } catch (error) {
+        console.error("Error fetching students:", error);
+      }
+    };
+    fetchSubject();
+  }, []);
 
   const handleSubmit = async (values) => {
     setLoading(true);
@@ -22,17 +45,17 @@ const AddStudent = () => {
       if (!subject) {
         message.error("Subject ID is missing.");
       }
-      const list = [];
-      list.push(user.id);
+      // const list = [];
+      // list.push(user.id);
       for (const newItem of data) {
         console.log(newItem.id);
-        list.push(newItem.id);
-        console.log(list);
+        selectedStudents.push(newItem.id);
+        console.log(selectedStudents);
       }
 
       await ax.put(`subjects/${subject}?populate=*`, {
         data: {
-          users_owner: list,
+          users_owner: selectedStudents,
         },
       });
       console.log("Data successfully uploaded to Strapi!");

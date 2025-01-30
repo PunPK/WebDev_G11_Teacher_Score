@@ -22,6 +22,7 @@ import AddStudent from "./lecturer/page/addStudent.js";
 import StudentListPage from "./lecturer/page/Student.js";
 import EditSubjectInfo from "./lecturer/page/editSubjectInfo.js";
 import DetailTopicLecturer from "./lecturer/page/detailTopic.js";
+import AddIDStudent from "./lecturer/page/addIdStudent.js";
 function App() {
   const { state } = useContext(AuthContext);
 
@@ -64,6 +65,10 @@ function App() {
             <Route
               path="/subject/student/:id/:subject"
               element={<StudentListPage />}
+            />
+            <Route
+              path="/subject/addstudent-test/:id/:subject"
+              element={<AddIDStudent />}
             />
             <Route
               path="/subject/edit/:subject"
