@@ -63,11 +63,11 @@ function App() {
               element={<AddStudent />}
             />
             <Route
-              path="/subject/student/:id/:subject"
+              path="/subject/student-all/:id/:subject"
               element={<StudentListPage />}
             />
             <Route
-              path="/subject/addstudent-test/:id/:subject"
+              path="/subject/student/:id/:subject"
               element={<AddIDStudent />}
             />
             <Route

@@ -13,6 +13,7 @@ import {
 import { Card } from "@material-tailwind/react";
 import ax from "../../conf/ax";
 import Nav_lec from "../../components/navbar";
+import "../components/table.css";
 
 const AddIDStudent = () => {
   const { id, subject } = useParams();
@@ -126,36 +127,64 @@ const AddIDStudent = () => {
   return (
     <div>
       <Nav_lec />
-      <Card
-        onClick={() => navigate(-1)}
-        className="mt-3 ml-7 w-24 h-12 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          class="size-5"
+      <div class="grid bg-gradient-to-tl from-red-400 to-pink-500 h-screen">
+        <Card
+          onClick={() => navigate(-1)}
+          className="mt-3 ml-7 w-24 h-12 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-          />
-        </svg>
-        <p className="font-extrabold w-20 text-center">Back</p>
-      </Card>
-
-      <Table dataSource={students} columns={columns} rowKey="id" />
-      <Button
-        type="primary"
-        onClick={handleSubmit}
-        loading={loading}
-        className="mr-12"
-      >
-        Add Selected Students
-      </Button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="size-5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+            />
+          </svg>
+          <p className="font-extrabold w-20 text-center">Back</p>
+        </Card>
+        <div className="flex justify-end gap-4 mt-2 mr-14">
+          <Card
+            onClick={() => navigate(`/subject/addstudent/${id}/${subject}`)}
+            className="justify-center items-center flex-none h-12 w-48 group bg-gradient-to-tr from-blue-50/40 to-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer hover:bg-white hover:shadow-blue-800"
+          >
+            <div className="w-full items-center">
+              <Typography className="font-semibold text-lg text-center">
+                Add Student By Import Excel
+              </Typography>
+            </div>
+          </Card>
+          <Card
+            onClick={() => navigate(`/subject/student-all/${id}/${subject}`)}
+            className="justify-center items-center flex-none h-12 w-48 group bg-gradient-to-tr from-blue-50/40 to-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer hover:bg-white hover:shadow-blue-800"
+          >
+            <div className="w-full items-center">
+              <Typography className="font-semibold text-lg text-center">
+                View All Student
+              </Typography>
+            </div>
+          </Card>
+        </div>
+        <Table
+          dataSource={students}
+          columns={columns}
+          rowKey="id"
+          className="custom-table"
+        />
+        <Button
+          type="primary"
+          onClick={handleSubmit}
+          loading={loading}
+          className="mr-12"
+        >
+          Add Selected Students
+        </Button>
+      </div>
     </div>
   );
 };

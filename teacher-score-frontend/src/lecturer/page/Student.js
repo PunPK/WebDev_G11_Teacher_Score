@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Card } from "@material-tailwind/react";
 import UserTable from "../table/studentList.js";
 import Nav_lec from "../../components/navbar.js";
+import "../components/table.css";
 
 function StudentListPage() {
   const [student, setStudent] = useState([]);
@@ -62,34 +63,9 @@ function StudentListPage() {
           <p className="font-extrabold w-20 text-center">Back</p>
         </Card>
 
-        <div className="flex justify-end gap-4 mt-2 mr-14">
-          <Card
-            onClick={() => navigate(`/subject/addstudent/${id}/${subject}`)}
-            className="justify-center items-center flex-none h-12 w-48 group bg-gradient-to-tr from-blue-50/40 to-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer hover:bg-white hover:shadow-blue-800"
-          >
-            <div className="w-full items-center">
-              <Typography className="font-semibold text-lg text-center">
-                Add Student By Import Excel
-              </Typography>
-            </div>
-          </Card>
-          <Card
-            onClick={() =>
-              navigate(`/subject/addstudent-test/${id}/${subject}`)
-            }
-            className="justify-center items-center flex-none h-12 w-48 group bg-gradient-to-tr from-blue-50/40 to-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer hover:bg-white hover:shadow-blue-800"
-          >
-            <div className="w-full items-center">
-              <Typography className="font-semibold text-lg text-center">
-                Add Student By Selected
-              </Typography>
-            </div>
-          </Card>
-        </div>
-
-        <body className="bg-white rounded-md mx-14 my-4">
+        <body className="bg-white rounded-md mx-14 my-4 custom-table">
           <Spin spinning={isLoading}>
-            <Typography.Title>Add Student:</Typography.Title>
+            <Typography.Title>Student All In This Subject:</Typography.Title>
             <UserTable data={[student]} />
           </Spin>
         </body>

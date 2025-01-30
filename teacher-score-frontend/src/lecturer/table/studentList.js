@@ -34,26 +34,6 @@ export default function UserTable(props) {
         </Tag>
       ),
     },
-    {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <Popconfirm
-            title="Edit the transaction"
-            description="Are you sure to Edit this transaction?"
-            onConfirm={() => props.onRowEdited(record)}
-          >
-            <Button
-              // danger
-              type="primary"
-              shape="circle"
-              icon={<EditOutlined twoToneColor="#eb2f96" />}
-            />
-          </Popconfirm>
-        </Space>
-      ),
-    },
   ];
   console.log(props.data[0]);
   return <Table columns={columns} dataSource={props.data[0]} rowKey="id" />;
