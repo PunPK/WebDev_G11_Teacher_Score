@@ -82,6 +82,14 @@
       "relation": "oneToMany",
       "target": "api::score.score",
       "mappedBy": "users_owner"
+    },
+    "profile_picture": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
