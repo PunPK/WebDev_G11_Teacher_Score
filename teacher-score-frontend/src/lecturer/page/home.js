@@ -95,7 +95,7 @@ const HomeLecturer = () => {
               </CardBody>
             </div>
           </Card>
-          <div className="bg-transparent flex-1 justify-between"></div>
+          <div className="bg-transparent flex-1 justify-between mb-3"></div>
           <div className="items-end">
             <Card
               onClick={() => navigate("/subject/create")}
@@ -110,7 +110,7 @@ const HomeLecturer = () => {
           </div>
         </div>
 
-        <Card className="mx-28 min-h-fit h-fit bg-white mb-2 ">
+        <Card className="mx-28 min-h-fit h-fit bg-white mb-2 mt-4">
           <div class=" grid grid-cols-2 gap-4 mx-6 mt-5 mb-12">
             {subjectData.map((subject) => (
               <div>

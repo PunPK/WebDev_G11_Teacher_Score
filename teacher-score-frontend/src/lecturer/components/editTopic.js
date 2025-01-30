@@ -37,12 +37,12 @@ const EditTopic = ({ userId, defaultValue, closeModal, onSubmit }) => {
       open={true}
       onCancel={closeModal}
       footer={[
-        <Button key="cancel" onClick={closeModal}>
+        <button className="text-lg mr-3 mt-3 l-0 hover:bg-transparent hover:text-red-600" key="cancel " onClick={closeModal}>
           Cancel
-        </Button>,
-        <Button key="submit" type="primary" onClick={handleRowEdited}>
+        </button>,
+        <button className="mx-3 text-lg font-medium text-center w-16 h-10 text-white bg-blue-600 rounded-md hover:bg-blue-900" key="submit" type="primary" onClick={handleRowEdited}>
           Edit
-        </Button>,
+        </button>,
       ]}
     >
       <Form
@@ -56,6 +56,7 @@ const EditTopic = ({ userId, defaultValue, closeModal, onSubmit }) => {
         <Form.Item
           name="topic_title"
           label="ชื่อหัวข้อ :"
+          className="font-semibold text-xl"
           rules={[{ required: true, message: "กรุณาระบุชื่อหัวข้อ" }]}
         >
           <Input placeholder="ชื่อวิชา" />
