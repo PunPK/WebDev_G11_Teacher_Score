@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../context/Auth.context.js";
 import { useNavigate, useParams } from "react-router-dom";
 import { Form, Input, Button, Card, message } from "antd";
 import ax from "../../conf/ax";
@@ -10,6 +11,8 @@ const { TextArea } = Input;
 const CreateSubject = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { state: ContextState } = useContext(AuthContext);
+  const { user } = ContextState;
 
   const handleSubmit = async (values) => {
     setLoading(true);
@@ -20,6 +23,7 @@ const CreateSubject = () => {
           description: values.description,
           create_date: new Date().toISOString(),
           subject_id: values.subject_id,
+          users_owner: user.id,
         },
       });
       message.success("Subject created successfully!");
