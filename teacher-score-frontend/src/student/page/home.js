@@ -79,21 +79,19 @@ const HomeStudent = () => {
         <div className="flex gap-10 mb-4 mx-28 ">
           <div>
             <Card className="bg-white">
-              <div>
-                <CardBody>
-                  <Typography className="font-bold text-lg">
-                    จำนวนวิชาที่เป็นเจ้าของ
-                  </Typography>
-                  <Typography className="ml-4">
-                    {subjectData.lenght} วิชา
-                  </Typography>
-                </CardBody>
-              </div>
+              <CardBody>
+                <Typography className="font-bold text-lg">
+                  จำนวนวิชาที่เป็นเจ้าของ
+                </Typography>
+                <Typography className="ml-4">
+                  {subjectData.lenght} วิชา
+                </Typography>
+              </CardBody>
             </Card>
           </div>
           <Card>
             <div>
-              <input>
+              <input title="ค้นหา" type="text" placeholder="ค้นหา" className="bg-white h-10 w-64 border-2 border-gray-300 rounded-lg" onChange={(e) => setQuery(e.target.value)}>
               </input>
             </div>
           </Card>
