@@ -30,6 +30,7 @@ const HomeLecturer = () => {
     setCurrentUserId(null);
     console.log("Closing modal...");
     setIsModalShow(false);
+    fetchSubject(user.id);
   };
 
   const fetchSubject = async (userId) => {
@@ -124,7 +125,7 @@ const HomeLecturer = () => {
                         vatiant="h5"
                         className="mb-2 text-2xl font-bold group-hover:text-white"
                       >
-                        {subject.title}
+                        {`[${subject.subject_id}] ${subject.title}`}
                       </Typography>
 
                       <Typography className="group-hover:text-white">

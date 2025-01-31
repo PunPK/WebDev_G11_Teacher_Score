@@ -28,6 +28,7 @@ const CreateSubject = () => {
       });
       message.success("Subject created successfully!");
       console.log("Data successfully uploaded to Strapi!");
+      navigate("/");
     } catch (error) {
       if (error.response) {
         console.error("Error response:", error.response.data);

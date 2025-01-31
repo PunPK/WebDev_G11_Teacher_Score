@@ -6,7 +6,7 @@ import * as XLSX from "xlsx";
 import Nav_lec from "../../components/navbar";
 import "../components/edit.css";
 
-const CreateTopic = () => {
+const AddScoreTopic = () => {
   const { subject } = useParams();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -58,7 +58,6 @@ const CreateTopic = () => {
 
       console.log("Data successfully uploaded to Strapi!");
       message.success("created successfully!");
-      navigate(`/topic/${subject}`);
     } catch (error) {
       if (error.response) {
         console.error("Error response:", error.response.data);
@@ -120,28 +119,6 @@ const CreateTopic = () => {
           className="custom-modal mx-24 items-center  shadow-lg"
         >
           <Form layout="vertical" onFinish={handleSubmit}>
-            <Form.Item
-              label="Title"
-              name="title"
-              rules={[
-                { required: true, message: "Please enter the topic title!" },
-              ]}
-            >
-              <Input placeholder="Enter topic title" />
-            </Form.Item>
-
-            <Form.Item
-              label="Max Score"
-              name="maxScore"
-              rules={[
-                { required: true, message: "Please enter the maximum score!" },
-              ]}
-            >
-              <InputNumber
-                placeholder="Enter maximum score"
-                className="w-full"
-              />
-            </Form.Item>
             <input
               type="file"
               accept=".xlsx, .xls"
@@ -184,4 +161,4 @@ const CreateTopic = () => {
   );
 };
 
-export default CreateTopic;
+export default AddScoreTopic;

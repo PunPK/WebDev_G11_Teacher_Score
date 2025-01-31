@@ -23,6 +23,7 @@ import StudentListPage from "./lecturer/page/Student.js";
 import EditSubjectInfo from "./lecturer/page/editSubjectInfo.js";
 import DetailTopicLecturer from "./lecturer/page/detailTopic.js";
 import AddIDStudent from "./lecturer/page/addIdStudent.js";
+import AddScoreTopic from "./lecturer/page/addScore.js";
 function App() {
   const { state } = useContext(AuthContext);
 
@@ -58,6 +59,10 @@ function App() {
               element={<DetailTopicLecturer />}
             />
             <Route path="/topic/create/:subject" element={<CreateTopic />} />
+            <Route
+              path="/topic/addscore/:subject"
+              element={<AddScoreTopic />}
+            />
             <Route
               path="/subject/addstudent/:id/:subject"
               element={<AddStudent />}

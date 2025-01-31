@@ -30,6 +30,7 @@ const TopicLecturer = () => {
     setCurrentUserId(null);
     console.log("Closing modal...");
     setIsModalShow(false);
+    fetchTopic();
   };
 
   const fetchTopic = async () => {
@@ -172,11 +173,13 @@ const TopicLecturer = () => {
               <>
                 <div className="flex gap-4 w-auto my-4 h-12">
                   <Card
-                    onClick={() => navigate(`/topic/detail/${topic.documentId}`)}
-                    className="flex-1 group w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl items-start justify-center group-hover:text-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-blue-700 hover:to-blue-900  hover:shadow-blue-400 ">
+                    onClick={() =>
+                      navigate(`/topic/detail/${topic.documentId}`)
+                    }
+                    className="flex-1 group w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl items-start justify-center group-hover:text-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-blue-700 hover:to-blue-900  hover:shadow-blue-400 "
+                  >
                     <div className="my-auto">
-                      <CardBody
-                      >
+                      <CardBody>
                         <Typography
                           vatiant="h5"
                           className=" text-xl font-bold items-center group-hover:text-white"
