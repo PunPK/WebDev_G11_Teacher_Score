@@ -3,11 +3,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/Auth.context.js";
 import ax from "../conf/ax.js";
 import { Spin, Typography, Button } from "antd";
-import { UserOutlined } from "@ant-design/icons";
 import axios from "axios";
 import UserTable from "./UserTable";
 import "./user.css";
 import Nav_lec from "../components/navbar.js";
+import { Card } from "@material-tailwind/react";
 
 function UserPage() {
   //   const [user, setUser] = useState({});
@@ -28,60 +28,6 @@ function UserPage() {
     setEditData(null);
   };
 
-  // const handleChangedPassword = async () => {
-  //   try {
-  //     const jwtToken =
-  //       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM0NzE0NjU1LCJleHAiOjE3MzczMDY2NTV9.nAKGVpQ-iqTRUFcwI21MgH3F0m4mCp4JKSkwwJwBOPs"; // Ensure this is retrieved securely
-  //     const resetCode = "";
-
-  //     const response = await axios.post(
-  //       "http://localhost:1337/auth/local/reset-password",
-  //       {
-  //         code: resetCode,
-  //         password: "1234567",
-  //         passwordConfirmation: "1234567",
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${jwtToken}`,
-  //         },
-  //       }
-  //     );
-
-  //     console.log("Your user's password has been changed.", response.data);
-  //   } catch (error) {
-  //     console.error(
-  //       "An error occurred:",
-  //       error.response?.data || error.message
-  //     );
-  //   }
-  // };
-
-  // const handleRowEdited = async (item) => {
-  //   try {
-  //     setIsLoading(true);
-
-  //     const payload = {
-  //       username: item.username,
-  //       email: item.email,
-  //       firstname: item.firstname,
-  //       lastname: item.lastname,
-  //     };
-
-  //     // console.log("Payload being sent:", payload);
-  //     await axios.put(`/api/users/${item.id}`, payload);
-  //     // const response = await axios.put(`/api/users/${item.id}`, payload);
-
-  //     // console.log("Updated data:", response.data);
-
-  //     //   fetchItems();
-  //   } catch (err) {
-  //     console.error("Error updating item:", err.response?.data || err.message);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
   useEffect(() => {
     // fetchItems();
   }, []);
@@ -93,23 +39,31 @@ function UserPage() {
 
   return (
     <>
-      <Nav_lec />
-      <div class="grid bg-gradient-to-tl from-blue-800 to-cyan-300 h-screen">
-        <body className="bg-white rounded-md mx-14 my-4">
-          <Spin spinning={isLoading}>
-            <UserOutlined className="custom-icon" />
-            <Typography.Title>Profile {user.firstname} :</Typography.Title>
-            <UserTable data={[user]} onRowEdited={openModal} />
-
-          </Spin>
-          {/* <Button
-          type="primary"
-          htmlType="submit"
-          onClick={handleChangedPassword}
-        >
-          Changed Password
-        </Button> */}
-        </body>
+      <div class="bg-gradient-to-tl from-pink-700 to-teal-300 min-h-screen max-h-full top-0 mt-0 z-0">
+        <Nav_lec className="z-50" />
+        <div className=" my-52 place-self-center justify-center items-center">
+          <Card className="bg-white rounded-md w-96 h-fit">
+            <div className="my-4 mx-3">
+              <Typography className="text-4xl font-extrabold items-start justify-start">
+                {user.first_name} {user.last_name}'s profile:
+              </Typography>
+              <div class="relative self-center justify-self-center mt-10 mb-5 w-28 h-28 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 ring-2 ring-offset-2  ring-black">
+                <svg class="absolute w-24 h-24 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+              </div>
+              <div className="mx-8">
+                <Typography className="text-xl font-medium mt-6">
+                  Name: {user.first_name} {user.last_name}
+                </Typography>
+                <Typography className="text-xl font-medium ">
+                  Role: {user.userRole}
+                </Typography>
+                <Typography className="text-xl font-medium ">
+                  Email: {user.email}
+                </Typography>
+              </div>
+            </div>
+          </Card>
+        </div>
       </div>
     </ >
   );

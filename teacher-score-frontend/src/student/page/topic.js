@@ -3,11 +3,11 @@ import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
-import { Spin, Typography, Divider } from "antd";
 import TopicList from "../table/studentTopic.js";
 import "./home.css";
 import { Card, CardBody } from "@material-tailwind/react";
 import Nav_lec from "../../components/navbar.js";
+import { Progress, Typography } from "@material-tailwind/react";
 import dayjs from "dayjs";
 
 
@@ -38,14 +38,15 @@ const HomeStudent = () => {
           "filters[subject][documentId][$eq]": subject,
         },
       });
-      const score_response = await ax.get("/topics", {
-        params: {
-          populate: "score_id.users_owner",
-          "filters[subject][documentId][$eq]": subject,
-        },
-      });
-      console.log(response.data.data);
-      setTopicData(response.data.data);
+
+      const filteredData = response.data.data.map((item) => ({
+        ...item,
+        score_id: item.score_id.filter(
+          (score) => score.users_owner.id === user.id
+        ),
+      }));
+      console.log(filteredData)
+      setTopicData(filteredData);
     } catch (e) {
       console.error("Error fetching student data:", e);
       setError("Error fetching student data. Please try again.");
@@ -53,6 +54,7 @@ const HomeStudent = () => {
       setLoading(false);
     }
   };
+
 
   console.log(subject)
 
@@ -84,31 +86,36 @@ const HomeStudent = () => {
           </Typography>
         </Card>
 
-        <Card className="mx-32 h-fit my-2 z-10">
+        <Card className="mx-32 h-fit mt-2 z-10">
           <div className="mx-6 my-5">
             {topicData.map((topic) => (
-              <Card className="bg-white z-20 h-full">
+              <Card className="bg-white z-20 h-full mb-3">
                 <CardBody>
-                  <Typography className="text-4xl font-semibold">{topic.topic_title}</Typography>
+                  <Typography className=" " variant="h2">{topic.topic_title}</Typography>
                   <Typography className="group-hover:text-white text-lg">
                     อัพเดพล่าสุด {dayjs(user.updatedAt).format("DD / MM / YYYY เวลา HH:mm น.")}
                   </Typography>
-                  <div
-                    class="flex-start flex h-2.5 w-full overflow-hidden rounded-full bg-blue-gray-50 font-sans text-xs font-medium">
-                    <div
-                      class="flex items-center justify-center w-1/2 h-full overflow-hidden text-white break-all bg-blue-500 rounded-full">
+                  <div className="w-full">
+                    <div className="mb-2 flex items-center justify-between gap-4">
+                      <Typography color="blue-gray" variant="h6">
+                        คะแนนที่ได้ :
+                      </Typography>
+                      <Typography color="blue-gray" className="font-semibold" variant="h5">
+                        {topic.score_id.length !== 0 ? topic.score_id[0].score : "ไม่มีคะแนน"} / {topic.max_score} ( {topic.score_id.length !== 0 ? ((topic.score_id[0].score / topic.max_score) * 100).toFixed(2) : "0"}% )
+                      </Typography>
                     </div>
+                    <Progress size="lg" color={topic.score_id.length !== 0 ? (topic.score_id[0].score / topic.max_score) * 100 >= 70 ? "green" : "red" : ""} value={topic.score_id.length !== 0 ? (topic.score_id[0].score / topic.max_score) * 100 : "ไม่มีคะแนน"} />
                   </div>
-                  <Typography>{topic.title}</Typography>
+
                 </CardBody>
               </Card>
 
             ))}
 
-          </div>
-        </Card>
+          </div >
+        </Card >
 
-      </div>
+      </div >
     </>
   );
 };
