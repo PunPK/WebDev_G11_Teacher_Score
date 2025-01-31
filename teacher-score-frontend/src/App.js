@@ -43,7 +43,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginForm />} />
             <Route path="/" element={<HomeStudent />} />
-            <Route path="/topic/:subject" element={<TopicStudent />} />
+            <Route path="/topic/:subject_title/:username/:subject" element={<TopicStudent />} />
             <Route path="/user" element={<UserPage />} />
           </Routes>
         </BrowserRouter>
@@ -53,7 +53,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/topic/:subject" element={<TopicLecturer />} />
+            <Route path="/topic/:subject_title/:username/:subject" element={<TopicLecturer />} />
             <Route
               path="/topic/detail/:subject"
               element={<DetailTopicLecturer />}

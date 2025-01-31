@@ -8,6 +8,7 @@ import TopicList from "../table/studentTopic.js";
 import "./home.css";
 import { Card, CardBody } from "@material-tailwind/react";
 import Nav_lec from "../../components/navbar.js";
+import dayjs from "dayjs";
 
 
 const HomeStudent = () => {
@@ -19,7 +20,7 @@ const HomeStudent = () => {
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
   const { user } = ContextState;
-  const { subject } = useParams();
+  const { subject, username, subject_title } = useParams();
 
   const onLogout = (e) => {
     e.preventDefault();
@@ -33,7 +34,13 @@ const HomeStudent = () => {
       console.log(subject);
       const response = await ax.get("/topics", {
         params: {
-          populate: "*",
+          populate: "score_id.users_owner",
+          "filters[subject][documentId][$eq]": subject,
+        },
+      });
+      const score_response = await ax.get("/topics", {
+        params: {
+          populate: "score_id.users_owner",
           "filters[subject][documentId][$eq]": subject,
         },
       });
@@ -57,72 +64,50 @@ const HomeStudent = () => {
 
   return (
     <>
+      <div class=" bg-gradient-to-tl from-blue-800 to-cyan-300  min-h-screen max-h-full top-0  z-0">
+        <Nav_lec className="z-50" />
+        <div className="mt-3">
+          <Card onClick={() => navigate(-1)} className="  ml-7 w-24 h-12 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
+            <p className="font-extrabold w-20 text-center">
+              Back
+            </p>
+          </Card>
+        </div>
+        <Card className="mt-1 mx-auto w-fit h-28 shadow-xl bg-white mb-6 items-center justify-center">
+          <Typography className="font-bold mx-12 w-fit text-gray-800 my-auto h-fit text-3xl">
+            คะแนนวิชา
+          </Typography>
 
-      <Nav_lec />
-      <div class="grid bg-gradient-to-tl from-blue-800 to-cyan-300 min-h-[20rem] max-h-full top-0 mt-0 z-10">
-        <Card onClick={() => navigate(-1)} className="mt-3 ml-7 w-24 h-12 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
-          <p className="font-extrabold w-20 text-center">
-            Back
-          </p>
-        </Card>
-
-        <Card className="mt-1 mx-auto w-auto h-24 shadow-xl bg-white mb-6 items-center justify-center">
-          <Typography className="font-extrabold mx-12 w-fit text-gray-800 my-auto h-fit text-3xl">
-            คะแนนในหัวข้อ
+          <Typography className="font-extrabold mx-12 w-fit text-gray-800 my-auto h-fit text-5xl">
+            {subject_title}
           </Typography>
         </Card>
 
-
-        <Card className="mx-28 h-fit my-2">
+        <Card className="mx-32 h-fit my-2 z-10">
           <div className="mx-6 my-5">
             {topicData.map((topic) => (
-              <>
-                <div className="flex gap-4 w-auto my-2 mx-28 h-12">
-                  <Card className="flex-1 w-28 items-start justify-center ">
-                    <CardBody >
-                      <Typography className="font-bold text-lg">
-                        {topic.topic_title}
-                      </Typography>
-                    </CardBody>
-                  </Card>
-
-                  <Card className="flex-none w-24 ml-4">
-                    <CardBody >
-                      <Typography >
-                        {topic.topic_title}
-                      </Typography>
-                    </CardBody>
-                  </Card>
-
-                  <Card className="flex-none w-36 ml-4">
-                    <CardBody >
-                      {topic.score_id.map((score) => (
-                        <Typography >
-
-                          {score.score}
-                        </Typography>
-                      ))}
-                    </CardBody>
-                  </Card>
-
-                </div>
-              </>
+              <Card className="bg-white z-20 h-full">
+                <CardBody>
+                  <Typography className="text-4xl font-semibold">{topic.topic_title}</Typography>
+                  <Typography className="group-hover:text-white text-lg">
+                    อัพเดพล่าสุด {dayjs(user.updatedAt).format("DD / MM / YYYY เวลา HH:mm น.")}
+                  </Typography>
+                  <div
+                    class="flex-start flex h-2.5 w-full overflow-hidden rounded-full bg-blue-gray-50 font-sans text-xs font-medium">
+                    <div
+                      class="flex items-center justify-center w-1/2 h-full overflow-hidden text-white break-all bg-blue-500 rounded-full">
+                    </div>
+                  </div>
+                  <Typography>{topic.title}</Typography>
+                </CardBody>
+              </Card>
 
             ))}
 
           </div>
         </Card>
 
-
-
-        <body className="App-finance-body">
-          <Spin spinning={loading}>
-            <Typography.Title>ตาราง</Typography.Title>
-            <Divider>topic</Divider>
-            <TopicList data={topicData} />
-          </Spin>
-        </body>
       </div>
     </>
   );
