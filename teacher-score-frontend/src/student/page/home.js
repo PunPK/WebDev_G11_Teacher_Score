@@ -16,6 +16,7 @@ const HomeStudent = () => {
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
   const { user } = ContextState;
+  const [searchTerm, setSearchTerm] = useState("");
   // console.log(user);
 
   const onLogout = (e) => {
@@ -62,6 +63,15 @@ const HomeStudent = () => {
     }
   }, [user]);
 
+  const handleSearch = () => {
+    setSearchTerm(query);
+  };
+
+  const filteredSubjects = subjectData.filter(subject =>
+    subject.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+
 
 
   return (
@@ -91,15 +101,30 @@ const HomeStudent = () => {
           </div>
           <Card>
             <div>
-              <input title="ค้นหา" type="text" placeholder="ค้นหา" className="bg-white h-10 w-64 border-2 border-gray-300 rounded-lg" onChange={(e) => setQuery(e.target.value)}>
-              </input>
+              <Card className="flex flex-col items-start gap-2 p-4">
+                <input
+                  title="ค้นหา"
+                  type="text"
+                  placeholder="ค้นหาชื่อวิชา"
+                  className="bg-white h-10 w-64 border-2 border-gray-300 rounded-lg px-2"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                />
+                <Card
+                  onClick={handleSearch}
+                  className="group shadow-md shadow-black items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400 text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer w-64 h-10 flex justify-center items-center"
+                >
+                  <span className="font-semibold">ค้นหา</span>
+                </Card>
+              </Card>
+
             </div>
           </Card>
         </div>
         <Card className="mx-28 h-fit bg-white my-2">
           <div class=" grid grid-cols-2 gap-6 mx-6 my-6">
             {
-              subjectData.map((subject) => (
+              filteredSubjects.map((subject) => (
                 <>
                   <Card onClick={() => navigate(`/topic/${subject.title}/${user.username}/${subject.documentId}`)} className="group h-full w-full  bg-gradient-to-tr from-blue-50 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-blue-700 hover:to-blue-900  hover:shadow-blue-400 ">
                     <CardBody>
