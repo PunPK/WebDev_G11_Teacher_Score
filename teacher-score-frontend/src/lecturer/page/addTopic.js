@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Form, Input, Button, Card, message, InputNumber } from "antd";
+import { Form, Input, Button, Card, message, InputNumber, Typography } from "antd";
 import ax from "../../conf/ax";
 import * as XLSX from "xlsx";
 import Nav_lec from "../../components/navbar";
@@ -96,7 +96,7 @@ const CreateTopic = () => {
       <Nav_lec />
       <Card
         onClick={() => navigate(-1)}
-        className="mt-3 ml-7 w-32 h-22 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
+        className="mt-3 ml-7 w-32 h-22 shadow-xl bg-white mb-6 items-center justify-items-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -105,6 +105,7 @@ const CreateTopic = () => {
           stroke-width="2"
           stroke="currentColor"
           class="size-5"
+          className="self-center justify-self-center"
         >
           <path
             stroke-linecap="round"
@@ -146,10 +147,11 @@ const CreateTopic = () => {
               type="file"
               accept=".xlsx, .xls"
               onChange={handleFileUpload}
+              className="mb-3 ml-3"
             />
             {data.length > 0 && (
-              <table className="table">
-                <thead>
+              <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
                     {Object.keys(data[0]).map((key) => (
                       <th key={key}>{key}</th>
@@ -168,14 +170,16 @@ const CreateTopic = () => {
               </table>
             )}
             <Form.Item>
-              <Button
+              <button
                 type="primary"
                 htmlType="submit"
                 loading={loading}
-                className="w-full"
+                className="mt-3 group rounded-lg h-12 bg-blue-600 w-full ml-0 place-items-center justify-items-center items-center justify-center transition-all hover:-translate-y-1 hover:bg-light-blue-900"
               >
-                Create Topic
-              </Button>
+                <Typography className="group-hover:text-white text-white font-semibold text-xl">
+                  Create Topic
+                </Typography>
+              </button>
             </Form.Item>
           </Form>
         </Card>
