@@ -73,10 +73,10 @@ const HomeLecturer = () => {
 
   const filteredSubjects = query
     ? subjectData.filter(
-        (subject) =>
-          subject.title.toLowerCase().includes(query.toLowerCase()) ||
-          subject.subject_id.toLowerCase().includes(query.toLowerCase())
-      )
+      (subject) =>
+        subject.title.toLowerCase().includes(query.toLowerCase()) ||
+        subject.subject_id.toLowerCase().includes(query.toLowerCase())
+    )
     : subjectData;
 
   useEffect(() => {
@@ -89,7 +89,7 @@ const HomeLecturer = () => {
   return (
     <>
       <Nav_lec />
-      <div class="grid bg-gradient-to-tr from-red-400 to-pink-500 min-h-screen max-h-full top-0 mt-0 z-10">
+      <div class="grid bg-gradient-to-tr from-red-800 to-pink-500 min-h-screen max-h-full top-0 mt-0 z-10">
         <Card className="mt-10 mx-auto w-72 h-24 shadow-xl bg-white mb-8">
           <Typography className="items-center justify-items-center w-fit mx-auto my-auto">
             <h1 class="mx-auto text-5xl font-sans">รายการวิชา</h1>

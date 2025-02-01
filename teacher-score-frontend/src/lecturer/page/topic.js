@@ -11,7 +11,7 @@ import { Popconfirm } from "antd";
 import EditTopic from "../components/editTopic.js";
 
 const TopicLecturer = () => {
-  const { subject } = useParams();
+  const { subject, subject_title } = useParams();
   const [topicData, setTopicData] = useState([]);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(null);
@@ -89,7 +89,8 @@ const TopicLecturer = () => {
 
         <Card className=" mx-auto w-auto h-24 shadow-xl bg-white -mb-6">
           <Typography className="font-extrabold items-center justify-items-center w-fit mx-auto my-auto">
-            <h1 class="mx-12 text-3xl font-sans ">หัวข้อประกาศคะแนน</h1>
+            <h3 class="mx-12 text-3xl font-sans ">ประกาศคะแนนวิชา</h3>
+            <h1 class="mx-12 text-3xl font-sans ">{subject_title}</h1>
           </Typography>
         </Card>
 
