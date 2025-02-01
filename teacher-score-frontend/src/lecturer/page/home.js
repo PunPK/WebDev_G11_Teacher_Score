@@ -122,7 +122,7 @@ const HomeLecturer = () => {
                 />
 
                 {query && filteredSubjects.length > 0 && (
-                  <ul className="absolute top-14 left-4 flex-1 bg-white border border-gray-300 rounded-lg shadow-md max-h-48 overflow-y-auto z-10">
+                  <ul className="absolute top-12 w-[58rem] left-2 flex-1 bg-white border border-gray-300 rounded-lg shadow-md max-h-48 overflow-y-auto z-30">
                     {filteredSubjects.map((subject) => (
                       <li
                         key={subject.subject_id}
@@ -136,7 +136,7 @@ const HomeLecturer = () => {
                 )}
                 <Card
                   onClick={handleSearch}
-                  className="group flex-none shadow-md mr-2 shadow-black self-center items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400 text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer w-24 h-10 flex justify-center"
+                  className="group flex-none shadow-md mr-2 shadow-black self-center items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400 text-white hover:to-blue-800 hover:from-cyan-600 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer w-24 h-10 flex justify-center"
                 >
                   <span className="font-semibold">ค้นหา</span>
                 </Card>
