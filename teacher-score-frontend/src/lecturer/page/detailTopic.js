@@ -8,15 +8,15 @@ import { Card, CardBody, Typography } from "@material-tailwind/react";
 import { useParams } from "react-router-dom";
 import { Popconfirm } from "antd";
 import EditScore from "../components/editScore.js";
+import AddScoreStudentTopic from "../components/addScoreStudent.js";
 const DetailTopicLecturer = () => {
-  const { subject } = useParams();
+  const { subject, topic } = useParams();
   const [topicData, setTopicData] = useState([]);
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(null);
   const [isModalShow, setIsModalShow] = useState(false);
   const [currentUserId, setCurrentUserId] = useState(null);
-
   const [currentData, setCurrentData] = useState(null);
   const openModal = (id, data) => {
     setCurrentUserId(id);
@@ -33,6 +33,24 @@ const DetailTopicLecturer = () => {
     fetchTopic();
   };
 
+  const [isModalShow2, setIsModalShow2] = useState(false);
+  const [currentUserId2, setCurrentUserId2] = useState(null);
+  const [currentData2, setCurrentData2] = useState(null);
+  const openModal2 = (id, data) => {
+    setCurrentUserId2(id);
+    setCurrentData2(data);
+    console.log("Open modal2...");
+    setIsModalShow2(true);
+  };
+
+  const closeModal2 = () => {
+    setCurrentData2(null);
+    setCurrentUserId2(null);
+    console.log("Closing modal2...");
+    setIsModalShow2(false);
+    fetchTopic();
+  };
+
   const onLogout = (e) => {
     e.preventDefault();
     logout();
@@ -42,7 +60,7 @@ const DetailTopicLecturer = () => {
   const fetchTopic = async () => {
     try {
       const response = await ax.get(
-        `/topics/${subject}?populate=score_id.users_owner`
+        `/topics/${topic}?populate=score_id.users_owner`
       );
       setTopicData(response.data.data.score_id);
     } catch (e) {
@@ -96,7 +114,8 @@ const DetailTopicLecturer = () => {
         </Card>
         <div className="justify-items-end -mb-60 mr-[8.5rem] h-8">
           <Card
-            onClick={() => navigate(`/topic/addscore/${subject}`)}
+            onClick={() => openModal2(topic.users_owner)}
+            // onClick={() => navigate(`/topic/addscore/${topic}`)}
             className=" h-8 w-28 group  bg-green-700 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800 items-center justify-center"
           >
             <div className=" w-28 items-center">
@@ -288,9 +307,21 @@ const DetailTopicLecturer = () => {
         </Card>
         {isModalShow && (
           <EditScore
+            // <AddScoreStudentTopic
             userId={currentUserId}
             defaultValue={currentData}
             closeModal={closeModal}
+            onSubmit={(updatedData) =>
+              console.log("Updated Data:", updatedData)
+            }
+          />
+        )}
+        {isModalShow2 && (
+          // <EditScore
+          <AddScoreStudentTopic
+            userId={currentUserId2}
+            defaultValue={currentData2}
+            closeModal={closeModal2}
             onSubmit={(updatedData) =>
               console.log("Updated Data:", updatedData)
             }

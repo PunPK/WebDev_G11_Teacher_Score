@@ -7,11 +7,11 @@ import response from "../../utils/demo/tableData";
 import Nav_lec from "../../components/navbar.js";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 import { useParams } from "react-router-dom";
-import { Popconfirm } from "antd";
+import { Popconfirm, message } from "antd";
 import EditTopic from "../components/editTopic.js";
 
 const TopicLecturer = () => {
-  const { subject, subject_title } = useParams();
+  const { subject, subject_title, documentId } = useParams();
   const [topicData, setTopicData] = useState([]);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(null);
@@ -49,7 +49,14 @@ const TopicLecturer = () => {
   const handleRowDeleted = async (itemId) => {
     try {
       setIsLoading(true);
+      const response = await ax.get(`topics/${itemId}?populate=*`);
       await ax.delete(`topics/${itemId}`);
+      const scores = response.data.data.score_id;
+      for (const score of scores) {
+        await ax.delete(`scores/${score.documentId}`);
+      }
+
+      message.success("Topic and associated scores deleted successfully!");
       fetchTopic();
     } catch (err) {
       console.log(err);
@@ -175,7 +182,9 @@ const TopicLecturer = () => {
                 <div className="flex gap-4 w-auto my-4 h-12">
                   <Card
                     onClick={() =>
-                      navigate(`/topic/detail/${topic.documentId}`)
+                      navigate(
+                        `/topic/detail/${documentId}/${topic.documentId}/${topic.id}`
+                      )
                     }
                     className="flex-1 group w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl items-start justify-center group-hover:text-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-blue-700 hover:to-blue-900  hover:shadow-blue-400 "
                   >
