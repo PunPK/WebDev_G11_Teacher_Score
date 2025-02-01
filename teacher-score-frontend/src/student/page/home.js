@@ -72,10 +72,10 @@ const HomeStudent = () => {
 
   const filteredSubjects = query
     ? subjectData.filter(
-        (subject) =>
-          subject.title.toLowerCase().includes(query.toLowerCase()) ||
-          subject.subject_id.toLowerCase().includes(query.toLowerCase())
-      )
+      (subject) =>
+        subject.title.toLowerCase().includes(query.toLowerCase()) ||
+        subject.subject_id.toLowerCase().includes(query.toLowerCase())
+    )
     : subjectData;
 
   return (
@@ -88,33 +88,34 @@ const HomeStudent = () => {
           </Typography>
         </Card>
 
-        <div className="flex gap-10 mb-4 mx-28 ">
-          <div>
-            <Card className="bg-white">
-              <CardBody>
-                <Typography className="font-bold text-lg">
-                  จำนวนวิชาที่เป็นเจ้าของ
-                </Typography>
-                <Typography className="ml-4">
-                  {subjectData.length} วิชา
-                </Typography>
-              </CardBody>
+        <div className=" mb-4 mx-28 items-start">
+          <div className="flex gap-10  h-fit">
+            <Card className="bg-white flex-none h-24 w-64">
+              <div class="btn">
+                <CardBody>
+                  <Typography className="font-bold text-lg">
+                    จำนวนวิชาที่เป็นเจ้าของ
+                  </Typography>
+                  <ul className="ml-4" >
+                    {subjectData.length} วิชา
+                  </ul>
+                </CardBody>
+              </div>
             </Card>
-          </div>
-          <Card>
-            <div>
-              <Card className="flex flex-col items-start gap-2 p-4">
+
+            <div className="flex-auto self-end justify-items-end">
+              <Card className="flex flex-row items-end gap-2 p-1">
                 <input
                   title="ค้นหา"
                   type="text"
                   placeholder="ค้นหาชื่อวิชา"
-                  className="bg-white h-10 w-64 border-2 border-gray-300 rounded-lg px-2"
+                  className="flex-1 bg-white h-10 border-2 w-[68rem] border-gray-300 rounded-lg px-2"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                 />
 
                 {query && filteredSubjects.length > 0 && (
-                  <ul className="absolute top-14 left-4 w-64 bg-white border border-gray-300 rounded-lg shadow-md max-h-48 overflow-y-auto z-10">
+                  <ul className="absolute top-14 left-4 flex-1 bg-white border border-gray-300 rounded-lg shadow-md max-h-48 overflow-y-auto z-10">
                     {filteredSubjects.map((subject) => (
                       <li
                         key={subject.subject_id}
@@ -128,14 +129,16 @@ const HomeStudent = () => {
                 )}
                 <Card
                   onClick={handleSearch}
-                  className="group shadow-md shadow-black items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400 text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer w-64 h-10 flex justify-center"
+                  className="group flex-none shadow-md mr-2 shadow-black self-center items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400 text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer w-24 h-10 flex justify-center"
                 >
                   <span className="font-semibold">ค้นหา</span>
                 </Card>
               </Card>
             </div>
-          </Card>
+
+          </div>
         </div>
+
         <Card className="mx-28 h-fit bg-white my-2">
           <div class=" grid grid-cols-2 gap-6 mx-6 my-6">
             {filteredSubjects.map((subject) => (

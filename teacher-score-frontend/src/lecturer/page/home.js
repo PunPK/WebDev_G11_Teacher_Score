@@ -167,7 +167,7 @@ const HomeLecturer = () => {
                     <Card
                       onClick={() =>
                         navigate(
-                          `/topic/${subject.title}/${user.username}/${subject.id}`
+                          `/topic/${subject.title}/${user.username}/${subject.id}/${subject.documentId}`
                         )
                       }
                       className="z-20 group mt-3  mx-3 h-46 w-auto rounded-t-lg bg-gradient-to-tl from-red-50 hover:-translate-y-2 transition-all duration-200 delay-75 cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900 hover:drop-shadow-2xl hover:shadow-red-400 "
@@ -211,7 +211,7 @@ const HomeLecturer = () => {
                         <Card
                           onClick={() =>
                             navigate(
-                              `/topic/${subject.title}/${user.username}/${subject.id}/${subject.documentId}`
+                              `/subject/student/${subject.id}/${subject.documentId}`
                             )
                           }
                           className="col-span-2 group shadow-md shadow-black items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400  text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer"
