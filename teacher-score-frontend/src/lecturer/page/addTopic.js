@@ -58,7 +58,7 @@ const CreateTopic = () => {
 
       console.log("Data successfully uploaded to Strapi!");
       message.success("created successfully!");
-      navigate(`/topic/${subject}`);
+      navigate(-1);
     } catch (error) {
       if (error.response) {
         console.error("Error response:", error.response.data);

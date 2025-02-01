@@ -18,6 +18,8 @@ const HomeLecturer = () => {
   const [currentUserId, setCurrentUserId] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const [currentData, setCurrentData] = useState(null);
+  const [query, setQuery] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const openModal = (id, data) => {
     setCurrentUserId(id);
     setCurrentData(data);
@@ -65,6 +67,17 @@ const HomeLecturer = () => {
       setIsLoading(false);
     }
   };
+  const handleSearch = () => {
+    setSearchTerm(query);
+  };
+
+  const filteredSubjects = query
+    ? subjectData.filter(
+        (subject) =>
+          subject.title.toLowerCase().includes(query.toLowerCase()) ||
+          subject.subject_id.toLowerCase().includes(query.toLowerCase())
+      )
+    : subjectData;
 
   useEffect(() => {
     if (user) {
@@ -77,47 +90,86 @@ const HomeLecturer = () => {
     <>
       <Nav_lec />
       <div class="grid bg-gradient-to-tr from-red-400 to-pink-500 min-h-screen max-h-full top-0 mt-0 z-10">
-        <Card className="mt-8 mx-auto w-72 h-24 shadow-xl bg-white mb-1">
+        <Card className="mt-10 mx-auto w-72 h-24 shadow-xl bg-white mb-8">
           <Typography className="items-center justify-items-center w-fit mx-auto my-auto">
             <h1 class="mx-auto text-5xl font-sans">รายการวิชา</h1>
           </Typography>
         </Card>
-
-        <div className="flex gap-10 mx-28 items-end h-fit">
-          <Card className="bg-white flex-none justify-between h-24 w-64 mt-4">
-            <div>
-              <CardBody>
-                <Typography className="font-bold text-lg">
-                  จำนวนวิชาที่เป็นเจ้าของ
-                </Typography>
-                <Typography className="ml-4">
-                  {subjectDataCount} วิชา
-                </Typography>
-              </CardBody>
-            </div>
-          </Card>
-          <div className="bg-transparent flex-1 justify-between mb-3"></div>
-          <div className="items-end">
-            <Card
-              onClick={() => navigate("/subject/create")}
-              className="justify-center mt-14 items-end flex-none h-12 w-36 group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-white  hover:shadow-teal-800"
-            >
-              <div className=" w-36 items-center">
-                <Typography className="font-semibold text-md  my-auto justify-self-center text-center">
-                  Add Subject
-                </Typography>
+        <div className="flex gap-10 mb-4 mx-28 items-start">
+          <div className="flex gap-10 mx-28 h-fit">
+            <Card className="bg-white flex-none justify-between h-24 w-64 mt-4">
+              <div>
+                <CardBody>
+                  <Typography className="font-bold text-lg">
+                    จำนวนวิชาที่เป็นเจ้าของ
+                  </Typography>
+                  <Typography className="ml-4">
+                    {subjectDataCount} วิชา
+                  </Typography>
+                </CardBody>
               </div>
             </Card>
+            <div className="bg-transparent flex-1 justify-between mb-3"></div>
+            <Card>
+              <div>
+                <Card className="flex flex-col items-start gap-2 p-4">
+                  <input
+                    title="ค้นหา"
+                    type="text"
+                    placeholder="ค้นหาชื่อวิชา"
+                    className="bg-white h-10 w-64 border-2 border-gray-300 rounded-lg px-2"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                  />
+
+                  {query && filteredSubjects.length > 0 && (
+                    <ul className="absolute top-14 left-4 w-64 bg-white border border-gray-300 rounded-lg shadow-md max-h-48 overflow-y-auto z-10">
+                      {filteredSubjects.map((subject) => (
+                        <li
+                          key={subject.subject_id}
+                          className="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                          onClick={() => setQuery(subject.title)}
+                        >
+                          {`[${subject.subject_id}] : ${subject.title}`}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <Card
+                    onClick={handleSearch}
+                    className="group shadow-md shadow-black items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400 text-white hover:to-blue-800 hover:from-cyan-600 hover:translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer w-64 h-10 flex justify-center"
+                  >
+                    <span className="font-semibold">ค้นหา</span>
+                  </Card>
+                </Card>
+              </div>
+            </Card>
+            <div className="items-end">
+              <Card
+                onClick={() => navigate("/subject/create")}
+                className="justify-center mt-14 items-end flex-none h-12 w-36 group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-white  hover:shadow-teal-800"
+              >
+                <div className=" w-36 items-center">
+                  <Typography className="font-semibold text-md  my-auto justify-self-center text-center">
+                    Add Subject
+                  </Typography>
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
 
         <Card className="mx-28 min-h-fit h-fit bg-white mb-2 mt-4">
           <div class=" grid grid-cols-2 gap-4 mx-6 mt-5 mb-12">
-            {subjectData.map((subject) => (
+            {filteredSubjects.map((subject) => (
               <div>
                 <Card className="bg-white shadow-xl shadow-red-900/20  h-72">
                   <Card
-                    onClick={() => navigate(`/topic/${subject.title}/${user.username}/${subject.id}`)}
+                    onClick={() =>
+                      navigate(
+                        `/topic/${subject.title}/${user.username}/${subject.id}`
+                      )
+                    }
                     className="z-20 group mt-3  mx-3 h-46 w-auto rounded-t-lg bg-gradient-to-tl from-red-50 hover:-translate-y-2 transition-all duration-200 delay-75 cursor-pointer  hover:bg-gradient-to-tr hover:from-red-700 hover:to-pink-900 hover:drop-shadow-2xl hover:shadow-red-400 "
                   >
                     <CardBody>
