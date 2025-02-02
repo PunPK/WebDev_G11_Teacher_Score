@@ -10,9 +10,11 @@ import {
 } from "antd";
 import ax from "../../conf/ax.js";
 import "./edit.css";
+import { useParams } from "react-router";
 
 const EditScore = ({ userId, defaultValue, closeModal, onSubmit }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { max_score } = useParams();
   const [form] = Form.useForm();
 
   const handleRowEdited = async () => {
@@ -86,7 +88,11 @@ const EditScore = ({ userId, defaultValue, closeModal, onSubmit }) => {
           label="Score :"
           rules={[{ required: true, message: "กรุณาระบุคะแนนใหม่" }]}
         >
-          <InputNumber placeholder="Enter new score" className="w-full" />
+          <InputNumber
+            max={max_score}
+            placeholder="Enter new score"
+            className="w-full"
+          />
         </Form.Item>
       </Form>
     </Modal>

@@ -21,7 +21,7 @@ const AddScoreStudentTopic = ({
   closeModal,
   onSubmit,
 }) => {
-  const { subject, topic, id } = useParams();
+  const { subject, topic, id, max_score } = useParams();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -96,17 +96,7 @@ const AddScoreStudentTopic = ({
         </Button>,
       ]}
     >
-      <Form
-        form={form}
-        layout="vertical"
-        // initialValues={
-        //   {
-        //     // title: defaultValue.title,
-        //     // description: defaultValue.description,
-        //   }
-        // }
-        onFinish={handleSubmit}
-      >
+      <Form form={form} layout="vertical" onFinish={handleSubmit}>
         <Form.Item
           name="student"
           label="เลือกนักเรียน :"
@@ -126,7 +116,11 @@ const AddScoreStudentTopic = ({
           label="คะแนน :"
           rules={[{ required: true, message: "กรุณาระบุคะแนน" }]}
         >
-          <InputNumber placeholder="กรอกคะแนน" className="w-full" />
+          <InputNumber
+            max={max_score}
+            placeholder="กรอกคะแนน"
+            className="w-full"
+          />
         </Form.Item>
       </Form>
     </Modal>
