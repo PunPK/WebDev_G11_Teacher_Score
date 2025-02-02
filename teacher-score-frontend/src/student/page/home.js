@@ -67,7 +67,7 @@ const HomeStudent = () => {
 
   return (
     <>
-      <div class=" bg-gradient-to-tl from-blue-800 to-cyan-300 min-h-screen max-h-full top-0 mt-0 z-0">
+      <div class=" bg-gradient-to-b from-blue-700 to-indigo-700 min-h-screen max-h-full top-0 mt-0 z-0">
         <Nav_lec className="z-50" />
         <Card className="mt-10 mx-auto w-72 h-24 shadow-xl bg-white mb-8">
           <Typography className="items-center justify-items-center w-fit mx-auto my-auto">
