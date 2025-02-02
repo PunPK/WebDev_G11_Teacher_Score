@@ -1,25 +1,17 @@
 import React, { useEffect, useState } from "react";
 import ax from "../conf/ax.js";
-import {
-  Card,
-  CardBody,
-  Typography,
-} from "@material-tailwind/react";
+import { Card, CardBody, Typography } from "@material-tailwind/react";
 import Nav_lec from "../components/navbar.js";
 import { Tag } from "antd";
 import defaultUserIcon from "../components/user-icon.webp";
 
 const ContactLecturer = () => {
   const [Data, setData] = useState([]);
-  const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-
 
   const fetchData = async () => {
     try {
-      setLoading(true);
       const response = await ax.get(
         "users?filters[role][name][$eq]=Lecturer&populate=*"
       );
@@ -27,9 +19,6 @@ const ContactLecturer = () => {
       setData(response.data);
     } catch (e) {
       console.error("Error fetching subjects:", e);
-      setError("Error fetching subjects. Please try again.");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -43,10 +32,10 @@ const ContactLecturer = () => {
 
   const filteredLecturer = query
     ? Data.filter(
-      (Lecturer) =>
-        Lecturer.first_name.toLowerCase().includes(query.toLowerCase()) ||
-        Lecturer.last_name.toLowerCase().includes(query.toLowerCase())
-    )
+        (Lecturer) =>
+          Lecturer.first_name.toLowerCase().includes(query.toLowerCase()) ||
+          Lecturer.last_name.toLowerCase().includes(query.toLowerCase())
+      )
     : Data;
 
   return (

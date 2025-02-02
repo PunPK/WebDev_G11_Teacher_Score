@@ -2,15 +2,18 @@ import React, { useContext } from "react";
 import { useSetState } from "react-use";
 
 import { AuthContext } from "../context/Auth.context.js";
-import { useNavigate } from "react-router";
 
 const initialState = {
+  // For Test Only
+  //student
+  // username: "pong",
+  // password: "123456",
+  //lecturer
   username: "mickey",
   password: "123456",
 };
 
 export default function Login() {
-  const navigate = useNavigate()
   const { state: ContextState, login } = useContext(AuthContext);
   const { isLoginPending, isLoggedIn, loginError } = ContextState;
   const [state, setState] = useSetState(initialState);
@@ -36,7 +39,9 @@ export default function Login() {
             <h1 class="text-black font-bold text-2xl mb-1">
               Welcome to Score anouncer
             </h1>
-            <p class="text-sm font-normal text-gray-800 mb-8">Please sign in before using</p>
+            <p class="text-sm font-normal text-gray-800 mb-8">
+              Please sign in before using
+            </p>
             <div class="flex items-center border-2 mb-8 py-2 px-3 rounded-lg border-black h-12">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

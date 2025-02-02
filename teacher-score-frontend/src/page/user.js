@@ -1,31 +1,14 @@
-// import Bar from "../components/Navbar";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../context/Auth.context.js";
 import Nav_lec from "../components/navbar.js";
 import { Card, Typography } from "@material-tailwind/react";
 import defaultUserIcon from "../components/user-icon.webp";
 
 function UserPage() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isModalShow, setIsModalShow] = useState(false);
-  const [editData, setEditData] = useState(null);
   const { state: ContextState } = useContext(AuthContext);
   const { user } = ContextState;
-  // console.log(user);
 
-  const openModal = (record) => {
-    setEditData(record);
-    setIsModalShow(true);
-  };
-
-  const closeModal = () => {
-    setIsModalShow(false);
-    setEditData(null);
-  };
-  useEffect(() => {
-    // console.log(user);
-  }, [user]);
-  if (isLoading) return <div>Loading...</div>;
+  useEffect(() => {}, [user]);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Table, Space, Tag, Modal } from "antd";
+import { Button, Table, Space, Modal } from "antd";
 import { BugOutlined, EditOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";

@@ -5,7 +5,7 @@ import ax from "../../conf/ax.js";
 
 const ExcelFetch = () => {
   const [data, setData] = useState([]);
-  const { state: ContextState, logout } = useContext(AuthContext);
+  const { state: ContextState } = useContext(AuthContext);
   const { user } = ContextState;
 
   const handleFileUpload = (e) => {
@@ -29,9 +29,7 @@ const ExcelFetch = () => {
 
   const uploadToStrapi = async () => {
     try {
-      const response = await ax.get("http://localhost:1337/api/users", {
-      });
-
+      const response = await ax.get("http://localhost:1337/api/users", {});
 
       const existingData = response.data;
 
@@ -44,10 +42,9 @@ const ExcelFetch = () => {
           match.score = match.score || [];
           match.score.push(newItem.score);
 
-          await ax.put(
-            `http://localhost:1337/api/users/${match.id}`,
-            { score: match.score }
-          );
+          await ax.put(`http://localhost:1337/api/users/${match.id}`, {
+            score: match.score,
+          });
         }
       });
 
@@ -65,11 +62,7 @@ const ExcelFetch = () => {
         <h1>Hello {user.email}</h1>
       </div>
       <div className="grid bg-gradient-to-tl from-blue-600 to-cyan-400 h-screen mt-0 top-0">
-        <input
-          type="file"
-          accept=".xlsx, .xls"
-          onChange={handleFileUpload}
-        />
+        <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
 
         {data.length > 0 && (
           <table className="table">

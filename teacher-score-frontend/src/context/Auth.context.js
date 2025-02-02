@@ -82,7 +82,7 @@ const fetchRole = async (jwt) => {
     const response = await ax.get(`/users/me?populate=role`);
     // console.log(response);
     if (response.data) {
-      return response.data.role?.name || "No role assigned";
+      return response.data.role?.name || "No role";
     }
   } catch (error) {
     console.error("Failed to fetch role:", error);
@@ -117,7 +117,7 @@ const loadPersistedJwt = async (callback) => {
       axData.jwt = persistedJwt;
       const response = await ax.get(conf.jwtUserEndpoint);
       if (response.data.id > 0) {
-        const userRole = response.data.role?.name || "No role assigned";
+        // const userRole = response.data.role?.name || "No role assigned";
         // console.log("Persisted User Role:", userRole);
         callback(null, { user: response.data });
       } else {
