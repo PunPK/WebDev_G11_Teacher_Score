@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import {
   Modal,
   Form,
-  Input,
-  Button,
   message,
   InputNumber,
   Typography,
@@ -12,7 +10,7 @@ import ax from "../../conf/ax.js";
 import "./edit.css";
 import { useParams } from "react-router";
 
-const EditScore = ({ userId, defaultValue, closeModal, onSubmit }) => {
+const EditScore = ({ defaultValue, closeModal }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { max_score } = useParams();
   const [form] = Form.useForm();
@@ -21,7 +19,7 @@ const EditScore = ({ userId, defaultValue, closeModal, onSubmit }) => {
     try {
       const formData = await form.validateFields();
       setIsLoading(true);
-      console.log(formData.Score);
+      // console.log(formData.Score);
       const response = await ax.put(
         `http://localhost:1337/api/scores/${defaultValue.documentId}`,
 
@@ -40,7 +38,7 @@ const EditScore = ({ userId, defaultValue, closeModal, onSubmit }) => {
       setIsLoading(false);
     }
   };
-  console.log(defaultValue);
+  // console.log(defaultValue);
   return (
     <Modal
       className="custom-modal"
@@ -77,7 +75,7 @@ const EditScore = ({ userId, defaultValue, closeModal, onSubmit }) => {
           name="Name"
           label="ชื่อนักศึกษา :"
           className="font-semibold text-xl"
-          //   rules={[{ required: true, message: "กรุณาระบุชื่อหัวข้อ" }]}
+        //   rules={[{ required: true, message: "กรุณาระบุชื่อหัวข้อ" }]}
         >
           <Typography.Text strong>
             {`Student Name : ${defaultValue.users_owner.first_name} ${defaultValue.users_owner.last_name}`}

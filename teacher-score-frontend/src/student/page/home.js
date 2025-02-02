@@ -90,45 +90,43 @@ const HomeStudent = () => {
               </div>
             </Card>
 
-            <div className="flex-auto self-end justify-items-end">
-              <Card className="flex flex-row items-end gap-2 p-1">
-                <input
-                  title="ค้นหา"
-                  type="text"
-                  placeholder="ค้นหาชื่อวิชา"
-                  className="flex-1 bg-white h-10 border-2 w-[68rem] border-gray-300 rounded-lg px-2"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                />
+            <Card className="flex flex-row flex-1 items-end gap-2 p-1 self-end justify-end">
+              <input
+                title="ค้นหา"
+                type="text"
+                placeholder="ค้นหาชื่อวิชา"
+                className="flex-1 bg-white h-10 border-2 border-gray-300 rounded-lg px-2"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
 
-                {query && filteredSubjects.length > 0 && (
-                  <ul className="absolute top-12 flex-1 w-[68rem] bg-white border border-gray-300 rounded-lg shadow-md max-h-48 overflow-y-auto z-30">
-                    {filteredSubjects.map((subject) => (
-                      <li
-                        key={subject.subject_id}
-                        className="px-3 py-2 cursor-pointer hover:bg-gray-200"
-                        onClick={() => setQuery(subject.title)}
-                      >
-                        {`[${subject.subject_id}] : ${subject.title}`}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                <Card
-                  onClick={handleSearch}
-                  className="group flex-none shadow-md mr-2 shadow-black self-center items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400 text-white hover:to-blue-800 hover:from-cyan-600 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer w-24 h-10 flex justify-center"
-                >
-                  <span className="font-semibold">ค้นหา</span>
-                </Card>
+              {query && filteredSubjects.length > 0 && (
+                <ul className="absolute flex-none top-12  left-2 w-[89.5%] bg-white border border-gray-300 rounded-lg shadow-md max-h-48 overflow-y-auto z-30">
+                  {filteredSubjects.map((subject) => (
+                    <li
+                      key={subject.subject_id}
+                      className="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                      onClick={() => setQuery(subject.title)}
+                    >
+                      {`[${subject.subject_id}] : ${subject.title}`}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <Card
+                onClick={handleSearch}
+                className="group flex-none shadow-md mr-2 shadow-black self-center items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400 text-white hover:to-blue-800 hover:from-cyan-600 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer w-24 h-10 flex justify-center"
+              >
+                <span className="font-semibold">ค้นหา</span>
               </Card>
-            </div>
+            </Card>
 
           </div>
         </div>
 
-        <Card className="mx-28 h-fit bg-white my-2">
+        <Card className="mx-28 h-fit bg-white mt-2">
           {filteredSubjects.length > 0 ?
-            <div class=" grid grid-cols-2 gap-6 mx-6 my-6">
+            <div class=" grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 gap-6 mx-6 my-6">
               {filteredSubjects.map((subject) => (
                 <Card
                   onClick={() =>

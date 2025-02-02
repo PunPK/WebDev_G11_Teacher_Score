@@ -40,10 +40,10 @@ function StudentListPage() {
 
   return (
     <>
-      <Nav_lec />
-      <div class="grid bg-gradient-to-tl from-red-400 to-pink-500 h-screen">
+      <div class="bg-gradient-to-tl from-teal-800 to-cyan-300  min-h-screen max-h-full top-0  z-0">
+        <Nav_lec />
         <Card
-          onClick={() => navigate("/")}
+          onClick={() => navigate(-1)}
           className="mt-3 ml-7 w-24 h-12 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
         >
           <svg
@@ -63,12 +63,17 @@ function StudentListPage() {
           <p className="font-extrabold w-20 text-center">Back</p>
         </Card>
 
-        <body className="bg-white rounded-md mx-14 my-4 custom-table">
+        <Card className=" mx-auto min-w-38 max-w-[28rem] h-24 shadow-xl bg-white">
+          <Typography className="font-bold items-center justify-items-center w-fit mx-auto my-auto text-3xl font-sans">
+            นักศึกษาในรายวิชา
+          </Typography>
+        </Card>
+
+        <Card className="bg-white rounded-md mx-14 my-4 custom-table">
           <Spin spinning={isLoading}>
-            <Typography.Title>Student All In This Subject:</Typography.Title>
             <UserTable data={[student]} />
           </Spin>
-        </body>
+        </Card>
       </div>
     </>
   );

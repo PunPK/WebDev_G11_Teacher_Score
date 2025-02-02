@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 import Nav_lec from "../../components/navbar.js";
 import Edit from "../components/editSubject.js";
+import AddSubjectModal from "../components/addSubject.js"
 import { Popconfirm } from "antd";
 
 const HomeLecturer = () => {
@@ -56,6 +57,25 @@ const HomeLecturer = () => {
     } finally {
     }
   };
+
+  const [isModalShow2, setIsModalShow2] = useState(false);
+  const [currentUserId2, setCurrentUserId2] = useState(null);
+  const [currentData2, setCurrentData2] = useState(null);
+  const openModal2 = (id, data) => {
+    setCurrentUserId2(id);
+    setCurrentData2(data);
+    console.log("Open modal2...");
+    setIsModalShow2(true);
+  };
+
+  const closeModal2 = () => {
+    setCurrentData2(null);
+    setCurrentUserId2(null);
+    console.log("Closing modal2...");
+    setIsModalShow2(false);
+    fetchSubject(user.id);
+  };
+
   const handleRowDeleted = async (itemId) => {
     try {
       setIsLoading(true);
@@ -96,7 +116,7 @@ const HomeLecturer = () => {
           </Typography>
         </Card>
         <div className=" mb-4 mx-28 items-start">
-          <div className="flex gap-10  h-fit">
+          <div className="flex gap-10 h-fit">
             <Card className="bg-white flex-none h-24 w-64">
               <div class="btn">
                 <CardBody>
@@ -110,42 +130,41 @@ const HomeLecturer = () => {
               </div>
             </Card>
 
-            <div className="flex-auto self-end justify-items-end">
-              <Card className="flex flex-row items-end gap-2 p-1">
-                <input
-                  title="ค้นหา"
-                  type="text"
-                  placeholder="ค้นหาชื่อวิชา"
-                  className="flex-auto bg-white h-10 border-2  border-gray-300 rounded-lg px-2"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                />
+            <Card className="flex flex-row flex-1 items-end gap-2 p-1 self-end justify-end">
+              <input
+                title="ค้นหา"
+                type="text"
+                placeholder="ค้นหาชื่อวิชา"
+                className="flex-1 bg-white h-10 w-max border-2  border-gray-300 rounded-lg px-2"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
 
-                {query && filteredSubjects.length > 0 && (
-                  <ul className="absolute top-12 w-[55rem] left-2 flex-1 bg-white border border-gray-300 rounded-lg shadow-md max-h-48 overflow-y-auto z-30">
-                    {filteredSubjects.map((subject) => (
-                      <li
-                        key={subject.subject_id}
-                        className="px-3 py-2 cursor-pointer hover:bg-gray-200"
-                        onClick={() => setQuery(subject.title)}
-                      >
-                        {`[${subject.subject_id}] : ${subject.title}`}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                <Card
-                  onClick={handleSearch}
-                  className="group flex-none shadow-md mr-2 shadow-black self-center items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400 text-white hover:to-blue-800 hover:from-cyan-600 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer w-24 h-10 flex justify-center"
-                >
-                  <span className="font-semibold">ค้นหา</span>
-                </Card>
+              {query && filteredSubjects.length > 0 && (
+                <ul className="absolute top-12 w-[87.5%] left-2 flex-1 bg-white border border-gray-300 rounded-lg shadow-md max-h-48 overflow-y-auto z-30">
+                  {filteredSubjects.map((subject) => (
+                    <li
+                      key={subject.subject_id}
+                      className="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                      onClick={() => setQuery(subject.title)}
+                    >
+                      {`[${subject.subject_id}] : ${subject.title}`}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <Card
+                onClick={handleSearch}
+                className="group flex-none shadow-md mr-2 shadow-black self-center items-center justify-items-center rounded-bl-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400 text-white hover:to-blue-800 hover:from-cyan-600 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer w-24 h-10 flex justify-center"
+              >
+                <span className="font-semibold">ค้นหา</span>
               </Card>
-            </div>
+            </Card>
+
 
             <div className="self-end justify-self-end">
               <Card
-                onClick={() => navigate("/subject/create")}
+                onClick={() => openModal2()}
                 className="justify-center items-end flex-none h-12 w-36 group bg-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-white  hover:shadow-teal-800"
               >
                 <div className=" w-36 items-center">
@@ -160,7 +179,7 @@ const HomeLecturer = () => {
 
         <Card className="mx-28 min-h-fit h-fit bg-white mt-4">
           {filteredSubjects.length > 0 ?
-            <div class=" grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 mx-6 mt-5 mb-12">
+            <div class=" grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 gap-4 mx-6 mt-5 mb-12">
               {filteredSubjects.map((subject) => (
                 <div>
                   <Card className="bg-white shadow-xl shadow-red-900/20  h-72">
@@ -258,7 +277,14 @@ const HomeLecturer = () => {
               closeModal={closeModal}
               onSubmit={(updatedData) =>
                 console.log("Updated Data")
-              }
+              } />)}
+          {isModalShow2 && (
+            <AddSubjectModal
+              userId={currentUserId}
+              defaultValue={currentData}
+              closeModal={closeModal2}
+              onSubmit={(updatedData) =>
+                console.log("Updated Data")}
             />
           )}
         </Card>

@@ -99,13 +99,13 @@ const TopicLecturer = () => {
           </Typography>
         </Card>
 
-        <div className="justify-items-end mb-5 mr-[8.5rem] h-12 mt-2">
+        <div className="justify-items-end mr-[8.5rem] h-12 mt-2">
           <Card
             onClick={() => navigate(`/topic/create/${subject}`)}
-            className="justify-center items-center flex-none h-12 w-32 group bg-gradient-to-tr from-blue-50/40 to-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-white  hover:shadow-blue-800"
+            className="justify-center items-center flex-none h-10 w-32 group bg-gradient-to-tr from-teal-900 to-cyan-900 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-br hover:from-teal-900 hover:to-green-900  hover:shadow-teal-800"
           >
             <div className=" w-36 items-center">
-              <Typography className="font-semibold text-lg my-auto justify-self-center text-center">
+              <Typography className="font-semibold text-lg my-auto justify-self-center text-center text-white group-hover:text-yellow-600">
                 Add Topic
               </Typography>
             </div>
@@ -117,7 +117,7 @@ const TopicLecturer = () => {
             <div className="my-auto mx-auto">
               <CardBody>
                 <Typography className="font-bold text-md">
-                  ชื่อหัวข้อ
+                  ชื่อหัวข้อ (คลิกเพื่อไปสู่หน้าคะแนน)
                 </Typography>
               </CardBody>
             </div>
@@ -185,7 +185,7 @@ const TopicLecturer = () => {
                           `/topic/detail/${topic.topic_title}/${documentId}/${topic.max_score}/${topic.id}/${topic.documentId}`
                         )
                       }
-                      className="flex-1 group w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl items-start justify-center group-hover:text-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-pink-900 hover:to-red-500  hover:shadow-red-400 "
+                      className="flex-1 group w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl items-start justify-center group-hover:text-white hover:-translate-y-0.5 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-pink-900 hover:to-red-500  hover:shadow-red-400 "
                     >
                       <div className="my-auto">
                         <CardBody>

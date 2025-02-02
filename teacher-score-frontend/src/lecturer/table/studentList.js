@@ -35,5 +35,5 @@ export default function UserTable(props) {
     },
   ];
   // console.log(props.data[0]);
-  return <Table columns={columns} dataSource={props.data[0]} rowKey="id" />;
+  return <Table columns={columns} dataSource={props.data[0]} pagination={false} rowKey="id" />;
 }

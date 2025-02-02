@@ -145,11 +145,12 @@ const AddIDStudent = () => {
           </svg>
           <p className="font-extrabold w-20 text-center">Back</p>
         </Card>
-        <div>
-          <Card >
-            <Typography>เพิ่มนักศึกษาลงในวิชา</Typography>
-          </Card>
-        </div>
+        <Card className=" mx-auto min-w-38 max-w-[28rem] h-24 shadow-xl bg-white">
+          <Typography className="font-bold items-center justify-items-center w-fit mx-auto my-auto text-3xl font-semibold  text-black/80">
+            เพิ่มนักศึกษาลงในวิชา
+
+          </Typography>
+        </Card>
         <div className="flex justify-end gap-4 mt-5 mb-3 mr-14">
           <Card
             onClick={() => navigate(`/subject/addstudent/${id}/${subject}`)}
@@ -172,20 +173,23 @@ const AddIDStudent = () => {
             </div>
           </Card>
         </div>
-        <Table
-          dataSource={students}
-          columns={columns}
-          rowKey="id"
-          className="custom-table mx-12"
-        />
-        <button
-          type="primary"
-          onClick={handleSubmit}
-          loading={loading}
-          className="mx-52 mt-2 mb-4 rounded-3xl bg-teal-700 hover:bg-teal-900 text-3xl text-white font-bold"
-        >
-          Add Selected Students
-        </button>
+        <Card className="mx-14">
+          <Table
+            dataSource={students}
+            columns={columns}
+            pagination={false}
+            rowKey="id"
+            className="custom-table mx-8 mt-6 mb-2"
+          />
+          <button
+            type="primary"
+            onClick={handleSubmit}
+            loading={loading}
+            className="justify-self-center w-8/12 self-center mx-auto mb-4 rounded-lg bg-teal-700 hover:bg-teal-900 text-3xl text-white font-bold"
+          >
+            Add Selected Students
+          </button>
+        </Card>
       </div>
     </div>
   );

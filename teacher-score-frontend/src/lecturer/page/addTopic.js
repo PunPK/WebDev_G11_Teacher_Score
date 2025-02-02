@@ -5,7 +5,7 @@ import ax from "../../conf/ax";
 import * as XLSX from "xlsx";
 import Nav_lec from "../../components/navbar";
 import "../components/edit.css";
-import { Card, Typography } from "@material-tailwind/react";
+import { Card, Typography, CardBody } from "@material-tailwind/react";
 
 const CreateTopic = () => {
   const { subject } = useParams();
@@ -93,11 +93,11 @@ const CreateTopic = () => {
   };
 
   return (
-    <div>
+    <div className=" bg-gradient-to-tl from-teal-800 to-cyan-300  min-h-screen max-h-full top-0  z-0">
       <Nav_lec />
       <Card
         onClick={() => navigate(-1)}
-        className="mt-3 -mb-24 ml-7 w-24 h-12 shadow-xl bg-white items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
+        className="mt-3 mb-6 ml-7 w-24 h-12 shadow-xl bg-white items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -115,11 +115,15 @@ const CreateTopic = () => {
         </svg>
         <p className="font-extrabold w-20 text-center">Back</p>
       </Card>
-      <div className="flex mx-20 justify-center items-center min-h-screen">
+      <Card className=" mx-auto min-w-38 max-w-[28rem] h-24 shadow-xl bg-white mb-6">
+        <Typography className="font-bold items-center justify-items-center w-fit mx-auto my-auto">
+          <h3 class="mx-12 text-3xl font-sans ">เพิ่มหัวข้อประกาศคะแนน</h3>
+        </Typography>
+      </Card>
+      <div className="flex mx-20 justify-center items-center">
         <Card
-          className="mx-24 items-center bg-white shadow-lg"
+          className="custom-modal mx-24 items-center bg-white shadow-lg"
         >
-          <Typography variant="h5">Create New Topic</Typography>
           <Form layout="vertical" onFinish={handleSubmit} className="bg-white">
             <Form.Item
               label="Title"

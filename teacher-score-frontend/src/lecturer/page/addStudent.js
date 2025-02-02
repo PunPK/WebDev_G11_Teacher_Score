@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Form, Button, message } from "antd";
-import { Card } from "@material-tailwind/react";
+import { Card, Typography } from "@material-tailwind/react";
 import ax from "../../conf/ax";
 import * as XLSX from "xlsx";
 import Nav_lec from "../../components/navbar";
@@ -92,7 +92,7 @@ const AddStudent = () => {
   };
 
   return (
-    <div>
+    <div className=" bg-gradient-to-tl from-teal-800 to-cyan-300  min-h-screen max-h-full top-0  z-0">
       <Nav_lec />
       <Card
         onClick={() => navigate(-1)}
@@ -114,22 +114,27 @@ const AddStudent = () => {
         </svg>
         <p className="font-extrabold w-20 text-center">Back</p>
       </Card>
-      <div className="flex mx-20 justify-center items-center min-h-screen">
+      <Card className=" mx-auto min-w-38 max-w-[28rem] h-24 shadow-xl bg-white">
+        <Typography className="font-bold items-center justify-items-center w-fit mx-auto my-auto mx-12 text-3xl">
+          เพิ่มนักศึกษาโดยใช้ Excel
+        </Typography>
+      </Card>
+      <div className="flex mx-20 justify-center items-center  mt-9">
         <Card className="custom-modal mx-24 items-center  shadow-lg">
-          <div className="group h-12 w-full shadow-md shadow-black items-center justify-items-center rounded-t-lg hover:bg-gradient-to-tr bg-gradient-to-tr from-light-blue-700 to-blue-400  text-white">
-            <span className="justify-self-center my-auto font-semibold text-center">
-              Add Student
-            </span>
+          <div className=" h-12 w-full justify-items-center items-center">
+            <Typography className="justify-self-center self-center my-auto font-semibold text-center text-2xl mt-1.5">
+              Put your excel here:
+            </Typography>
           </div>
 
-          <Form layout="vertical" onFinish={handleSubmit}>
+          <Form title="Add your exel" className="custom-modal rounded-none" layout="vertical" onFinish={handleSubmit}>
             <input
               type="file"
               accept=".xlsx, .xls"
               onChange={handleFileUpload}
             />
             {data.length > 0 && (
-              <table className="table">
+              <table className="table mt-2.5">
                 <thead>
                   <tr>
                     {Object.keys(data[0]).map((key) => (
@@ -148,15 +153,16 @@ const AddStudent = () => {
                 </tbody>
               </table>
             )}
-            <Form.Item>
-              <Button
+            <Form.Item className=" mt-4 mx-32 h-8">
+              <button
                 type="primary"
-                htmlType="submit"
+                onClick={handleSubmit}
                 loading={loading}
-                className="w-full"
-              >
-                Upload Student
-              </Button>
+                className=" w-full self-center mb-4 rounded-lg bg-teal-700 hover:bg-teal-900 text-2xl text-white font-bold"
+              ><Typography className="m-3 text-2xl font-semibold font-sans">
+                  Upload Student
+                </Typography>
+              </button>
             </Form.Item>
           </Form>
         </Card>
