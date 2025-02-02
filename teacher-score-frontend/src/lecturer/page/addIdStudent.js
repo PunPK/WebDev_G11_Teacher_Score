@@ -146,7 +146,7 @@ const AddIDStudent = () => {
           <p className="font-extrabold w-20 text-center">Back</p>
         </Card>
         <Card className=" mx-auto min-w-38 max-w-[28rem] h-24 shadow-xl bg-white">
-          <Typography className="font-bold items-center justify-items-center w-fit mx-auto my-auto text-3xl font-semibold  text-black/80">
+          <Typography className=" items-center justify-items-center w-fit mx-auto my-auto text-3xl font-semibold  text-black/80">
             เพิ่มนักศึกษาลงในวิชา
 
           </Typography>
