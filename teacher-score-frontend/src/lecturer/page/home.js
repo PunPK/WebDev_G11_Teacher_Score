@@ -160,7 +160,7 @@ const HomeLecturer = () => {
 
         <Card className="mx-28 min-h-fit h-fit bg-white mt-4">
           {filteredSubjects.length > 0 ?
-            <div class=" grid grid-cols-2 gap-4 mx-6 mt-5 mb-12">
+            <div class=" grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 mx-6 mt-5 mb-12">
               {filteredSubjects.map((subject) => (
                 <div>
                   <Card className="bg-white shadow-xl shadow-red-900/20  h-72">
