@@ -72,7 +72,7 @@ const TopicLecturer = () => {
   return (
     <>
       <Nav_lec />
-      <div class="grid bg-gradient-to-tr from-red-400 to-pink-500 min-h-screen max-h-full top-0 mt-0 z-10">
+      <div class="grid bg-gradient-to-t from-pink-900 to-purple-800 min-h-screen max-h-full top-0 mt-0 z-10">
         <Card
           onClick={() => navigate(-1)}
           className="mt-3 -mb-14 ml-7 w-24 h-12 shadow-xl bg-white items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
@@ -177,7 +177,7 @@ const TopicLecturer = () => {
         </div>
         <Card className="mx-28 h-fit bg-white/15 -mt-8 mb-2">
           <div class="  mx-6 my-5">
-            {topicData.map((topic) => (
+            {topicData > 0 ? topicData.map((topic) => (
               <>
                 <div className="flex gap-4 w-auto my-4 h-12">
                   <Card
@@ -298,7 +298,10 @@ const TopicLecturer = () => {
                   </Popconfirm>
                 </div>
               </>
-            ))}
+            )) :
+              <Typography className="text-white text-4xl text-center">
+                ยังไม่มีหัวข้อในวิชานี้
+              </Typography>}
           </div>
         </Card>
         {isModalShow && (

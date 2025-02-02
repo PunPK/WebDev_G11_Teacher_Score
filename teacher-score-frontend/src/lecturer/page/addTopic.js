@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Form, Input, Button, Card, message, InputNumber, Typography } from "antd";
+import { Form, Input, Button, message, InputNumber, } from "antd";
 import ax from "../../conf/ax";
 import * as XLSX from "xlsx";
 import Nav_lec from "../../components/navbar";
 import "../components/edit.css";
+import { Card, Typography } from "@material-tailwind/react";
 
 const CreateTopic = () => {
   const { subject } = useParams();
@@ -96,7 +97,7 @@ const CreateTopic = () => {
       <Nav_lec />
       <Card
         onClick={() => navigate(-1)}
-        className="mt-3 ml-7 w-32 h-22 shadow-xl bg-white mb-6 items-center justify-items-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
+        className="mt-3 -mb-24 ml-7 w-24 h-12 shadow-xl bg-white items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +106,6 @@ const CreateTopic = () => {
           stroke-width="2"
           stroke="currentColor"
           class="size-5"
-          className="self-center justify-self-center"
         >
           <path
             stroke-linecap="round"
@@ -117,10 +117,10 @@ const CreateTopic = () => {
       </Card>
       <div className="flex mx-20 justify-center items-center min-h-screen">
         <Card
-          title="Create New Topic"
-          className="custom-modal mx-24 items-center  shadow-lg"
+          className="mx-24 items-center bg-white shadow-lg"
         >
-          <Form layout="vertical" onFinish={handleSubmit}>
+          <Typography variant="h5">Create New Topic</Typography>
+          <Form layout="vertical" onFinish={handleSubmit} className="bg-white">
             <Form.Item
               label="Title"
               name="title"
@@ -151,7 +151,7 @@ const CreateTopic = () => {
             />
             {data.length > 0 && (
               <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+                <thead class="text-xs text-gray-900 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
                     {Object.keys(data[0]).map((key) => (
                       <th key={key}>{key}</th>

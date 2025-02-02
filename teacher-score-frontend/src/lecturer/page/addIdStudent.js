@@ -127,7 +127,7 @@ const AddIDStudent = () => {
   return (
     <div>
       <Nav_lec />
-      <div class="grid bg-gradient-to-tl from-red-400 to-pink-500 h-screen">
+      <div class="grid bg-gradient-to-tl from-blue-400 to-teal-500 h-screen">
         <Card
           onClick={() => navigate(-1)}
           className="mt-3 ml-7 w-24 h-12 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
@@ -174,16 +174,16 @@ const AddIDStudent = () => {
           dataSource={students}
           columns={columns}
           rowKey="id"
-          className="custom-table"
+          className="custom-table mx-12"
         />
-        <Button
+        <button
           type="primary"
           onClick={handleSubmit}
           loading={loading}
-          className="mr-12"
+          className="mx-52 mt-2 mb-4 rounded-3xl bg-teal-700 hover:bg-teal-900 text-3xl text-white font-bold"
         >
           Add Selected Students
-        </Button>
+        </button>
       </div>
     </div>
   );

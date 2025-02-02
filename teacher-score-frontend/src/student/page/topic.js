@@ -98,63 +98,69 @@ const HomeStudent = () => {
         </Card>
 
         <Card className="mx-32 h-fit mt-2 z-10">
-          <div className="mx-6 my-5">
-            {topicData.map((topic) => (
-              <Card className="bg-white z-20 h-full mb-3">
-                <CardBody>
-                  <Typography className=" " variant="h2">
-                    {topic.topic_title}
-                  </Typography>
-                  <Typography className="group-hover:text-white text-lg">
-                    อัพเดพล่าสุด{" "}
-                    {dayjs(user.updatedAt).format(
-                      "DD / MM / YYYY เวลา HH:mm น."
-                    )}
-                  </Typography>
-                  <div className="w-full">
-                    <div className="mb-2 flex items-center justify-between gap-4">
-                      <Typography color="blue-gray" variant="h6">
-                        คะแนนที่ได้ :
-                      </Typography>
-                      <Typography
-                        color="blue-gray"
-                        className="font-semibold"
-                        variant="h5"
-                      >
-                        {topic.score_id.length !== 0
-                          ? topic.score_id[0].score
-                          : "ไม่มีคะแนน"}{" "}
-                        / {topic.max_score} ({" "}
-                        {topic.score_id.length !== 0
-                          ? (
+          {topicData.length > 0 ?
+            <div className="mx-6 my-5">
+              {topicData.map((topic) => (
+                <Card className="bg-white z-20 h-full mb-3">
+                  <CardBody>
+                    <Typography className=" " variant="h2">
+                      {topic.topic_title}
+                    </Typography>
+                    <Typography className="group-hover:text-white text-lg">
+                      อัพเดพล่าสุด{" "}
+                      {dayjs(user.updatedAt).format(
+                        "DD / MM / YYYY เวลา HH:mm น."
+                      )}
+                    </Typography>
+                    <div className="w-full">
+                      <div className="mb-2 flex items-center justify-between gap-4">
+                        <Typography color="blue-gray" variant="h6">
+                          คะแนนที่ได้ :
+                        </Typography>
+                        <Typography
+                          color="blue-gray"
+                          className="font-semibold"
+                          variant="h5"
+                        >
+                          {topic.score_id.length !== 0
+                            ? topic.score_id[0].score
+                            : "ไม่มีคะแนน"}{" "}
+                          / {topic.max_score} ({" "}
+                          {topic.score_id.length !== 0
+                            ? (
                               (topic.score_id[0].score / topic.max_score) *
                               100
                             ).toFixed(2)
-                          : "0"}
-                        % )
-                      </Typography>
+                            : "0"}
+                          % )
+                        </Typography>
+                      </div>
+                      <Progress
+                        size="lg"
+                        color={
+                          topic.score_id.length !== 0
+                            ? (topic.score_id[0].score / topic.max_score) * 100 >=
+                              70
+                              ? "green"
+                              : "red"
+                            : ""
+                        }
+                        value={
+                          topic.score_id.length !== 0
+                            ? (topic.score_id[0].score / topic.max_score) * 100
+                            : "ไม่มีคะแนน"
+                        }
+                      />
                     </div>
-                    <Progress
-                      size="lg"
-                      color={
-                        topic.score_id.length !== 0
-                          ? (topic.score_id[0].score / topic.max_score) * 100 >=
-                            70
-                            ? "green"
-                            : "red"
-                          : ""
-                      }
-                      value={
-                        topic.score_id.length !== 0
-                          ? (topic.score_id[0].score / topic.max_score) * 100
-                          : "ไม่มีคะแนน"
-                      }
-                    />
-                  </div>
-                </CardBody>
-              </Card>
-            ))}
-          </div>
+                  </CardBody>
+                </Card>
+              ))}
+            </div> :
+            <div className="mx-24 my-28 items-center justify-items-center">
+              <Typography className="text-black/75 text-5xl font-medium">
+                ไม่พบหัวข้อ
+              </Typography>
+            </div>}
         </Card>
       </div>
     </>

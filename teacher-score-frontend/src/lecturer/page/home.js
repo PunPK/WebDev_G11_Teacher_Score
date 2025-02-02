@@ -247,7 +247,7 @@ const HomeLecturer = () => {
             </div>
             :
             <div className="mx-24 my-28 items-center justify-items-center">
-              <Typography className="text-black text-5xl font-bold">
+              <Typography className="text-black text-5xl font-medium">
                 ไม่พบวิชา
               </Typography>
             </div>}
