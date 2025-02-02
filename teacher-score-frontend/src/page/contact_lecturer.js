@@ -1,14 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context/Auth.context.js";
+import React, { useEffect, useState } from "react";
 import ax from "../conf/ax.js";
 import {
   Card,
   CardBody,
-  CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import { useNavigate } from "react-router";
-import dayjs from "dayjs";
 import Nav_lec from "../components/navbar.js";
 import { Tag } from "antd";
 import defaultUserIcon from "../components/user-icon.webp";
@@ -17,17 +13,9 @@ const ContactLecturer = () => {
   const [Data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
-  const [studentid, setstudentid] = useState();
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const { state: ContextState, logout } = useContext(AuthContext);
-  const { user } = ContextState;
   const [searchTerm, setSearchTerm] = useState("");
 
-  const onLogout = (e) => {
-    e.preventDefault();
-    logout();
-  };
 
   const fetchData = async () => {
     try {
@@ -35,7 +23,7 @@ const ContactLecturer = () => {
       const response = await ax.get(
         "users?filters[role][name][$eq]=Lecturer&populate=*"
       );
-      console.log(response.data);
+      // console.log(response.data);
       setData(response.data);
     } catch (e) {
       console.error("Error fetching subjects:", e);
@@ -55,10 +43,10 @@ const ContactLecturer = () => {
 
   const filteredLecturer = query
     ? Data.filter(
-        (Lecturer) =>
-          Lecturer.first_name.toLowerCase().includes(query.toLowerCase()) ||
-          Lecturer.last_name.toLowerCase().includes(query.toLowerCase())
-      )
+      (Lecturer) =>
+        Lecturer.first_name.toLowerCase().includes(query.toLowerCase()) ||
+        Lecturer.last_name.toLowerCase().includes(query.toLowerCase())
+    )
     : Data;
 
   return (

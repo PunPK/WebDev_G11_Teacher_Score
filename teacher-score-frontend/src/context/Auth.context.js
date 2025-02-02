@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSetState } from "react-use";
 import conf from "../conf/main";
 import ax, { axData } from "../conf/ax";
-import { useNavigate } from "react-router";
 
 export const AuthContext = React.createContext(null);
 
@@ -37,7 +36,7 @@ export const ContextProvider = (props) => {
       }
       const userRole = await fetchRole(result.jwt);
       // const role = userRole.type;
-      console.log(userRole);
+      // console.log(userRole);
       setLoginSuccess(true, { ...result.user, userRole });
       // navigate("/")
     } else if (error) {
@@ -81,7 +80,7 @@ export const ContextProvider = (props) => {
 const fetchRole = async (jwt) => {
   try {
     const response = await ax.get(`/users/me?populate=role`);
-    console.log(response);
+    // console.log(response);
     if (response.data) {
       return response.data.role?.name || "No role assigned";
     }
@@ -119,7 +118,7 @@ const loadPersistedJwt = async (callback) => {
       const response = await ax.get(conf.jwtUserEndpoint);
       if (response.data.id > 0) {
         const userRole = response.data.role?.name || "No role assigned";
-        console.log("Persisted User Role:", userRole);
+        // console.log("Persisted User Role:", userRole);
         callback(null, { user: response.data });
       } else {
         callback(null);

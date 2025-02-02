@@ -257,7 +257,7 @@ const HomeLecturer = () => {
               defaultValue={currentData}
               closeModal={closeModal}
               onSubmit={(updatedData) =>
-                console.log("Updated Data:", updatedData)
+                console.log("Updated Data")
               }
             />
           )}

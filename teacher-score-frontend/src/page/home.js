@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context/Auth.context.js";
+import React, { useEffect, useState } from "react";
 import ax from "../conf/ax.js";
 import { useNavigate } from "react-router";
 import dayjs from "dayjs";
@@ -9,18 +8,12 @@ import { Card, CardBody, Typography } from "@material-tailwind/react";
 const HomeLecturer = () => {
   const [subjectData, setSubjectData] = useState([]);
   const navigate = useNavigate();
-  const { state: ContextState, logout } = useContext(AuthContext);
-  const { user } = ContextState;
-  const onLogout = (e) => {
-    e.preventDefault();
-    logout();
-  };
 
   const fetchSubject = async () => {
     try {
       const subjectUrl = "http://localhost:1337/api/subjects?populate=*"
       const response = await ax.get(subjectUrl)
-      console.log(response.data.data)
+      // console.log(response.data.data)
       setSubjectData(response.data.data)
 
     } catch (e) {

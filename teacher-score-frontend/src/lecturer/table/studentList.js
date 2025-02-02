@@ -1,6 +1,5 @@
 import React from "react";
-import { Button, Table, Space, Tag, Modal, Popconfirm } from "antd";
-import { BugOutlined, EditOutlined } from "@ant-design/icons";
+import { Table, Tag, } from "antd";
 import dayjs from "dayjs";
 // import { useNavigate } from "react-router-dom";
 
@@ -35,6 +34,6 @@ export default function UserTable(props) {
       ),
     },
   ];
-  console.log(props.data[0]);
+  // console.log(props.data[0]);
   return <Table columns={columns} dataSource={props.data[0]} rowKey="id" />;
 }

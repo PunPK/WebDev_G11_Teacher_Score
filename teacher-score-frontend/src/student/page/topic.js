@@ -3,7 +3,6 @@ import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
-import TopicList from "../table/studentTopic.js";
 import { Card, CardBody } from "@material-tailwind/react";
 import Nav_lec from "../../components/navbar.js";
 import { Progress, Typography } from "@material-tailwind/react";
@@ -13,12 +12,10 @@ const HomeStudent = () => {
   const [topicData, setTopicData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
-  const [studentid, setstudentid] = useState();
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
   const { user } = ContextState;
-  const { subject, username, subject_title } = useParams();
+  const { subject, subject_title } = useParams();
 
   const onLogout = (e) => {
     e.preventDefault();
@@ -29,7 +26,7 @@ const HomeStudent = () => {
   const fetchTopic = async () => {
     setLoading(true);
     try {
-      console.log(subject);
+      // console.log(subject);
       const response = await ax.get("/topics", {
         params: {
           populate: "score_id.users_owner",
@@ -43,7 +40,7 @@ const HomeStudent = () => {
           (score) => score.users_owner.id === user.id
         ),
       }));
-      console.log(filteredData);
+      // console.log(filteredData);
       setTopicData(filteredData);
     } catch (e) {
       console.error("Error fetching student data:", e);
@@ -53,7 +50,7 @@ const HomeStudent = () => {
     }
   };
 
-  console.log(subject);
+  // console.log(subject);
 
   useEffect(() => {
     if (subject) {
@@ -128,9 +125,9 @@ const HomeStudent = () => {
                           / {topic.max_score} ({" "}
                           {topic.score_id.length !== 0
                             ? (
-                                (topic.score_id[0].score / topic.max_score) *
-                                100
-                              ).toFixed(2)
+                              (topic.score_id[0].score / topic.max_score) *
+                              100
+                            ).toFixed(2)
                             : "0"}
                           % )
                         </Typography>
@@ -140,7 +137,7 @@ const HomeStudent = () => {
                         color={
                           topic.score_id.length !== 0
                             ? (topic.score_id[0].score / topic.max_score) *
-                                100 >=
+                              100 >=
                               70
                               ? "green"
                               : "red"

@@ -1,7 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
-import { AuthContext } from "../../context/Auth.context.js";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Form, Input, Button, message } from "antd";
+import { Form, Button, message } from "antd";
 import { Card } from "@material-tailwind/react";
 import ax from "../../conf/ax";
 import * as XLSX from "xlsx";
@@ -9,14 +8,11 @@ import Nav_lec from "../../components/navbar";
 import "../components/edit.css";
 
 const AddStudent = () => {
-  const { id, subject } = useParams();
+  const { subject } = useParams();
   const [data, setData] = useState([]);
-  const [studentdata, setStudentData] = useState([]);
   const [selectedStudents, setSelectedStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { state: ContextState } = useContext(AuthContext);
-  const { user } = ContextState;
 
   useEffect(() => {
     const fetchSubject = async () => {
@@ -25,12 +21,12 @@ const AddStudent = () => {
           `/subjects/${subject}?populate=users_owner`
         );
 
-        console.log(response.data.data);
+        // console.log(response.data.data);
         const studentIds = response.data.data.users_owner.map(
           (user) => user.id
         );
 
-        console.log(studentIds);
+        // console.log(studentIds);
         setSelectedStudents(studentIds);
       } catch (error) {
         console.error("Error fetching students:", error);
@@ -48,9 +44,9 @@ const AddStudent = () => {
       // const list = [];
       // list.push(user.id);
       for (const newItem of data) {
-        console.log(newItem.id);
+        // console.log(newItem.id);
         selectedStudents.push(newItem.id);
-        console.log(selectedStudents);
+        // console.log(selectedStudents);
       }
 
       await ax.put(`subjects/${subject}?populate=*`, {
@@ -87,7 +83,7 @@ const AddStudent = () => {
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
       const parsedData = XLSX.utils.sheet_to_json(sheet);
-      console.log(parsedData);
+      // console.log(parsedData);
       setData(parsedData);
     };
     reader.onerror = (error) => {

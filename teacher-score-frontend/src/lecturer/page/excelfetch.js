@@ -1,20 +1,12 @@
 import * as XLSX from "xlsx";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
-import { useNavigate } from "react-router";
-import axios from "axios";
 
 const ExcelFetch = () => {
   const [data, setData] = useState([]);
-  const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
   const { user } = ContextState;
-
-  const onLogout = (e) => {
-    e.preventDefault();
-    logout();
-  };
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -39,7 +31,7 @@ const ExcelFetch = () => {
     try {
       const response = await ax.get("http://localhost:1337/api/users", {
       });
-      
+
 
       const existingData = response.data;
 

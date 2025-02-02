@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
-import response from "../../utils/demo/tableData";
 import Nav_lec from "../../components/navbar.js";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 import { useParams } from "react-router-dom";
@@ -313,7 +311,7 @@ const TopicLecturer = () => {
             defaultValue={currentData}
             closeModal={closeModal}
             onSubmit={(updatedData) =>
-              console.log("Updated Data:", updatedData)
+              console.log("Updated Data")
             }
           />
         )}

@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
 import { useNavigate } from "react-router";
 import Nav_lec from "../../components/navbar.js";
@@ -10,10 +9,9 @@ import { Popconfirm } from "antd";
 import EditScore from "../components/editScore.js";
 import AddScoreStudentTopic from "../components/addScoreStudent.js";
 const DetailTopicLecturer = () => {
-  const { max_score, topic, topic_title, id, documentId } = useParams();
+  const { max_score, topic_title, documentId } = useParams();
   const [topicData, setTopicData] = useState([]);
   const navigate = useNavigate();
-  const { state: ContextState, logout } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(null);
   const [isModalShow, setIsModalShow] = useState(false);
   const [currentUserId, setCurrentUserId] = useState(null);
@@ -49,12 +47,6 @@ const DetailTopicLecturer = () => {
     console.log("Closing modal2...");
     setIsModalShow2(false);
     fetchTopic();
-  };
-
-  const onLogout = (e) => {
-    e.preventDefault();
-    logout();
-    navigate("/");
   };
 
   const fetchTopic = async () => {
@@ -321,7 +313,7 @@ const DetailTopicLecturer = () => {
             defaultValue={currentData}
             closeModal={closeModal}
             onSubmit={(updatedData) =>
-              console.log("Updated Data:", updatedData)
+              console.log("Updated Data")
             }
           />
         )}
@@ -332,7 +324,7 @@ const DetailTopicLecturer = () => {
             defaultValue={currentData2}
             closeModal={closeModal2}
             onSubmit={(updatedData) =>
-              console.log("Updated Data:", updatedData)
+              console.log("Updated Data")
             }
           />
         )}

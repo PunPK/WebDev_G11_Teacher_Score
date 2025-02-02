@@ -2,9 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../context/Auth.context.js";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  Form,
-  Input,
-  Button,
   Table,
   Checkbox,
   message,
@@ -31,12 +28,12 @@ const AddIDStudent = () => {
           `/subjects/${subject}?populate=users_owner`
         );
 
-        console.log(response.data.data);
+        // console.log(response.data.data);
         const studentIds = response.data.data.users_owner.map(
           (user) => user.id
         );
 
-        console.log(studentIds);
+        // console.log(studentIds);
         setSelectedStudents(studentIds);
         fetchStudents();
       } catch (error) {
@@ -54,7 +51,7 @@ const AddIDStudent = () => {
         //     },
         //   },
         // });
-        console.log(response.data);
+        // console.log(response.data);
         setStudents(response.data);
       } catch (error) {
         console.error("Error fetching students:", error);
@@ -81,7 +78,7 @@ const AddIDStudent = () => {
       }
 
       const updatedUsers = [user.id, ...selectedStudents];
-      console.log(updatedUsers);
+      // console.log(updatedUsers);
       await ax.put(`subjects/${subject}?populate=users_owner`, {
         data: { users_owner: updatedUsers },
       });

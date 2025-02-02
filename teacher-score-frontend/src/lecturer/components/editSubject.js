@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Form, Input, Button, message } from "antd";
+import { Modal, Form, Input, message } from "antd";
 import ax from "../../conf/ax.js";
 import "./edit.css";
 
@@ -12,7 +12,7 @@ const EditSubject = ({ userId, defaultValue, closeModal, onSubmit }) => {
       const formData = await form.validateFields();
 
       setIsLoading(true);
-      const response = await ax.put(
+      await ax.put(
         `http://localhost:1337/api/subjects/${userId}`,
         { data: formData }
       );

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/Auth.context.js";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, } from "react-router-dom";
 import { Form, Input, Button, Card, message } from "antd";
 import ax from "../../conf/ax";
 import Nav_lec from "../../components/navbar";

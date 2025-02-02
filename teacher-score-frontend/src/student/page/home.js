@@ -4,7 +4,6 @@ import ax from "../../conf/ax.js";
 import {
   Card,
   CardBody,
-  CardHeader,
   Typography,
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router";
@@ -15,23 +14,13 @@ const HomeStudent = () => {
   const [subjectData, setSubjectData] = useState([]);
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
-  const [studentid, setstudentid] = useState();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { state: ContextState, logout } = useContext(AuthContext);
+  const { state: ContextState } = useContext(AuthContext);
   const { user } = ContextState;
   const [searchTerm, setSearchTerm] = useState("");
   // console.log(user);
-
-  const onLogout = (e) => {
-    e.preventDefault();
-    logout();
-  };
-
   const fetchSubject = async (userId) => {
-    // const studentIds = students.map((student) => student.id).join(",");
-    // const subjectUrl = `http://localhost:1337/api/subjects?populate=*&filters[students][id][$in]=${studentIds}`;
-
     try {
       setLoading(true);
       const response = await ax.get("http://localhost:1337/api/subjects", {
@@ -46,8 +35,8 @@ const HomeStudent = () => {
           },
         },
       });
-      console.log(user);
-      console.log(response.data);
+      // console.log(user);
+      // console.log(response.data);
       setSubjectData(response.data);
     } catch (e) {
       console.error("Error fetching subjects:", e);
@@ -60,9 +49,7 @@ const HomeStudent = () => {
   useEffect(() => {
     if (user) {
       fetchSubject(user.id);
-      // setSubjectData(user.subject);
     } else {
-      // console.error("User is undefined");
     }
   }, [user]);
 

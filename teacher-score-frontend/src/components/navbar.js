@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import { AuthContext } from "../context/Auth.context";
 import { useNavigate } from "react-router";
 import { Typography } from "@material-tailwind/react";
-import { Disclosure, DisclosureButton } from "@headlessui/react";
-import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 
 export default function Nav_lec() {

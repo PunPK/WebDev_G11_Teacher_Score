@@ -20,13 +20,13 @@ function EditSubjectInfo() {
                     },
                 }
             );
-            console.log("API Response:", response.data); 
-            const data = response.data.data; 
+            // console.log("API Response:", response.data); 
+            const data = response.data.data;
             if (data) {
-                setSubjectData(data); 
+                setSubjectData(data);
                 form.setFieldsValue({
-                    title: data.title || "", 
-                    description: data.description || "", 
+                    title: data.title || "",
+                    description: data.description || "",
                 });
             } else {
                 console.error("No data found in API response");
@@ -37,8 +37,8 @@ function EditSubjectInfo() {
             setIsLoading(false);
         }
     };
-    
-    
+
+
 
     useEffect(() => {
         fetchSubject();
@@ -47,14 +47,14 @@ function EditSubjectInfo() {
     const handleFormSubmit = async () => {
         try {
             const formData = await form.validateFields();
-            console.log("Form Data Submitted:", formData);
-    
+            // console.log("Form Data Submitted:", formData);
+
             setIsLoading(true);
             const response = await ax.put(
                 `http://localhost:1337/api/subjects/${subject}`,
                 { data: formData }
             );
-            console.log("Update Response:", response.data);
+            // console.log("Update Response:", response.data);
         } catch (errorInfo) {
             console.error("Validation or Update Failed:", errorInfo);
             if (errorInfo.response) {

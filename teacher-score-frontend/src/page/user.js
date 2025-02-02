@@ -1,22 +1,17 @@
 // import Bar from "../components/Navbar";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/Auth.context.js";
-import ax from "../conf/ax.js";
-import { Spin, Typography, Button } from "antd";
-import axios from "axios";
-import UserTable from "./UserTable";
 import Nav_lec from "../components/navbar.js";
-import { Card } from "@material-tailwind/react";
+import { Card, Typography } from "@material-tailwind/react";
 import defaultUserIcon from "../components/user-icon.webp";
 
 function UserPage() {
-  const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isModalShow, setIsModalShow] = useState(false);
   const [editData, setEditData] = useState(null);
-  const { state: ContextState, logout } = useContext(AuthContext);
+  const { state: ContextState } = useContext(AuthContext);
   const { user } = ContextState;
-  console.log(user);
+  // console.log(user);
 
   const openModal = (record) => {
     setEditData(record);
@@ -28,7 +23,7 @@ function UserPage() {
     setEditData(null);
   };
   useEffect(() => {
-    console.log(user);
+    // console.log(user);
   }, [user]);
   if (isLoading) return <div>Loading...</div>;
 
@@ -47,7 +42,7 @@ function UserPage() {
                   src={
                     user.profile_picture?.url
                       ? `http://localhost:1337${user.profile_picture.url}`
-                      : defaultUserIcon
+                      : { defaultUserIcon }
                   }
                   alt="User Avatar"
                   className="w-24 h-24 rounded-full border-4 border-white shadow-md"

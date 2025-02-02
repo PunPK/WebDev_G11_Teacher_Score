@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   Form,
-  Input,
   Button,
-  Card,
   message,
   InputNumber,
   Modal,
   Select,
 } from "antd";
 import ax from "../../conf/ax";
-import * as XLSX from "xlsx";
-import Nav_lec from "../../components/navbar";
 import "../components/edit.css";
 
 const AddScoreStudentTopic = ({
@@ -21,10 +17,8 @@ const AddScoreStudentTopic = ({
   closeModal,
   onSubmit,
 }) => {
-  const { subject, topic, id, max_score } = useParams();
-  const [data, setData] = useState([]);
+  const { subject, id, max_score } = useParams();
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const [students, setStudents] = useState([]);
   const [form] = Form.useForm();
 
@@ -51,7 +45,7 @@ const AddScoreStudentTopic = ({
       const studentId = values.student;
       const score = [];
       score.push(values.score);
-      console.log(topicId, studentId, score);
+      // console.log(topicId, studentId, score);
 
       await ax.post("scores?populate=*", {
         data: {
@@ -77,7 +71,7 @@ const AddScoreStudentTopic = ({
   };
 
   useEffect(() => {
-    console.log(userId);
+    // console.log(userId);
     fetchStudent();
   }, []);
 

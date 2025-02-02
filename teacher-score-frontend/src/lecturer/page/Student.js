@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/Auth.context.js";
 import ax from "../../conf/ax.js";
-import { Spin, Typography, Button } from "antd";
+import { Spin, Typography, } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { Card } from "@material-tailwind/react";
 import UserTable from "../table/studentList.js";
@@ -11,9 +11,9 @@ import "../components/table.css";
 function StudentListPage() {
   const [student, setStudent] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { state: ContextState, logout } = useContext(AuthContext);
+  const { state: ContextState, } = useContext(AuthContext);
   const { user } = ContextState;
-  const { id, subject } = useParams();
+  const { subject } = useParams();
   const navigate = useNavigate();
 
   const fetchStudent = async () => {
@@ -35,7 +35,7 @@ function StudentListPage() {
     }
   }, [user]);
 
-  useEffect(() => {}, [user]);
+  useEffect(() => { }, [user]);
   if (isLoading) return <div>Loading...</div>;
 
   return (

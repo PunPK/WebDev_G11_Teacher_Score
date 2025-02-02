@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Form, Input, Button, Card, message, InputNumber } from "antd";
+import { Form, Button, Card, message, } from "antd";
 import ax from "../../conf/ax";
 import * as XLSX from "xlsx";
 import Nav_lec from "../../components/navbar";
@@ -42,7 +42,7 @@ const AddScoreTopic = () => {
         if (match) {
           match.score = match.score || [];
           match.score.push(newItem.score);
-          console.log(match);
+          // console.log(match);
         }
 
         await ax.post("scores?populate=*", {

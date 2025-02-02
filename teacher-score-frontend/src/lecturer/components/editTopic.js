@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import { Modal, Form, Input, Button, message, InputNumber } from "antd";
+import { Modal, Form, Input, message, InputNumber } from "antd";
 import ax from "../../conf/ax.js";
 import "./edit.css";
-import { useParams } from "react-router";
 
 const EditTopic = ({ userId, defaultValue, closeModal, onSubmit }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
-  const { max_score } = useParams();
 
   const handleRowEdited = async () => {
     try {
       const formData = await form.validateFields();
       setIsLoading(true);
-      const response = await ax.put(
+      await ax.put(
         `http://localhost:1337/api/topics/${userId}`,
 
         { data: formData }
