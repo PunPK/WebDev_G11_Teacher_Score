@@ -76,17 +76,11 @@ const AddScoreStudentTopic = ({
   return (
     <Modal
       className="custom-modal"
-      title="Edit transactions"
+      title="Add student's score"
       open={true}
       onCancel={closeModal}
-      footer={[
-        <Button key="cancel" onClick={closeModal}>
-          Cancel
-        </Button>,
-        <Button key="submit" type="primary" onClick={() => form.submit()}>
-          Submit
-        </Button>,
-      ]}
+      footer={false}
+
     >
       <Form form={form} layout="vertical" onFinish={handleSubmit}>
         <Form.Item
@@ -113,6 +107,14 @@ const AddScoreStudentTopic = ({
             placeholder="กรอกคะแนน"
             className="w-full"
           />
+        </Form.Item>
+        <Form.Item className="justify-items-end">
+          <button key="cancel" className="text-lg mr-3 mt-3 hover:bg-transparent hover:text-red-600" onClick={closeModal}>
+            Cancel
+          </button>
+          <button type="primary" htmlType="submit" key="submit" className="justify-self-end mx-3 text-lg font-medium text-center w-16 h-10 text-white bg-blue-600 rounded-md hover:bg-blue-900">
+            Submit
+          </button>
         </Form.Item>
       </Form>
     </Modal>
