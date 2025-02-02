@@ -177,14 +177,14 @@ const TopicLecturer = () => {
         </div>
         <Card className="mx-28 h-fit bg-white/15 mt-1 mb-2">
           <div class="  mx-6 my-5">
-            {topicData.length > 0 ?
+            {topicData.length > 0 ? (
               topicData.map((topic) => (
                 <>
                   <div className="flex gap-4 w-auto my-4 h-12">
                     <Card
                       onClick={() =>
                         navigate(
-                          `/topic/detail/${topic.topic_title}/${documentId}/${topic.max_score}/${topic.id}`
+                          `/topic/detail/${topic.topic_title}/${documentId}/${topic.max_score}/${topic.documentId}`
                         )
                       }
                       className="flex-1 group w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl items-start justify-center group-hover:text-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-pink-900 hover:to-red-500  hover:shadow-red-400 "
@@ -299,11 +299,12 @@ const TopicLecturer = () => {
                     </Popconfirm>
                   </div>
                 </>
-              )) :
+              ))
+            ) : (
               <Typography className="text-white text-4xl text-center">
                 ยังไม่มีหัวข้อในวิชานี้
               </Typography>
-            }
+            )}
           </div>
         </Card>
         {isModalShow && (
