@@ -109,8 +109,7 @@ const DetailTopicLecturer = () => {
         </Card>
         <div className="justify-items-end mr-[8.5rem] h-8 mt-12 mb-3">
           <Card
-            onClick={() => openModal2(topicData.users_owner)}
-            // onClick={() => navigate(`/topic/addscore/${topic}`)}
+            onClick={() => openModal2(topicData.users_owner, topicData)}
             className=" h-8 w-28 group  bg-green-700 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800 items-center justify-center"
           >
             <div className=" w-28 items-center">
@@ -308,24 +307,18 @@ const DetailTopicLecturer = () => {
         </Card>
         {isModalShow && (
           <EditScore
-            // <AddScoreStudentTopic
             userId={currentUserId}
             defaultValue={currentData}
             closeModal={closeModal}
-            onSubmit={(updatedData) =>
-              console.log("Updated Data")
-            }
+            onSubmit={(updatedData) => console.log("Updated Data")}
           />
         )}
         {isModalShow2 && (
-          // <EditScore
           <AddScoreStudentTopic
             userId={currentUserId2}
             defaultValue={currentData2}
             closeModal={closeModal2}
-            onSubmit={(updatedData) =>
-              console.log("Updated Data")
-            }
+            onSubmit={(updatedData) => console.log("Updated Data")}
           />
         )}
       </div>

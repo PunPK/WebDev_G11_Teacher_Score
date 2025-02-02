@@ -42,7 +42,7 @@ function UserPage() {
                   src={
                     user.profile_picture?.url
                       ? `http://localhost:1337${user.profile_picture.url}`
-                      : { defaultUserIcon }
+                      : defaultUserIcon
                   }
                   alt="User Avatar"
                   className="w-24 h-24 rounded-full border-4 border-white shadow-md"

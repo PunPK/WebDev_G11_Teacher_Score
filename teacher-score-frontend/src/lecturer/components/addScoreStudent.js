@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  Form,
-  Button,
-  message,
-  InputNumber,
-  Modal,
-  Select,
-} from "antd";
+import { Form, Button, message, InputNumber, Modal, Select } from "antd";
 import ax from "../../conf/ax";
 import "../components/edit.css";
 
@@ -18,10 +11,8 @@ const AddScoreStudentTopic = ({
   onSubmit,
 }) => {
   const { subject, id, max_score } = useParams();
-  const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
   const [form] = Form.useForm();
-
   const fetchStudent = async () => {
     try {
       const response = await ax.get(
@@ -34,7 +25,6 @@ const AddScoreStudentTopic = ({
   };
 
   const handleSubmit = async (values) => {
-    setLoading(true);
     try {
       if (!subject) {
         message.error("Subject ID is missing.");
@@ -45,17 +35,26 @@ const AddScoreStudentTopic = ({
       const studentId = values.student;
       const score = [];
       score.push(values.score);
-      // console.log(topicId, studentId, score);
+      const existingUser = defaultValue.find(
+        (user) => user.users_owner.id === studentId
+      );
+      if (existingUser) {
+        await ax.put(
+          `scores/${existingUser.documentId}`,
 
-      await ax.post("scores?populate=*", {
-        data: {
-          score: score,
-          topic_score_id: {
-            id: topicId,
+          { data: { score: score } }
+        );
+      } else {
+        await ax.post("scores?populate=*", {
+          data: {
+            score: score,
+            topic_score_id: {
+              id: topicId,
+            },
+            users_owner: studentId,
           },
-          users_owner: studentId,
-        },
-      });
+        });
+      }
 
       message.success("Scores and topic created successfully!");
       closeModal();
@@ -66,7 +65,6 @@ const AddScoreStudentTopic = ({
         message.error(`Error: ${error.message}`);
       }
     } finally {
-      setLoading(false);
     }
   };
 
