@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Modal, Form, Input, Button, message, InputNumber } from "antd";
 import ax from "../../conf/ax.js";
 import "./edit.css";
+import { useParams } from "react-router";
 
 const EditTopic = ({ userId, defaultValue, closeModal, onSubmit }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
+  const { max_score } = useParams();
 
   const handleRowEdited = async () => {
     try {
@@ -64,7 +66,7 @@ const EditTopic = ({ userId, defaultValue, closeModal, onSubmit }) => {
         <Form.Item
           name="max_score"
           label="Max Score :"
-          rules={[{ required: true, message: "กรุณาระบุคะแนนเต็ม" }]}
+          rules={[{ required: true, message: "กรุณาระบุคะแนนเต็ม", max: max_score }]}
         >
           <InputNumber placeholder="Enter maximum score" className="w-full" />
         </Form.Item>

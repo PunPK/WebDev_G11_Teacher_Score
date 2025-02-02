@@ -10,21 +10,7 @@ import {
   LineChartOutlined,
 } from "@ant-design/icons";
 
-function Navbar({}) {
-  //   const { logout } = useContext(AuthContext);
-  //   const navigate = useNavigate();
-  //   const onLogout = (e) => {
-  //     e.preventDefault();
-  //     console.log("Logging out...");
-  //     navigate("/login");
-  //     logout();
-  //   };
-  //   const handleLogout = (e) => {
-  //     e.preventDefault();
-  //     if (isAuthenticated) {
-  //     }
-  //   };
-
+function Navbar({ }) {
   return (
     <div className="navigation-menu">
       <ul>
@@ -40,15 +26,6 @@ function Navbar({}) {
             <span className="menu-text">User</span>
           </Link>
         </li>
-        {/* <li>
-          Allow logout only if the user is authenticated
-          {isAuthenticated && (
-            <a href="/logout" onClick={handleLogout}>
-              <DisconnectOutlined className="menu-icon" />
-              <span className="menu-text">Logout</span>
-            </a>
-          )}
-        </li> */}
       </ul>
     </div>
   );

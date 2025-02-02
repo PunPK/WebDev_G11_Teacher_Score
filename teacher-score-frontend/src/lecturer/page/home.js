@@ -87,9 +87,9 @@ const HomeLecturer = () => {
   }, [user]);
 
   return (
-    <>
-      <Nav_lec />
-      <div class="grid bg-gradient-to-t from-pink-900 to-purple-800 min-h-screen max-h-full top-0 mt-0 z-10">
+    <div class="bg-gradient-to-t from-pink-900 to-purple-800 min-h-screen max-h-full top-0 mt-0 z-0">
+      <div >
+        <Nav_lec className="z-0" />
         <Card className="mt-10 mx-auto w-72 h-24 shadow-xl bg-white mb-8">
           <Typography className="items-center justify-items-center w-fit mx-auto my-auto">
             <h1 class="mx-auto text-5xl font-sans">รายการวิชา</h1>
@@ -116,13 +116,13 @@ const HomeLecturer = () => {
                   title="ค้นหา"
                   type="text"
                   placeholder="ค้นหาชื่อวิชา"
-                  className="flex-1 bg-white h-10 border-2 w-[58rem] border-gray-300 rounded-lg px-2"
+                  className="flex-auto bg-white h-10 border-2  border-gray-300 rounded-lg px-2"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                 />
 
                 {query && filteredSubjects.length > 0 && (
-                  <ul className="absolute top-12 w-[58rem] left-2 flex-1 bg-white border border-gray-300 rounded-lg shadow-md max-h-48 overflow-y-auto z-30">
+                  <ul className="absolute top-12 w-[55rem] left-2 flex-1 bg-white border border-gray-300 rounded-lg shadow-md max-h-48 overflow-y-auto z-30">
                     {filteredSubjects.map((subject) => (
                       <li
                         key={subject.subject_id}
@@ -158,7 +158,7 @@ const HomeLecturer = () => {
           </div>
         </div>
 
-        <Card className="mx-28 min-h-fit h-fit bg-white mb-2 mt-4">
+        <Card className="mx-28 min-h-fit h-fit bg-white mt-4">
           {filteredSubjects.length > 0 ?
             <div class=" grid grid-cols-2 gap-4 mx-6 mt-5 mb-12">
               {filteredSubjects.map((subject) => (
@@ -263,7 +263,7 @@ const HomeLecturer = () => {
           )}
         </Card>
       </div>
-    </>
+    </div>
   );
 };
 

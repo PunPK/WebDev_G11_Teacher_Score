@@ -36,12 +36,12 @@ const EditSubject = ({ userId, defaultValue, closeModal, onSubmit }) => {
       open={true}
       onCancel={closeModal}
       footer={[
-        <Button key="cancel" onClick={closeModal}>
+        <button key="cancel" className="text-lg mr-3 mt-3 l-0 hover:bg-transparent hover:text-red-600" onClick={closeModal}>
           Cancel
-        </Button>,
-        <Button key="submit" type="primary" onClick={handleRowEdited}>
+        </button>,
+        <button key="submit" className="mx-3 text-lg font-medium text-center w-16 h-10 text-white bg-blue-600 rounded-md hover:bg-blue-900" type="primary" onClick={handleRowEdited}>
           Edit
-        </Button>,
+        </button>,
       ]}
     >
       <Form

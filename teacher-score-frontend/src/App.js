@@ -63,7 +63,7 @@ function App() {
               element={<TopicLecturer />}
             />
             <Route
-              path="/topic/detail/:subject/:topic/:id"
+              path="/topic/detail/:topic_title/:subject/:max_score/:id"
               element={<DetailTopicLecturer />}
             />
             <Route path="/topic/create/:subject" element={<CreateTopic />} />

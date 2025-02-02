@@ -71,11 +71,11 @@ const TopicLecturer = () => {
 
   return (
     <>
-      <Nav_lec />
-      <div class="grid bg-gradient-to-t from-pink-900 to-purple-800 min-h-screen max-h-full top-0 mt-0 z-10">
+      <div class="bg-gradient-to-t from-pink-900 to-purple-800 min-h-screen max-h-full top-0 mt-0 z-0">
+        <Nav_lec className="z-50" />
         <Card
           onClick={() => navigate(-1)}
-          className="mt-3 -mb-14 ml-7 w-24 h-12 shadow-xl bg-white items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
+          className="mt-3 mb-8 ml-7 w-24 h-12 shadow-xl bg-white items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -94,14 +94,14 @@ const TopicLecturer = () => {
           <p className="font-extrabold w-20 text-center">Back</p>
         </Card>
 
-        <Card className=" mx-auto w-auto h-24 shadow-xl bg-white -mb-6">
+        <Card className=" mx-auto min-w-38 max-w-[38rem] h-24 shadow-xl bg-white mb-6">
           <Typography className="font-extrabold items-center justify-items-center w-fit mx-auto my-auto">
             <h3 class="mx-12 text-3xl font-sans ">ประกาศคะแนนวิชา</h3>
             <h1 class="mx-12 text-3xl font-sans ">{subject_title}</h1>
           </Typography>
         </Card>
 
-        <div className="justify-items-end -mb-24 mr-[8.5rem] h-12 mt-2">
+        <div className="justify-items-end mb-5 mr-[8.5rem] h-12 mt-2">
           <Card
             onClick={() => navigate(`/topic/create/${subject}`)}
             className="justify-center items-center flex-none h-12 w-32 group bg-gradient-to-tr from-blue-50/40 to-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-white  hover:shadow-blue-800"
@@ -114,7 +114,7 @@ const TopicLecturer = () => {
           </Card>
         </div>
 
-        <div className="flex gap-4 -mb-60 mx-[8.5rem] h-12 ">
+        <div className="flex gap-4 my-3 mx-[8.5rem] h-12 ">
           <Card className="bg-white flex-1 group w-18 justify-center">
             <div className="my-auto mx-auto">
               <CardBody>
@@ -175,19 +175,19 @@ const TopicLecturer = () => {
             </CardBody>
           </Card>
         </div>
-        <Card className="mx-28 h-fit bg-white/15 -mt-8 mb-2">
+        <Card className="mx-28 h-fit bg-white/15 mt-1 mb-2">
           <div class="  mx-6 my-5">
-            {topicData.length > 0 ? (
+            {topicData.length > 0 ?
               topicData.map((topic) => (
                 <>
                   <div className="flex gap-4 w-auto my-4 h-12">
                     <Card
                       onClick={() =>
                         navigate(
-                          `/topic/detail/${documentId}/${topic.documentId}/${topic.id}`
+                          `/topic/detail/${topic.topic_title}/${documentId}/${topic.max_score}/${topic.id}`
                         )
                       }
-                      className="flex-1 group w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl items-start justify-center group-hover:text-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-blue-700 hover:to-blue-900  hover:shadow-blue-400 "
+                      className="flex-1 group w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl items-start justify-center group-hover:text-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-pink-900 hover:to-red-500  hover:shadow-red-400 "
                     >
                       <div className="my-auto">
                         <CardBody>
@@ -299,12 +299,11 @@ const TopicLecturer = () => {
                     </Popconfirm>
                   </div>
                 </>
-              ))
-            ) : (
+              )) :
               <Typography className="text-white text-4xl text-center">
                 ยังไม่มีหัวข้อในวิชานี้
               </Typography>
-            )}
+            }
           </div>
         </Card>
         {isModalShow && (

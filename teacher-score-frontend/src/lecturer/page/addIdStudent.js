@@ -126,8 +126,8 @@ const AddIDStudent = () => {
 
   return (
     <div>
-      <Nav_lec />
-      <div class="grid bg-gradient-to-tl from-blue-400 to-teal-500 h-screen">
+      <div class=" bg-gradient-to-tl from-blue-400 to-teal-500 min-h-screen max-h-full top-0 mt-0 z-0">
+        <Nav_lec />
         <Card
           onClick={() => navigate(-1)}
           className="mt-3 ml-7 w-24 h-12 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
@@ -148,14 +148,19 @@ const AddIDStudent = () => {
           </svg>
           <p className="font-extrabold w-20 text-center">Back</p>
         </Card>
-        <div className="flex justify-end gap-4 mt-2 mr-14">
+        <div>
+          <Card >
+            <Typography>เพิ่มนักศึกษาลงในวิชา</Typography>
+          </Card>
+        </div>
+        <div className="flex justify-end gap-4 mt-5 mb-3 mr-14">
           <Card
             onClick={() => navigate(`/subject/addstudent/${id}/${subject}`)}
             className="justify-center items-center flex-none h-12 w-48 group bg-gradient-to-tr from-blue-50/40 to-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer hover:bg-white hover:shadow-blue-800"
           >
             <div className="w-full items-center">
               <Typography className="font-semibold text-lg text-center">
-                Add Student By Import Excel
+                Add Student Excel
               </Typography>
             </div>
           </Card>

@@ -10,7 +10,7 @@ import { Popconfirm } from "antd";
 import EditScore from "../components/editScore.js";
 import AddScoreStudentTopic from "../components/addScoreStudent.js";
 const DetailTopicLecturer = () => {
-  const { subject, topic } = useParams();
+  const { max_score, topic, topic_title } = useParams();
   const [topicData, setTopicData] = useState([]);
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
@@ -84,35 +84,39 @@ const DetailTopicLecturer = () => {
 
   return (
     <>
-      <Nav_lec />
 
-      <div class="grid bg-gradient-to-t from-pink-900 to-purple-800 min-h-screen max-h-full top-0 mt-0 z-10">
-        <Card
-          onClick={() => navigate(-1)}
-          className="mt-3 -mb-24 ml-7 w-24 h-12 shadow-xl bg-white items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            class="size-5"
+      <div class=" bg-gradient-to-t from-pink-900 to-purple-800 min-h-screen max-h-full top-0 mt-0 z-0">
+        <Nav_lec className="z-50" />
+        <div className="mt-3">
+          <Card
+            onClick={() => navigate(-1)}
+            className="  ml-7 w-24 h-12 shadow-xl bg-white mb-6 items-center justify-center group hover:-translate-y-0.5 transition-all duration-200 delay-75 cursor-pointer hover:shadow-blue-900/60 hover:drop-shadow-sm"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-            />
-          </svg>
-          <p className="font-extrabold w-20 text-center">Back</p>
-        </Card>
-        <Card className=" mx-auto w-auto h-24 shadow-xl bg-white -mb-36">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="size-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+              />
+            </svg>
+            <p className="font-extrabold w-20 text-center">Back</p>
+          </Card>
+        </div>
+        <Card className=" mx-auto min-w-38 max-w-[38rem] h-24 shadow-xl bg-white mb-6">
           <Typography className="font-extrabold items-center justify-items-center w-fit mx-auto my-auto">
-            <h1 class="mx-12 text-3xl font-sans ">หัวข้อประกาศคะแนน</h1>
+            <h3 class="mx-12 text-xl font-sans ">ประกาศคะแนนหัวข้อ</h3>
+            <h1 class="mx-12 text-3xl font-sans ">{topic_title}</h1>
+            <h4 class="mx-12 text-2xl font-sans ">(เต็ม {max_score} คะแนน)</h4>
           </Typography>
         </Card>
-        <div className="justify-items-end -mb-60 mr-[8.5rem] h-8">
+        <div className="justify-items-end mr-[8.5rem] h-8 mt-12 mb-3">
           <Card
             onClick={() => openModal2(topic.users_owner)}
             // onClick={() => navigate(`/topic/addscore/${topic}`)}
@@ -125,7 +129,7 @@ const DetailTopicLecturer = () => {
             </div>
           </Card>
         </div>
-        <div className="flex gap-4 -mt-28 mx-[8.5rem] my-2 h-12">
+        <div className="flex gap-4 mx-[8.5rem] my-3 h-12">
           <Card className="bg-white flex-none group w-16 justify-center items-center">
             <CardBody>
               <Typography className="font-bold text-md">ลำดับ</Typography>
@@ -182,9 +186,9 @@ const DetailTopicLecturer = () => {
             </CardBody>
           </Card>
         </div>
-        <Card className="mx-28 h-fit bg-white/15 -mt-52 mb-2">
+        <Card className="mx-28 h-fit bg-white/15 mb-2">
           <div class="  mx-6 my-5">
-            {topicData.map((topic, index) => (
+            {topicData.length > 0 ? topicData.map((topic, index) => (
               <>
                 <div className="flex gap-4 w-auto my-4 h-12">
                   <Card className="flex-none group w-16 items-center justify-center bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl">
@@ -302,7 +306,10 @@ const DetailTopicLecturer = () => {
                   </Card>
                 </div>
               </>
-            ))}
+            )) :
+              <Typography className="text-white text-4xl text-center">
+                ยังไม่มีประกาศคะแนนในหัวข้อนี้
+              </Typography>}
           </div>
         </Card>
         {isModalShow && (
