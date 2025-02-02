@@ -184,7 +184,7 @@ const TopicLecturer = () => {
                     <Card
                       onClick={() =>
                         navigate(
-                          `/topic/detail/${topic.topic_title}/${documentId}/${topic.max_score}/${topic.documentId}`
+                          `/topic/detail/${topic.topic_title}/${documentId}/${topic.max_score}/${topic.id}/${topic.documentId}`
                         )
                       }
                       className="flex-1 group w-18  bg-gradient-to-tr from-blue-50 hover:drop-shadow-5xl items-start justify-center group-hover:text-white hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-pink-900 hover:to-red-500  hover:shadow-red-400 "

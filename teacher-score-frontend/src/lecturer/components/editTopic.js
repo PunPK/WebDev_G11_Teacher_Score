@@ -39,10 +39,19 @@ const EditTopic = ({ userId, defaultValue, closeModal, onSubmit }) => {
       open={true}
       onCancel={closeModal}
       footer={[
-        <button className="text-lg mr-3 mt-3 l-0 hover:bg-transparent hover:text-red-600" key="cancel " onClick={closeModal}>
+        <button
+          className="text-lg mr-3 mt-3 l-0 hover:bg-transparent hover:text-red-600"
+          key="cancel "
+          onClick={closeModal}
+        >
           Cancel
         </button>,
-        <button className="mx-3 text-lg font-medium text-center w-16 h-10 text-white bg-blue-600 rounded-md hover:bg-blue-900" key="submit" type="primary" onClick={handleRowEdited}>
+        <button
+          className="mx-3 text-lg font-medium text-center w-16 h-10 text-white bg-blue-600 rounded-md hover:bg-blue-900"
+          key="submit"
+          type="primary"
+          onClick={handleRowEdited}
+        >
           Edit
         </button>,
       ]}
@@ -66,7 +75,7 @@ const EditTopic = ({ userId, defaultValue, closeModal, onSubmit }) => {
         <Form.Item
           name="max_score"
           label="Max Score :"
-          rules={[{ required: true, message: "กรุณาระบุคะแนนเต็ม", max: max_score }]}
+          rules={[{ required: true, message: "กรุณาระบุคะแนนเต็ม" }]}
         >
           <InputNumber placeholder="Enter maximum score" className="w-full" />
         </Form.Item>

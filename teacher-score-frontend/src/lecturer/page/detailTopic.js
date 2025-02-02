@@ -10,7 +10,7 @@ import { Popconfirm } from "antd";
 import EditScore from "../components/editScore.js";
 import AddScoreStudentTopic from "../components/addScoreStudent.js";
 const DetailTopicLecturer = () => {
-  const { max_score, topic, topic_title, id } = useParams();
+  const { max_score, topic, topic_title, id, documentId } = useParams();
   const [topicData, setTopicData] = useState([]);
   const navigate = useNavigate();
   const { state: ContextState, logout } = useContext(AuthContext);
@@ -60,7 +60,7 @@ const DetailTopicLecturer = () => {
   const fetchTopic = async () => {
     try {
       const response = await ax.get(
-        `/topics/${id}?populate=score_id.users_owner`
+        `/topics/${documentId}?populate=score_id.users_owner`
       );
       setTopicData(response.data.data.score_id);
     } catch (e) {
@@ -117,7 +117,7 @@ const DetailTopicLecturer = () => {
         </Card>
         <div className="justify-items-end mr-[8.5rem] h-8 mt-12 mb-3">
           <Card
-            onClick={() => openModal2(topic.users_owner)}
+            onClick={() => openModal2(topicData.users_owner)}
             // onClick={() => navigate(`/topic/addscore/${topic}`)}
             className=" h-8 w-28 group  bg-green-700 hover:-translate-y-2 transition-all duration-200 delay-75 hover:drop-shadow-5xl cursor-pointer  hover:bg-gradient-to-tr hover:from-green-700 hover:to-teal-900  hover:shadow-teal-800 items-center justify-center"
           >
