@@ -98,7 +98,7 @@ const HomeStudent = () => {
         </Card>
 
         <Card className="mx-32 h-fit mt-2 z-10">
-          {topicData.length > 0 ?
+          {topicData.length > 0 ? (
             <div className="mx-6 my-5">
               {topicData.map((topic) => (
                 <Card className="bg-white z-20 h-full mb-3">
@@ -108,7 +108,7 @@ const HomeStudent = () => {
                     </Typography>
                     <Typography className="group-hover:text-white text-lg">
                       อัพเดพล่าสุด{" "}
-                      {dayjs(user.updatedAt).format(
+                      {dayjs(topic.updatedAt).format(
                         "DD / MM / YYYY เวลา HH:mm น."
                       )}
                     </Typography>
@@ -128,9 +128,9 @@ const HomeStudent = () => {
                           / {topic.max_score} ({" "}
                           {topic.score_id.length !== 0
                             ? (
-                              (topic.score_id[0].score / topic.max_score) *
-                              100
-                            ).toFixed(2)
+                                (topic.score_id[0].score / topic.max_score) *
+                                100
+                              ).toFixed(2)
                             : "0"}
                           % )
                         </Typography>
@@ -139,7 +139,8 @@ const HomeStudent = () => {
                         size="lg"
                         color={
                           topic.score_id.length !== 0
-                            ? (topic.score_id[0].score / topic.max_score) * 100 >=
+                            ? (topic.score_id[0].score / topic.max_score) *
+                                100 >=
                               70
                               ? "green"
                               : "red"
@@ -155,12 +156,14 @@ const HomeStudent = () => {
                   </CardBody>
                 </Card>
               ))}
-            </div> :
+            </div>
+          ) : (
             <div className="mx-24 my-28 items-center justify-items-center">
               <Typography className="text-black/75 text-5xl font-medium">
                 ไม่พบหัวข้อ
               </Typography>
-            </div>}
+            </div>
+          )}
         </Card>
       </div>
     </>

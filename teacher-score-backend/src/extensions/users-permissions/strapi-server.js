@@ -8,7 +8,7 @@ module.exports = (plugin) => {
     const completeUser = await strapi.entityService.findOne(
       "plugin::users-permissions.user",
       user.id,
-      { populate: ["role", "subject_owners", "score_owers"] }
+      { populate: ["profile_picture", "role", "subject_owners", "score_owers"] }
     );
 
     ctx.body = {
@@ -19,6 +19,7 @@ module.exports = (plugin) => {
       email: completeUser.email,
       confirmed: completeUser.confirmed,
       blocked: completeUser.blocked,
+      profile_picture: completeUser.profile_picture,
       role: completeUser.role,
       subject: completeUser.subject_owners,
       score: completeUser.score_owers,

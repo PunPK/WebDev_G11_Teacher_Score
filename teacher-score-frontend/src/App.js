@@ -24,6 +24,7 @@ import EditSubjectInfo from "./lecturer/page/editSubjectInfo.js";
 import DetailTopicLecturer from "./lecturer/page/detailTopic.js";
 import AddIDStudent from "./lecturer/page/addIdStudent.js";
 import AddScoreTopic from "./lecturer/page/addScore.js";
+import ContactLecturer from "./page/contact_lecturer.js";
 function App() {
   const { state } = useContext(AuthContext);
 
@@ -48,6 +49,7 @@ function App() {
               element={<TopicStudent />}
             />
             <Route path="/user" element={<UserPage />} />
+            <Route path="/contact" element={<ContactLecturer />} />
           </Routes>
         </BrowserRouter>
       );

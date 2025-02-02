@@ -5,12 +5,12 @@ import ax from "../conf/ax.js";
 import { Spin, Typography, Button } from "antd";
 import axios from "axios";
 import UserTable from "./UserTable";
-import "./user.css";
 import Nav_lec from "../components/navbar.js";
 import { Card } from "@material-tailwind/react";
+import defaultUserIcon from "../components/user-icon.webp";
 
 function UserPage() {
-  //   const [user, setUser] = useState({});
+  const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isModalShow, setIsModalShow] = useState(false);
   const [editData, setEditData] = useState(null);
@@ -27,11 +27,6 @@ function UserPage() {
     setIsModalShow(false);
     setEditData(null);
   };
-
-  useEffect(() => {
-    // fetchItems();
-  }, []);
-
   useEffect(() => {
     console.log(user);
   }, [user]);
@@ -47,8 +42,16 @@ function UserPage() {
               <Typography className="text-4xl font-extrabold items-start justify-start">
                 {user.first_name} {user.last_name}'s profile:
               </Typography>
-              <div class="relative self-center justify-self-center mt-10 mb-5 w-28 h-28 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 ring-2 ring-offset-2  ring-black">
-                <svg class="absolute w-24 h-24 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+              <div className="flex justify-center mt-4">
+                <img
+                  src={
+                    user.profile_picture?.url
+                      ? `http://localhost:1337${user.profile_picture.url}`
+                      : defaultUserIcon
+                  }
+                  alt="User Avatar"
+                  className="w-24 h-24 rounded-full border-4 border-white shadow-md"
+                />
               </div>
               <div className="mx-8">
                 <Typography className="text-xl font-medium mt-6">
@@ -65,7 +68,7 @@ function UserPage() {
           </Card>
         </div>
       </div>
-    </ >
+    </>
   );
 }
 

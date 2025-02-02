@@ -85,6 +85,31 @@ export default function Nav_lec() {
                   User
                 </Typography>
               </button>
+
+              {user.userRole === "Student" && (
+                <button
+                  onClick={() => navigate("/contact")}
+                  className="flex-initial mx-3 group relative inline-flex items-center justify-center rounded-md p-2 text-indigo-500 hover:text-indigo-700 w-auto h-8 bg-transparent focus:outline-none focus:underline-offset-8"
+                >
+                  <svg
+                    class="h-5 w-5 text-slate-900"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.8"
+                      d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <Typography className="translate-y-0.5 ml-0.5">
+                    {" "}
+                    Contact Lecturer
+                  </Typography>
+                </button>
+              )}
             </div>
           </div>
 
